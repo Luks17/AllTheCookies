@@ -1,0 +1,26 @@
+---
+import Meta from "@/components/base/Meta.astro";
+import type { MetaTags } from "@/types/Meta";
+import { SITE } from "@/config.mjs";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { title, description, author, socialImage } = SITE;
+
+const meta: MetaTags = {
+  canonicalURL,
+  title,
+  description,
+  author,
+  socialImage,
+};
+---
+
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <Meta {...meta} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

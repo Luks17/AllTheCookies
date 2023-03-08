@@ -1,0 +1,17 @@
+---
+import "@/styles/base.css";
+
+import Layout from "./BaseLayout.astro";
+import Header from "@/components/base/Header";
+import PageThemeScripts from "@/util/PageThemeScripts.astro";
+---
+
+<Layout>
+  <Header />
+
+  <main class="bg-gradient-image h-screen w-screen">
+    <slot />
+  </main>
+
+  <PageThemeScripts />
+</Layout>

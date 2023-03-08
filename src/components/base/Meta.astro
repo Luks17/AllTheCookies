@@ -1,0 +1,29 @@
+---
+import type { MetaTags as Props } from "@/types/Meta";
+
+const { title, description, author, socialImage, canonicalURL } = Astro.props;
+---
+
+<!-- Basic Meta Tags -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="canonical" href={canonicalURL} />
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="author" content={author} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={socialImage} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={socialImage} />

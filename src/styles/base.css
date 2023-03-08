@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  html[page-theme="light"] {
+    --color-text-base: #0d0d0d;
+    --color-text-muted: #2B2B2B;
+    --color-text-accent: #01579B;
+    --color-text-inverted: #BF360C;
+    --bg-gradient: linear-gradient(to bottom, #FF5722, #FF7043, #FF8A65, #FFAB91);
+  }
+
+  html[page-theme="dark"] {
+    --color-text-base: ##F5F5F5;
+    --color-text-muted: #E0E0E0;
+    --color-text-accent: #BF360C;
+    --color-text-inverted: #01579B;
+    --bg-gradient: linear-gradient(to bottom, #0a1429, #142952, #193366, #1f3d7a); 
+  }
+}
+
