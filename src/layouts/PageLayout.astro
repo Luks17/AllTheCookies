@@ -2,17 +2,16 @@
 import "@/styles/base.css";
 
 import Layout from "./BaseLayout.astro";
-import Header from "@/components/base/Header";
+import Header from "@/components/base/Header.astro";
 import Sidebar from "@/components/base/Sidebar";
 import PageThemeScripts from "@/util/PageThemeScripts.astro";
 ---
 
 <Layout>
   <!-- 
-    client:load loads the component js immediately, while client:media only loads
-    the component when a css condition is met 
+    client:media only loads the component JS when a css condition is met 
   -->
-  <Header client:load />
+  <Header />
   <Sidebar client:media="(max-width: 768px)" />
 
   <main>

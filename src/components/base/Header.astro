@@ -1,0 +1,24 @@
+---
+import Logo from "@/components/Logo.astro";
+import SidebarOpenBtn from "@/components/segments/SidebarOpenBtn";
+---
+
+<header class="p-7 flex-col w-full">
+  <div class="flex items-center justify-between">
+    <!-- Logo -->
+    <Logo />
+
+    <!-- sidebar-open mobile - JS only load when screen is smaller than 768px -->
+    <SidebarOpenBtn client:media="(max-width: 768px)" />
+  </div>
+
+  <!-- nav -->
+  <nav>
+    <!-- links -->
+
+    <!-- Icons -->
+    <ul>
+      <li></li>
+    </ul>
+  </nav>
+</header>
