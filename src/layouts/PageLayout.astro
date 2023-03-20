@@ -3,13 +3,15 @@ import "@/styles/base.css";
 
 import Layout from "./BaseLayout.astro";
 import Header from "@/components/base/Header";
+import Sidebar from "@/components/base/Sidebar";
 import PageThemeScripts from "@/util/PageThemeScripts.astro";
 ---
 
 <Layout>
-  <Header />
+  <Header client:load />
+  <Sidebar client:load />
 
-  <main class="bg-gradient-image h-screen w-screen">
+  <main>
     <slot />
   </main>
 

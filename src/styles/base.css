@@ -13,11 +13,17 @@
   }
 
   html[page-theme="dark"] {
-    --color-text-base: ##F5F5F5;
+    --color-text-base: #f7f7f7;
     --color-text-muted: #E0E0E0;
     --color-text-accent: #BF360C;
     --color-text-inverted: #01579B;
     --bg-gradient: linear-gradient(to bottom, #0a1429, #142952, #193366, #1f3d7a); 
+  }
+}
+
+@layer components {
+  .sidebar-opacity {
+    background: rgba(0, 0, 0, 0.3);
   }
 }
 
