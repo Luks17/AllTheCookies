@@ -1,24 +1,25 @@
 ---
 import Logo from "@/components/Logo.astro";
-import SidebarOpenBtn from "@/components/segments/SidebarOpenBtn";
+import SidebarButton from "@/components/segments/SidebarButton";
+import Navbar from "@/components/base/Navbar";
+import ThemeToggle from "@/components/segments/ThemeToggle";
+import { Github } from "@/assets/static/Icons";
 ---
 
-<header class="p-7 flex-col w-full">
-  <div class="flex items-center justify-between">
-    <!-- Logo -->
-    <Logo />
+<header class="p-7 flex items-center justify-between w-full z-10">
+  <Logo />
 
-    <!-- sidebar-open mobile - JS only load when screen is smaller than 768px -->
-    <SidebarOpenBtn client:media="(max-width: 768px)" />
+  <div class="hidden lg:flex justify-start items-center">
+    <Navbar client:media="(min-width: 1024px)" />
   </div>
 
-  <!-- nav -->
-  <nav>
-    <!-- links -->
+  <ul class="flex gap-3 text-skin-base items-center justify-end">
+    <li><Github /></li>
+    <li><ThemeToggle client:load /></li>
 
-    <!-- Icons -->
-    <ul>
-      <li></li>
-    </ul>
-  </nav>
+    <!-- sidebar-open mobile - JS only load when screen is smaller than 1024px -->
+    <li class="lg:hidden">
+      <SidebarButton client:media="(max-width: 1024px)" />
+    </li>
+  </ul>
 </header>

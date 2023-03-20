@@ -1,5 +1,5 @@
 
-import type { ItemTemplate, LinkTemplate } from "@/types/SidebarLinks"
+import type { ItemTemplate, LinkTemplate } from "@/types/Header"
 
 // uses scale-y-0 to hide the ul sublinks and scales it back toggling it
 // the absolute is used because, even when scaled down, the elements still take space
@@ -18,7 +18,7 @@ function Item({ name, Icon }: ItemTemplate) {
 function SidebarLink(link: LinkTemplate) {
   const { id, sublinks } = link;
 
-  return <li className="m-3 text-2xl font-bold text-skin-accent w-full">
+  return <div className="m-3 text-2xl font-bold text-skin-accent w-full">
     {(sublinks === undefined) ? <a href={link.url}><Item {...link} /></a> : <div>
       <button className="w-full" onClick={() => toggleSublinks(id)}><Item {...link} /></button>
       {/* The transition here uses transform-scale-y along with origin-top */}
@@ -28,7 +28,7 @@ function SidebarLink(link: LinkTemplate) {
         </li>)}
       </ul>
     </div>}
-  </li>
+  </div>
 }
 
 export default SidebarLink;

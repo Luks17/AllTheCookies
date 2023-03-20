@@ -1,4 +1,9 @@
 
+export type SubmenuCords = {
+  center: number,
+  bottom: number,
+}
+
 export interface ItemTemplate {
   name: string,
   Icon: JSX.Element,

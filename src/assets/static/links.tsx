@@ -1,5 +1,5 @@
 
-import type { LinkTemplate } from "@/types/Links";
+import type { LinkTemplate } from "@/types/Header";
 
 export const links: LinkTemplate[] = [
   {

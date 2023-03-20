@@ -4,7 +4,6 @@ import "@/styles/base.css";
 import Layout from "./BaseLayout.astro";
 import Header from "@/components/base/Header.astro";
 import Sidebar from "@/components/base/Sidebar";
-import PageThemeScripts from "@/util/PageThemeScripts.astro";
 ---
 
 <Layout>
@@ -12,11 +11,15 @@ import PageThemeScripts from "@/util/PageThemeScripts.astro";
     client:media only loads the component JS when a css condition is met 
   -->
   <Header />
-  <Sidebar client:media="(max-width: 768px)" />
+  <Sidebar client:media="(max-width: 1024px)" />
 
   <main>
     <slot />
   </main>
 
-  <PageThemeScripts />
+  <!-- 
+  <script is:inline> makes astro leave the script tag as it is on the final html element without any processing or building,
+  this is useful for global themes because it prevents screen flashes 
+  -->
+  <script is:inline src="/theme-scripts.js"></script>
 </Layout>
