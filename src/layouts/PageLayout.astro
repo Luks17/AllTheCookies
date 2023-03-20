@@ -8,8 +8,12 @@ import PageThemeScripts from "@/util/PageThemeScripts.astro";
 ---
 
 <Layout>
+  <!-- 
+    client:load loads the component js immediately, while client:media only loads
+    the component when a css condition is met 
+  -->
   <Header client:load />
-  <Sidebar client:load />
+  <Sidebar client:media="(max-width: 768px)" />
 
   <main>
     <slot />
