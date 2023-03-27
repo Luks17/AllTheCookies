@@ -9,7 +9,7 @@ function toggleSublinks(id: number): void {
 }
 
 function Item({ name, Icon }: ItemTemplate) {
-  return <div className="p-1.5 m-1.5 flex items-center opacity-70 hover:opacity-90 transition-opacity ease-linear">
+  return <div className="p-1.5 m-1.5 flex items-center opacity-80 hover:opacity-100 transition-opacity ease-linear">
     {Icon}
     <h6>{name}</h6>
   </div>
