@@ -4,10 +4,10 @@ import SidebarButton from "@/components/segments/SidebarButton";
 import Navbar from "@/components/base/Navbar";
 import ThemeToggle from "@/components/segments/ThemeToggle";
 
-import { Github } from "@/assets/static/Icons";
+import { Github, MagnifyingGlass } from "@/assets/static/Icons";
 ---
 
-<header class="p-7 flex items-center justify-between w-full z-10">
+<header class="py-7 px-3 flex items-center justify-between w-full z-10">
   <Logo />
 
   <div class="hidden lg:flex justify-start items-center">
@@ -15,11 +15,19 @@ import { Github } from "@/assets/static/Icons";
   </div>
 
   <ul class="flex gap-3 text-skin-base items-center justify-end">
-    <li><Github /></li>
-    <li><ThemeToggle client:load /></li>
+    <li class="hoverable-btn">
+      <a href="https://github.com/Luks17/AllTheCookies"><Github /></a>
+    </li>
+    <li class="hoverable-btn">
+      <a href="/search"><MagnifyingGlass /></a>
+    </li>
+
+    <li class="hidden lg:flex">
+      <ThemeToggle client:media="(min-width: 1024px)" />
+    </li>
 
     <!-- sidebar-open mobile - JS only load when screen is smaller than 1024px -->
-    <li class="lg:hidden">
+    <li class="lg:hidden hoverable-btn">
       <SidebarButton client:media="(max-width: 1024px)" />
     </li>
   </ul>

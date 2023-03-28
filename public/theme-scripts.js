@@ -26,9 +26,10 @@ function setTheme(theme) {
 // toggles theme when the theme toggle button is pressed
 window.onload = function() {
   document
-    .querySelector("#theme-toggle-btn")
-    .addEventListener("click", () => {
-      currentTheme = currentTheme === "light" ? "dark" : "light";
-      setTheme(currentTheme);
-    });
+    .querySelectorAll(".theme-toggle-btn").forEach(element => {
+      element.addEventListener("click", () => {
+        currentTheme = currentTheme === "light" ? "dark" : "light";
+        setTheme(currentTheme);
+      });
+    })
 };

@@ -33,5 +33,9 @@
     border-right: 16px solid transparent;
     border-bottom: 16px solid white;
   }
+
+  .hoverable-btn {
+    @apply opacity-80 hover:opacity-100 transition-opacity ease-linear;
+  }
 }
 

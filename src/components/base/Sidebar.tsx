@@ -3,6 +3,7 @@ import React from "react";
 import { useStore } from "@nanostores/react";
 
 import SidebarLink from "@/components/segments/SidebarLink";
+import ThemeToggle from "@/components/segments/ThemeToggle";
 
 import { closeSidebar, isSidebarOpen } from "@/assets/stores/nav-store";
 import { links } from "@/assets/static/links";
@@ -21,6 +22,10 @@ function Sidebar() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
+
+      <div className="absolute left-5 top-5">
+        <ThemeToggle />
+      </div>
 
       {/* links */}
       <nav>

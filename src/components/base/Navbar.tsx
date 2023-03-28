@@ -11,7 +11,7 @@ function Navbar() {
     {links.map(link => {
       const { id, sublinks, url, name } = link;
 
-      return <div key={id} className="opacity-80 hover:opacity-100 transition-opacity ease-linear">
+      return <div key={id} className="hoverable-btn">
         {(sublinks === undefined ? <a href={url}>{name}</a> : <Submenu buttonName={name} sublinks={sublinks} />)}
       </div>
     })}
