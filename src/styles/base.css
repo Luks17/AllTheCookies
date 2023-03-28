@@ -9,7 +9,7 @@
     --color-text-muted: #2B2B2B;
     --color-text-accent: #01579B;
     --color-text-inverted: #BF360C;
-    --bg-gradient: linear-gradient(to bottom, #FF5722, #FF7043, #FF8A65, #FFAB91);
+    --bg-gradient: linear-gradient(to bottom, #B9A69F, #AE9991);
   }
 
   html[page-theme="dark"] {

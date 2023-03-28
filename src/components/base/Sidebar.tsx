@@ -8,6 +8,7 @@ import ThemeToggle from "@/components/segments/ThemeToggle";
 import { closeSidebar, isSidebarOpen } from "@/assets/stores/nav-store";
 import { links } from "@/assets/static/links";
 
+// needs appeareance overhaul
 function Sidebar() {
   const $isSidebarOpen = useStore(isSidebarOpen);
 
@@ -18,7 +19,7 @@ function Sidebar() {
     <div className="bg-gray-300 rounded-md relative shadow-black px-16 py-8 h-[95%] w-[90%]">
       <button onClick={() => closeSidebar()}>
 
-        <svg className="w-8 h-8 absolute right-5 top-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+        <svg className="w-8 h-8 absolute right-5 top-5 hoverable-btn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
