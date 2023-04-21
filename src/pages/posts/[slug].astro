@@ -1,0 +1,33 @@
+---
+import { postCategories } from "@/assets/static/links";
+import PageDescription from "@/components/segments/PageDescription.astro";
+import { SITE } from "@/config.mjs";
+import PageLayout from "@/layouts/PageLayout.astro";
+import { getNumberOfPosts } from "@/util/posts-utils";
+
+export function getStaticPaths() {
+  return postCategories.map((category) => {
+    return {
+      params: { slug: category.slug },
+      props: {
+        categoryName: category.name,
+        categoryDescription: category.description,
+      },
+    };
+  });
+}
+
+const { categoryName, categoryDescription } = Astro.props;
+const { slug } = Astro.params;
+
+const numberOfPages = (await getNumberOfPosts()) / SITE.postsPerPage;
+---
+
+<PageLayout>
+  <PageDescription
+    pages={numberOfPages}
+    description={categoryDescription}
+    slugs={["posts", slug!]}
+    pageName={categoryName}
+  />
+</PageLayout>

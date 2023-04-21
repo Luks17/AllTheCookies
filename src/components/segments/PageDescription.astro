@@ -1,0 +1,24 @@
+---
+export interface Props {
+  pages: number;
+  slugs: string[];
+  pageName: string;
+  description: string;
+}
+
+const { pages, slugs, pageName, description } = Astro.props;
+
+let pageNumber = "";
+if (pages > 1) {
+  pageNumber = ` (Página ${"1"} de ${pages})`;
+}
+---
+
+<div class="flex-col mx-auto max-w-[90rem] items-center w-auto">
+  <h6 class="text-skin-muted">
+    <span class="capitalize">{slugs.join(" > ")}</span>
+    {pageNumber}
+  </h6>
+  <h1 class="text-skin-base capitalize text-3xl">{pageName}</h1>
+  <p class="text-skin-muted">{description}</p>
+</div>

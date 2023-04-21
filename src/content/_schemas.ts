@@ -9,8 +9,8 @@ export const postSchema = z.object({
   category: z.string(),
   tags: z.array(z.string()),
   draft: z.boolean(),
+  minutesRead: z.number(),
 });
-
 
 export type blogFrontmatter = z.infer<typeof postSchema>;
 

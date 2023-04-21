@@ -34,7 +34,7 @@ function Submenu({ buttonName, sublinks }: SubmenuProps) {
         {sublinks.map(sublink => {
           const { id, name, Icon, url } = sublink;
 
-          return <li key={id} className="flex items-center text-skin-accent hoverable-btn py-1">
+          return <li key={id} className="flex items-center text-skin-accent hoverable-btn py-1 capitalize">
             {Icon}
             <a href={url}>{name}</a>
           </li>
