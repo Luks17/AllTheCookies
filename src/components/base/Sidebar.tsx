@@ -16,7 +16,7 @@ function Sidebar() {
   // because doing it this way the child will not inherit the opacity.
   // To handle transitions, i'm using scale and visibility.
   return <aside className={`fixed flex lg:hidden z-50 top-0 right-0 h-full w-full justify-center items-center sidebar-opacity transition-all duration-100 ease-linear ${$isSidebarOpen ? "scale-100 visible" : "scale-0 invisible"}`}>
-    <div className="bg-gray-300 rounded-md relative shadow-black px-16 py-8 h-[95%] w-[90%]">
+    <div className="bg-primary rounded-md relative shadow-black px-16 py-8 h-[95%] w-[90%]">
       <button onClick={() => closeSidebar()}>
 
         <svg className="w-8 h-8 absolute right-5 top-5 hoverable-btn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">

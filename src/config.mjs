@@ -5,7 +5,7 @@ export const SITE = {
   description: "Personal Website about technology",
   socialImage: "",
 
-  postsPerPage: 6,
+  postsPerPage: 3,
   origin: "",
   basePathname: "/",
   trailingSlash: false,

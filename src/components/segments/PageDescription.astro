@@ -1,12 +1,12 @@
 ---
 export interface Props {
   pages: number;
-  slugs: string[];
+  slugsPath: string[];
   pageName: string;
   description: string;
 }
 
-const { pages, slugs, pageName, description } = Astro.props;
+const { pages, slugsPath: slugs, pageName, description } = Astro.props;
 
 let pageNumber = "";
 if (pages > 1) {
@@ -14,7 +14,7 @@ if (pages > 1) {
 }
 ---
 
-<div class="flex-col mx-auto max-w-[90rem] items-center w-auto">
+<div class="flex-col">
   <h6 class="text-skin-muted">
     <span class="capitalize">{slugs.join(" > ")}</span>
     {pageNumber}
