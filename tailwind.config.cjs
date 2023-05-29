@@ -3,19 +3,27 @@ module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     // extend: {
-    backgroundColor: {
-      primary: "var(--bg-primary)",
-      secondary: "var(--bg-secondary)",
-    },
     backgroundImage: {
       "gradient-image": "var(--bg-gradient)",
     },
+    backgroundColor: {
+      primary: "var(--base)",
+      crust: "var(--crust)",
+      mantle: "var(--mantle)",
+      selected: "var(--surface2)",
+      fg_base: "var(--surface0)",
+      fg_secondary: "var(--surface1)",
+      fg_third: "var(--surface2)",
+    },
+
     textColor: {
       skin: {
-        base: "var(--color-text-base)",
-        muted: "var(--color-text-muted)",
-        accent: "var(--color-text-accent)",
-        inverted: "var(--color-text-inverted)"
+        base: "var(--text)",
+        subtext: "var(--subtext0)",
+        muted: "var(--overlay1)",
+        selected: "var(--mauve)",
+        accent: "var(--lavender)",
+        alternate: "var(--maroon)",
       }
     }
     // }

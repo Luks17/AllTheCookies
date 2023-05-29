@@ -18,7 +18,7 @@ function Item({ name, Icon }: ItemTemplate) {
 function SidebarLink(link: LinkTemplate) {
   const { id, sublinks } = link;
 
-  return <div className="m-3 text-2xl font-bold text-skin-accent w-full">
+  return <div className="m-3 text-2xl font-bold text-skin-base w-full">
     {(sublinks === undefined) ? <a href={link.url}><Item {...link} /></a> : <div>
       <button className="w-full" onClick={() => toggleSublinks(id)}><Item {...link} /></button>
       {/* The transition here uses transform-scale-y along with origin-top */}
