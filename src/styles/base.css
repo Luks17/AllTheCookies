@@ -62,11 +62,6 @@
     --mantle: #292c3c;
     --crust: #232634;
   }
-
-  html {
-    --bg-gradient: linear-gradient(-45deg, var(--flamingo), var(--maroon), var(--peach), var(--yellow), 
-      var(--green), var(--teal), var(--lavender));
-  }
 }
 
 @layer components {
@@ -83,7 +78,7 @@
   }
 
   .hoverable-btn {
-    @apply opacity-90 hover:opacity-100 hover:text-skin-accent transition-opacity ease-linear;
+    @apply opacity-90 hover:opacity-100 hover:text-skin-selected transition-colors ease-linear;
   }
 }
 
