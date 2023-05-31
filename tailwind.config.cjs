@@ -27,13 +27,20 @@ module.exports = {
       }
     },
 
+    gradientColorStops: {
+      primary: "var(--base)",
+      crust: "var(--crust)",
+      mantle: "var(--mantle)",
+    },
+
     borderColor: {
       "primary": "var(--peach)",
+      "secondary": "var(--mauve)",
     },
 
     fontFamily: {
       primary: ["Raleway", "Roboto", "Ubuntu", "sans-serif"],
-    }
+    },
     // }
   },
   plugins: [],

@@ -1,12 +1,12 @@
 ---
 export interface Props {
   pages: number;
-  slugsPath: string[];
+  categoriesPath: string[];
   pageName: string;
   description: string;
 }
 
-const { pages, slugsPath: slugs, pageName, description } = Astro.props;
+const { pages, categoriesPath, pageName, description } = Astro.props;
 
 let pageNumber = "";
 if (pages > 1) {
@@ -14,11 +14,17 @@ if (pages > 1) {
 }
 ---
 
-<div class="flex-col">
-  <h6 class="text-skin-accent-secondary">
-    <span class="capitalize">{slugs.join(" > ")}</span>
+<div
+  class="flex-col bg-gradient-to-t from-crust via-mantle to-primary border-secondary border-b-2 px-4 pb-4 pt-20 max-w-4xl mx-auto text-md lg:text-lg rounded-lg"
+>
+  <h6 class="text-skin-accent-secondary font-semibold">
+    <span class="capitalize">{categoriesPath.join(" > ")}</span>
     {pageNumber}
   </h6>
-  <h1 class="text-skin-base capitalize text-3xl">{pageName}</h1>
-  <p class="text-skin-subtext">{description}</p>
+  <h1 class="text-skin-base capitalize font-bold text-3xl lg:text-4xl py-2">
+    {pageName}
+  </h1>
+  <p class="text-skin-subtext font-semibold">
+    {description}
+  </p>
 </div>
