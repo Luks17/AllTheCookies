@@ -16,7 +16,7 @@ const { post } = Astro.props;
     <!-- category -->
     <a
       href="#"
-      class="bg-primary text-skin-alternate w-fit px-2 py-0.5 uppercase"
+      class="bg-primary font-semibold text-skin-alternate w-fit px-2 py-0.5 uppercase"
       >{post.data.category}</a
     >
 
@@ -27,7 +27,9 @@ const { post } = Astro.props;
   </div>
 
   <!-- title -->
-  <h3 class="text-skin-accent text-xl px-1 pb-2">{post.data.title}</h3>
+  <h3 class="text-skin-accent font-bold text-xl px-1 pb-2">
+    {post.data.title}
+  </h3>
 
   <!-- description -->
   <p class="text-skin-subtext px-1">{post.data.description}</p>
