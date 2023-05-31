@@ -4,19 +4,31 @@ module.exports = {
   theme: {
     // extend: {
     backgroundColor: {
-      primary: "var(--bg-primary)",
-      secondary: "var(--bg-secondary)",
+      primary: "var(--base)",
+      crust: "var(--crust)",
+      mantle: "var(--mantle)",
+      selected: "var(--surface2)",
+      "fg-base": "var(--surface0)",
+      "fg-secondary": "var(--surface1)",
+      "fg-third": "var(--surface2)",
+
+      "glow-primary": "var(--sky)",
     },
-    backgroundImage: {
-      "gradient-image": "var(--bg-gradient)",
-    },
+
     textColor: {
       skin: {
-        base: "var(--color-text-base)",
-        muted: "var(--color-text-muted)",
-        accent: "var(--color-text-accent)",
-        inverted: "var(--color-text-inverted)"
+        base: "var(--text)",
+        subtext: "var(--subtext0)",
+        muted: "var(--overlay1)",
+        selected: "var(--yellow)",
+        "accent": "var(--lavender)",
+        "accent-secondary": "var(--mauve)",
+        "alternate": "var(--maroon)",
       }
+    },
+
+    borderColor: {
+      "primary": "var(--peach)",
     }
     // }
   },
