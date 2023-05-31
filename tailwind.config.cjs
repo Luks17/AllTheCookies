@@ -29,6 +29,10 @@ module.exports = {
 
     borderColor: {
       "primary": "var(--peach)",
+    },
+
+    fontFamily: {
+      primary: ["Raleway", "Roboto", "Ubuntu", "sans-serif"],
     }
     // }
   },
