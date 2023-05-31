@@ -36,6 +36,7 @@ module.exports = {
     borderColor: {
       "primary": "var(--peach)",
       "secondary": "var(--mauve)",
+      "crust": "var(--crust)",
     },
 
     fontFamily: {
