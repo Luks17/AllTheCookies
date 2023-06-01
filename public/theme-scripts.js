@@ -15,6 +15,18 @@ function getCurrentTheme() {
     : "light";
 }
 
+function changeToggleBtnStyle(element, toggledTheme) {
+  const targetIcon = element.getElementsByClassName(`${toggledTheme}-mode-icon`).item(0);
+
+  targetIcon.classList.toggle("bg-fg-base");
+  targetIcon.classList.toggle("bg-mantle");
+  targetIcon.classList.toggle("text-skin-alternate")
+}
+
+function getNotCurrentSetMode() {
+  return currentTheme === "light" ? "dark" : "light";
+}
+
 // sets theme to the document html element on the custom property named "page-theme"
 // also stores current theme in local storage
 function setTheme(theme) {
@@ -27,8 +39,14 @@ function setTheme(theme) {
 window.onload = function() {
   document
     .querySelectorAll(".theme-toggle-btn").forEach(element => {
+      changeToggleBtnStyle(element, currentTheme);
+
       element.addEventListener("click", () => {
-        currentTheme = currentTheme === "light" ? "dark" : "light";
+        currentTheme = getNotCurrentSetMode();
+
+        changeToggleBtnStyle(element, currentTheme);
+        changeToggleBtnStyle(element, getNotCurrentSetMode());
+
         setTheme(currentTheme);
       });
     })

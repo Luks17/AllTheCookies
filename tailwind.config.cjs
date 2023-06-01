@@ -17,10 +17,10 @@ module.exports = {
 
     textColor: {
       skin: {
-        base: "var(--text)",
-        subtext: "var(--subtext0)",
-        muted: "var(--overlay1)",
-        selected: "var(--yellow)",
+        "base": "var(--text)",
+        "subtext": "var(--subtext0)",
+        "muted": "var(--overlay1)",
+        "selected": "var(--yellow)",
         "accent": "var(--lavender)",
         "accent-secondary": "var(--mauve)",
         "alternate": "var(--maroon)",
