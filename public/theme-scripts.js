@@ -17,10 +17,11 @@ function getCurrentTheme() {
 
 function changeToggleBtnStyle(element, toggledTheme) {
   const targetIcon = element.getElementsByClassName(`${toggledTheme}-mode-icon`).item(0);
+  const overlay = element.getElementsByClassName("overlay").item(0);
+  const overlayTranslatePrefix = toggledTheme === "light" ? "-" : "";
 
-  targetIcon.classList.toggle("bg-fg-base");
-  targetIcon.classList.toggle("bg-mantle");
-  targetIcon.classList.toggle("text-skin-alternate")
+  overlay.classList.toggle(`${overlayTranslatePrefix}translate-x-full`);
+  targetIcon.classList.toggle("text-skin-alternate");
 }
 
 function getNotCurrentSetMode() {

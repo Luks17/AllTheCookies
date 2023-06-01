@@ -5,13 +5,14 @@ import { Moon, Sun } from "@/assets/static/Icons";
 
 function ThemeToggle() {
 
-  return <button className={`theme-toggle-btn flex justify-between text-skin-base border-crust overflow-hidden items-center border-2 rounded-2xl`} >
-    <div className="dark-mode-icon bg-fg-base p-1 pl-2">
-      <Moon />
+  return <button className={`theme-toggle-btn flex justify-between bg-fg-base text-skin-base border-crust overflow-hidden items-center border-2 rounded-2xl`} >
+    <div className="z-20 relative flex">
+      <div className="overlay bg-crust translate-x-full transition-transform duration-200 absolute w-1/2 h-full"></div>
+
+      <div className="dark-mode-icon z-30 pl-2 p-1 relative"><Moon /></div>
+      <div className="light-mode-icon z-30 p-1 pr-2 relative"><Sun /></div>
     </div>
-    <div className="light-mode-icon bg-fg-base pr-2 p-1">
-      <Sun />
-    </div>
+
   </button >
 }
 

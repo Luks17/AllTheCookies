@@ -15,7 +15,7 @@ function Sidebar() {
   // Uses the sidebar-opacity utility class, which is a rgba value, instead of tailwindcss opacity. This is useful
   // because doing it this way the child will not inherit the opacity.
   // To handle transitions, i'm using scale and visibility.
-  return <aside className={`fixed flex lg:hidden z-50 top-0 right-0 h-full w-full justify-center items-center sidebar-opacity transition-all duration-100 ease-linear ${$isSidebarOpen ? "scale-100 visible" : "scale-0 invisible"}`}>
+  return <aside className={`fixed flex lg:hidden z-10 top-0 right-0 h-full w-full justify-center items-center sidebar-opacity transition-all duration-100 ease-linear ${$isSidebarOpen ? "scale-100 visible" : "scale-0 invisible"}`}>
     <div className="bg-mantle rounded-md relative shadow-black h-[95%] w-[90%] max-w-sm border-primary border-2">
       <button onClick={() => closeSidebar()}>
 
