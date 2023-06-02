@@ -17,9 +17,9 @@ import Sidebar from "@/components/base/Sidebar";
     <slot />
   </main>
 
-  <!-- 
-  <script is:inline> makes astro leave the script tag as it is on the final html element without any processing or building,
-  this is useful for global themes because it prevents screen flashes 
-  -->
-  <script is:inline src="/theme-scripts.js"></script>
+  <script>
+    import { getCurrentTheme, setTheme } from "@/util/theme";
+
+    setTheme(getCurrentTheme());
+  </script>
 </Layout>

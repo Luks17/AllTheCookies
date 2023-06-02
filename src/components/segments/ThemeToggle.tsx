@@ -1,16 +1,54 @@
 import { Moon, Sun } from "@/assets/static/Icons";
+import { useEffect, useRef, useState } from "react";
 
-// Ironically, this react component does not actually contain any code to toggle the current theme, 
-// you can find the actual code on /public/theme-scripts.js
+import { setTheme, getNotCurrentSetMode } from "@/util/theme";
+
 
 function ThemeToggle() {
+  const [btnCurrentTheme, setBtnCurrentTheme] = useState(localStorage.getItem("theme"));
 
-  return <button className={`theme-toggle-btn flex justify-between bg-fg-base text-skin-base border-crust overflow-hidden items-center border-2 rounded-2xl`} >
+  const buttonContainer = useRef<HTMLButtonElement | null>(null);
+  const sunIconContainer = useRef<HTMLDivElement | null>(null);
+  const moonIconContainer = useRef<HTMLDivElement | null>(null);
+  const overlayContainer = useRef<HTMLDivElement | null>(null);
+
+  function toggleTheme() {
+    const theme = getNotCurrentSetMode(btnCurrentTheme!);
+
+    setTheme(theme)
+    setBtnCurrentTheme(theme);
+  };
+
+  useEffect(() => {
+    const button = buttonContainer.current!;
+    const overlay = overlayContainer.current!;
+    const sunIcon = sunIconContainer.current!;
+    const moonIcon = moonIconContainer.current!;
+
+    if (btnCurrentTheme === "light") {
+      overlay.classList.add("translate-x-full");
+
+      sunIcon.classList.add("text-skin-alternate");
+      moonIcon.classList.remove("text-skin-alternate");
+    }
+    else {
+      overlay.classList.remove("translate-x-full");
+
+      moonIcon.classList.add("text-skin-alternate");
+      sunIcon.classList.remove("text-skin-alternate");
+    }
+
+    button.addEventListener("click", toggleTheme);
+    return () => button.removeEventListener("click", toggleTheme);
+
+  }, [btnCurrentTheme]);
+
+  return <button className={`theme-toggle-btn flex justify-between bg-fg-base text-skin-base border-crust overflow-hidden items-center border-2 rounded-2xl`} ref={buttonContainer} >
     <div className="z-20 relative flex">
-      <div className="overlay bg-crust translate-x-full transition-transform duration-200 absolute w-1/2 h-full"></div>
+      <div className="bg-crust transition-transform duration-200 absolute w-1/2 h-full" ref={overlayContainer}></div>
 
-      <div className="dark-mode-icon z-30 pl-2 p-1 relative"><Moon /></div>
-      <div className="light-mode-icon z-30 p-1 pr-2 relative"><Sun /></div>
+      <div className="z-30 pl-2 p-1 relative" ref={moonIconContainer}><Moon /></div>
+      <div className="z-30 p-1 pr-2 relative" ref={sunIconContainer}><Sun /></div>
     </div>
 
   </button >
