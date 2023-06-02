@@ -10,9 +10,13 @@ function getCurrentTheme() {
 
   if (theme !== null) return theme;
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  if (window.matchMedia) {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+
+  return "dark";
 }
 
 function changeToggleBtnStyle(element, toggledTheme) {
