@@ -8,29 +8,32 @@ import { Github, MagnifyingGlass } from "@/assets/static/Icons";
 ---
 
 <header
-  class="py-7 px-3 max-w-[90rem] mx-auto flex items-center justify-between w-full z-10"
+  class="py-5 lg:py-7 border-b-4 border-b-primary bg-crust px-3 w-full z-10"
 >
-  <Logo />
+  <div class="max-w-[90rem] mx-auto flex items-center justify-between">
+    <Logo />
 
-  <div class="hidden lg:flex justify-start items-center">
-    <Navbar client:media="(min-width: 1024px)" />
+    <div class="hidden lg:flex justify-start items-center">
+      <Navbar client:media="(min-width: 1024px)" />
+    </div>
+
+    <ul class="flex gap-3 text-skin-base items-center justify-end">
+      <li class="hoverable-btn">
+        <a href="https://github.com/Luks17/AllTheCookies"><Github /></a>
+      </li>
+      <li class="hoverable-btn">
+        <a href="/search"><MagnifyingGlass /></a>
+      </li>
+
+      <li class="hidden lg:flex">
+        <ThemeToggle client:media="(min-width: 1024px)" />
+      </li>
+
+      <!-- sidebar-open mobile - JS only load when screen is smaller than 1024px -->
+      <!-- TODO: fix hoverable-btn class not applying to this thing for some reason -->
+      <li class="lg:hidden hoverable-btn">
+        <SidebarButton client:media="(max-width: 1024px)" />
+      </li>
+    </ul>
   </div>
-
-  <ul class="flex gap-3 text-skin-base items-center justify-end">
-    <li class="hoverable-btn">
-      <a href="https://github.com/Luks17/AllTheCookies"><Github /></a>
-    </li>
-    <li class="hoverable-btn">
-      <a href="/search"><MagnifyingGlass /></a>
-    </li>
-
-    <li class="hidden lg:flex">
-      <ThemeToggle client:media="(min-width: 1024px)" />
-    </li>
-
-    <!-- sidebar-open mobile - JS only load when screen is smaller than 1024px -->
-    <li class="lg:hidden hoverable-btn">
-      <SidebarButton client:media="(max-width: 1024px)" />
-    </li>
-  </ul>
 </header>

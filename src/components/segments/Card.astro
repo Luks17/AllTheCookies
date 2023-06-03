@@ -1,0 +1,45 @@
+---
+import { getFormatedDate } from "@/util/date";
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  post: CollectionEntry<"post">;
+}
+
+const { post } = Astro.props;
+---
+
+<div class="p-2 my-5 bg-crust rounded-md">
+  <!-- thumb -->
+
+  <div class="w-full flex my-1 ml-2 text-xs items-center justify-between">
+    <!-- category -->
+    <a
+      href="#"
+      class="bg-primary font-semibold text-skin-alternate w-fit px-2 py-0.5 uppercase"
+      >{post.data.category}</a
+    >
+
+    <!-- date -->
+    <span class="text-skin-muted mr-4"
+      ><time>{getFormatedDate(post.data.publishDate)}</time></span
+    >
+  </div>
+
+  <!-- title -->
+  <h3 class="text-skin-accent font-bold text-xl px-1 pb-2">
+    {post.data.title}
+  </h3>
+
+  <!-- description -->
+  <p class="text-skin-subtext px-1">{post.data.description}</p>
+
+  <!-- tags -->
+  <div>
+    {
+      post.data.tags.forEach((tag) => {
+        return <a>{tag}</a>;
+      })
+    }
+  </div>
+</div>

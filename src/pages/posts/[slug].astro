@@ -1,0 +1,42 @@
+---
+import { postCategories } from "@/assets/static/links";
+import Card from "@/components/segments/Card.astro";
+import PageDescription from "@/components/segments/PageDescription.astro";
+import { SITE } from "@/config.mjs";
+import PageLayout from "@/layouts/PageLayout.astro";
+import { getNumberOfPosts, getSortedPosts } from "@/util/posts-utils";
+
+export function getStaticPaths() {
+  return postCategories.map((category) => {
+    return {
+      params: { slug: category.slug },
+      props: {
+        categoryName: category.name,
+        categoryDescription: category.description,
+      },
+    };
+  });
+}
+
+const { categoryName, categoryDescription } = Astro.props;
+const { slug } = Astro.params;
+
+const numberOfPages: number = Math.ceil(
+  (await getNumberOfPosts()) / SITE.postsPerPage
+);
+
+const posts = await getSortedPosts(slug);
+---
+
+<PageLayout>
+  <PageDescription
+    pages={numberOfPages}
+    description={categoryDescription}
+    categoriesPath={["posts", categoryName]}
+    pageName={categoryName}
+  />
+
+  <ul class="flex-col text-skin-base">
+    {posts.map((post) => <Card post={post} />)}
+  </ul>
+</PageLayout>

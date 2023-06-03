@@ -29,12 +29,12 @@ function Submenu({ buttonName, sublinks }: SubmenuProps) {
     <button onMouseOver={() => setIsSubmenuOpen(true)} ref={container}>{buttonName}</button>
     {/* Tailwindcss does not support dynamic values for classes, so I need to use the style prop to align the submenu */}
     <aside className={`absolute w-fit origin-top transition-transform ease-in flex flex-col items-center justify-center ${!isSubmenuOpen && "scale-y-0"}`} style={{ left: `${submenuAbsolutePosition}px` }}>
-      <div className="triangle"></div>
-      <ul className="bg-white rounded-lg" style={{ padding: submenuPadding }}>
+      <div className="submenu-triangle"></div>
+      <ul className="bg-fg-base rounded-lg" style={{ padding: submenuPadding }}>
         {sublinks.map(sublink => {
           const { id, name, Icon, url } = sublink;
 
-          return <li key={id} className="flex items-center text-skin-accent hoverable-btn py-1">
+          return <li key={id} className="flex items-center text-skin-base hoverable-btn py-1 capitalize">
             {Icon}
             <a href={url}>{name}</a>
           </li>

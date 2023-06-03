@@ -8,7 +8,7 @@ import { openSidebar } from "@/assets/stores/nav-store";
 function SidebarButton() {
   return <button onClick={() => openSidebar()}>
     <Lines />
-  </button>
+  </button >
 }
 
 export default SidebarButton;
