@@ -18,8 +18,8 @@ import Sidebar from "@/components/base/Sidebar";
   </main>
 
   <script>
-    import { getCurrentTheme, setTheme } from "@/util/theme";
+    import { setPreferredTheme } from "@/assets/stores/theme-store";
 
-    setTheme(getCurrentTheme());
+    setPreferredTheme();
   </script>
 </Layout>

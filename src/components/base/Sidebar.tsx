@@ -8,7 +8,6 @@ import ThemeToggle from "@/components/segments/ThemeToggle";
 import { closeSidebar, isSidebarOpen } from "@/assets/stores/nav-store";
 import { links } from "@/assets/static/links";
 
-// needs appeareance overhaul
 function Sidebar() {
   const $isSidebarOpen = useStore(isSidebarOpen);
 
