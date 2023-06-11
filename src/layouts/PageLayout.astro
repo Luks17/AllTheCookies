@@ -20,7 +20,7 @@ const optimizedBg = await getImage({ src: background });
 
   <main class="mx-auto max-w-[90rem] items-center pb-10 pr-10 pl-10">
     <div style={`background-image: url('${optimizedBg.src}')`} class="left-0 absolute h-full w-full -z-20
-      opacity-[0.02] rotate-1 bg-contain"></div>
+      background-opacity rotate-1 bg-contain"></div>
     <slot />
   </main>
 
