@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     // extend: {
     backgroundColor: {
@@ -17,14 +17,14 @@ module.exports = {
 
     textColor: {
       skin: {
-        "base": "var(--text)",
-        "subtext": "var(--subtext0)",
-        "muted": "var(--overlay1)",
-        "selected": "var(--yellow)",
-        "accent": "var(--lavender)",
+        base: "var(--text)",
+        subtext: "var(--subtext0)",
+        muted: "var(--overlay1)",
+        selected: "var(--yellow)",
+        accent: "var(--lavender)",
         "accent-secondary": "var(--mauve)",
-        "alternate": "var(--maroon)",
-      }
+        alternate: "var(--maroon)",
+      },
     },
 
     gradientColorStops: {
@@ -34,9 +34,9 @@ module.exports = {
     },
 
     borderColor: {
-      "primary": "var(--peach)",
-      "secondary": "var(--mauve)",
-      "crust": "var(--crust)",
+      primary: "var(--peach)",
+      secondary: "var(--mauve)",
+      crust: "var(--crust)",
     },
 
     fontFamily: {
@@ -45,4 +45,4 @@ module.exports = {
     // }
   },
   plugins: [],
-}
+};

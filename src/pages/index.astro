@@ -1,5 +1,23 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
+import { getImage } from "astro:assets";
+import cookieCoffe from "/public/cookies.png";
+
+const oCookieCoffe = await getImage({ src: cookieCoffe });
+
+const title = "Bem vindo! Aceite nossos cookies.";
+const description = "AllTheCookies é um pequeno blog colaborativo de tecnologia. Tendo como conteúdo notícias, tutoriais & artigos pessoais.";
 ---
 
-<PageLayout />
+
+<PageLayout>
+<section class="py-12 md:py-6 max-w-5xl mx-auto xl:px-8 md:flex items-center justify-center">
+  <div class="text-skin-base">
+    <h1 class="text-3xl lg:text-4xl font-bold pb-2">{title}</h1>
+    <p class="text-md text-skin-muted lg:text-lg max-w-xl">{description}</p>
+  </div>
+  <div class="flex justify-center md:justify-start">
+    <img src={oCookieCoffe.src} alt="Cookie with coffe" class="w-[200px] xl:w-[280px]">
+  </div>
+</section>
+</PageLayout>
