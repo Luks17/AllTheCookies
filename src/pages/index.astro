@@ -17,7 +17,10 @@ const description = "AllTheCookies é um pequeno blog colaborativo de tecnologia
     <p class="text-md text-skin-muted lg:text-lg max-w-xl">{description}</p>
   </div>
   <div class="flex justify-center md:justify-start">
-    <img src={oCookieCoffe.src} alt="Cookie with coffe" class="w-[200px] xl:w-[280px]">
+    <div class="relative w-fit">
+      <div class="absolute bg-glow-primary inset-5 blur opacity-0 hover:opacity-[0.03] rounded-full transition-opacity ease-in"></div>
+      <img src={oCookieCoffe.src} alt="Cookie with coffe" class="w-[200px] xl:w-[280px]">
+    </div>
   </div>
 </section>
 </PageLayout>
