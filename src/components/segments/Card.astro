@@ -1,44 +1,57 @@
 ---
 import { getFormatedDate } from "@/util/date";
 import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
 
 export interface Props {
   post: CollectionEntry<"post">;
+  showCategory?: boolean;
+  special?: boolean;
 }
 
-const { post } = Astro.props;
+const { post, showCategory=true, special=false } = Astro.props;
 ---
 
-<div class="p-2 my-5 bg-crust rounded-md">
+<div class={`p-2 my-5 bg-crust rounded-md max-md:max-w-2xl mx-auto ${special ? "border-x-2 border-secondary bg-mantle" : 
+            "max-w-md"}`}>
+
+  {special && <div class="flex justify-center">
+    <h4 class="text-skin-accent-secondary font-bold text-xl pt-1">Mais recente</h4>
+  </div>}
+
   <!-- thumb -->
-
-  <div class="w-full flex my-1 ml-2 text-xs items-center justify-between">
-    <!-- category -->
-    <a
-      href="#"
-      class="bg-primary font-semibold text-skin-alternate w-fit px-2 py-0.5 uppercase"
-      >{post.data.category}</a
-    >
-
-    <!-- date -->
-    <span class="text-skin-muted mr-4"
-      ><time>{getFormatedDate(post.data.publishDate)}</time></span
-    >
+  <div class="flex items-center justify-center bg-fg-base m-4">
+    <Image src="/public/img_not_found.png" alt="Image not found" width={1280} height={720} />
   </div>
 
-  <!-- title -->
-  <h3 class="text-skin-accent font-bold text-xl px-1 pb-2">
-    {post.data.title}
-  </h3>
+  <div class="w-full flex my-1 px-5 text-xs items-center justify-between">
+    <!-- category -->
+    {showCategory && <a href="#" class="bg-primary font-semibold text-skin-alternate w-fit px-2 py-0.5 uppercase">
+      {post.data.category}
+    </a>
+    }
 
-  <!-- description -->
-  <p class="text-skin-subtext px-1">{post.data.description}</p>
+    <!-- date -->
+    <span class="text-skin-muted">
+      <time>{getFormatedDate(post.data.publishDate)}</time>
+    </span>
+  </div>
+
+  <div class="px-2 py-1">
+    <!-- title -->
+    <h3 class="text-skin-accent font-bold text-xl px-1 pb-2">
+      {post.data.title}
+    </h3>
+
+    <!-- description -->
+    <p class="text-skin-subtext px-1">{post.data.description}</p>
+  </div>
 
   <!-- tags -->
-  <div>
+  <div class="flex py-1 px-3 gap-1.5">
     {
-      post.data.tags.forEach((tag) => {
-        return <a>{tag}</a>;
+      post.data.tags.map((tag) => {
+        return <a class="text-skin-muted bg-mantle px-2">{tag}</a>;
       })
     }
   </div>
