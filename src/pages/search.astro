@@ -1,0 +1,14 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import PageDescription from "@/components/segments/PageDescription.astro";
+import SearchBar from "@/components/segments/Search";
+---
+
+<PageLayout>
+  <PageDescription categoriesPath={["search"]} 
+                   pageName="Buscar" 
+                   description="Busque por qualquer coisa..." />
+
+  <SearchBar client:load />
+</PageLayout>
+

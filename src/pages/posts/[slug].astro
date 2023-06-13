@@ -22,7 +22,7 @@ const { categoryName, categoryDescription } = Astro.props;
 const { slug } = Astro.params;
 
 const numberOfPages: number = Math.ceil(
-  (await getNumberOfPosts()) / SITE.postsPerPage
+  (await getNumberOfPosts(slug)) / SITE.postsPerPage
 );
 
 const posts = await getSortedPosts(slug);
@@ -32,7 +32,7 @@ const posts = await getSortedPosts(slug);
   <PageDescription
     pages={numberOfPages}
     description={categoryDescription}
-    categoriesPath={["posts", categoryName]}
+    categoriesPath={["posts", slug!]}
     pageName={categoryName}
   />
 
