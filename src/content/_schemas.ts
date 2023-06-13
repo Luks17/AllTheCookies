@@ -11,6 +11,3 @@ export const postSchema = z.object({
   draft: z.boolean(),
   minutesRead: z.number(),
 });
-
-export type blogFrontmatter = z.infer<typeof postSchema>;
-
