@@ -22,7 +22,8 @@ const meta: MetaTags = {
   </head>
 
   <!-- lining-nums fixes raleway font oddly placed numbers -->
-  <body class="bg-primary h-screen w-screen font-primary lining-nums">
+  <!-- overflow-x-hidden is needed so absolute elements don't make the horizontal scrollbar appear -->
+  <body class="bg-primary h-screen w-screen font-primary lining-nums overflow-x-hidden">
     <slot />
   </body>
 </html>

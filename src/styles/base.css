@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -35,6 +34,8 @@
     --base: #303446;
     --mantle: #292c3c;
     --crust: #232634;
+
+    --bg-opacity: 0.02;
   }
 
   html[page-theme="light"] {
@@ -64,6 +65,8 @@
     --crust: #dce0e8;
     --mantle: #e6e9ef;
     --base: #eff1f5;
+
+    --bg-opacity: 0.07;
   }
 }
 
@@ -73,8 +76,8 @@
   }
 
   .submenu-triangle {
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-left: 16px solid transparent;
     border-right: 16px solid transparent;
     border-bottom: 16px solid var(--surface0);
@@ -83,5 +86,8 @@
   .hoverable-btn {
     @apply opacity-90 hover:opacity-100 hover:text-skin-selected transition-colors ease-linear;
   }
-}
 
+  .background-opacity {
+    opacity: var(--bg-opacity);
+  }
+}

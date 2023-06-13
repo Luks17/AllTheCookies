@@ -1,4 +1,3 @@
-
 import { CollectionEntry, getCollection } from "astro:content";
 
 // variable to store loaded posts so they don't get reloaded all the time
@@ -17,32 +16,31 @@ function getPostDateTime(post: CollectionEntry<"post">): number {
   return post.data.publishDate.getTime();
 }
 
-function filterPostsByCategory(posts: CollectionEntry<"post">[], category: string) {
-  return posts.filter(post => getPostCategory(post) === category);
+function filterPostsByCategory(
+  posts: CollectionEntry<"post">[],
+  category: string
+) {
+  return posts.filter((post) => getPostCategory(post) === category);
 }
 
-export async function getSortedPosts(category?: string): Promise<CollectionEntry<"post">[]> {
-  if (!loaded_posts)
-    await load_posts();
+export async function getSortedPosts(
+  category?: string
+): Promise<CollectionEntry<"post">[]> {
+  if (!loaded_posts) await load_posts();
 
   let posts = loaded_posts;
 
-  if (category !== undefined)
-    posts = filterPostsByCategory(posts, category);
+  if (category !== undefined) posts = filterPostsByCategory(posts, category);
 
-  return posts.sort((a, b) => getPostDateTime(b) - getPostDateTime(a))
+  return posts.sort((a, b) => getPostDateTime(b) - getPostDateTime(a));
 }
 
 export async function getNumberOfPosts(category?: string): Promise<number> {
-  if (!loaded_posts)
-    await load_posts();
+  if (!loaded_posts) await load_posts();
 
   let posts = loaded_posts;
 
-  if (category !== undefined)
-    posts = filterPostsByCategory(posts, category);
+  if (category !== undefined) posts = filterPostsByCategory(posts, category);
 
   return posts.length;
 }
-
-
