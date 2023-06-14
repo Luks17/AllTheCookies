@@ -90,4 +90,8 @@
   .background-opacity {
     opacity: var(--bg-opacity);
   }
+
+  .display-none {
+    display: none;
+  }
 }

@@ -39,6 +39,11 @@ module.exports = {
       crust: "var(--crust)",
     },
 
+    outlineColor: {
+      primary: "var(--blue)",
+      error: "var(--red)",
+    },
+
     fontFamily: {
       primary: ["Raleway", "Roboto", "Ubuntu", "sans-serif"],
     },
