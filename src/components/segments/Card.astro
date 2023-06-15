@@ -1,7 +1,6 @@
 ---
 import { getFormatedDate } from "@/util/date";
 import type { CollectionEntry } from "astro:content";
-import { Image } from "astro:assets";
 
 export interface Props {
   post: CollectionEntry<"post">;
@@ -21,7 +20,7 @@ const { post, showCategory=true, special=false } = Astro.props;
 
   <!-- thumb -->
   <div class="flex items-center justify-center bg-fg-base m-4">
-    <Image src={post.data.thumbnail.src} alt={post.data.thumbnail.alt} width={1280} height={720} />
+    <img src={post.data.thumbnail.img.src} alt={post.data.thumbnail.alt} width={1280} height={720} />
   </div>
 
   <div class="w-full flex my-1 px-5 text-xs items-center justify-between">

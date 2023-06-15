@@ -6,7 +6,7 @@ export const postSchema = ({ image }) =>
     title: z.string(),
     description: z.string(),
     thumbnail: z.object({
-      src: image(),
+      img: image(),
       alt: z.string(),
     }),
     publishDate: z.date(),
