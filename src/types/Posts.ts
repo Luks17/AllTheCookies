@@ -1,5 +1,5 @@
-import { postSchema } from "@/content/_schemas";
-import { z } from "astro:content";
+import type { postSchema } from "@/content/_schemas";
+import type { z } from "astro:content";
 
 export interface PostCategory {
   slug: string;

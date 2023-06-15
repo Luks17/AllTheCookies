@@ -1,4 +1,4 @@
-import { MagnifyingGlass } from "@/assets/static/Icons";
+import { MagnifyingGlass } from "@/resources/static/Icons";
 import type { PostFrontmatter } from "@/types/Posts";
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useRef, useState } from "react";

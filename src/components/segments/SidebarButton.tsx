@@ -1,14 +1,15 @@
-
 import React from "react";
 
-import { Lines } from "@/assets/static/Icons";
+import { Lines } from "@/resources/static/Icons";
 
-import { openSidebar } from "@/assets/stores/nav-store";
+import { openSidebar } from "@/resources/stores/nav-store";
 
 function SidebarButton() {
-  return <button onClick={() => openSidebar()}>
-    <Lines />
-  </button >
+  return (
+    <button onClick={() => openSidebar()}>
+      <Lines />
+    </button>
+  );
 }
 
 export default SidebarButton;
