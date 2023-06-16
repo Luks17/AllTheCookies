@@ -1,19 +1,17 @@
-import { z } from "astro:content";
+import { z, ImageFunction } from "astro:content";
 
-export const postSchema = z.object({
-  author: z.string(),
-  title: z.string(),
-  description: z.string(),
-  thumbnail: z.object({
-    // TODO: change from endsWith(".png") to .webp
-    img: z.string().refine((img) => img.endsWith(".png"), {
-      message: "Thumbnail img must be webp",
+export const postSchema = ({ image }: { image: ImageFunction }) =>
+  z.object({
+    author: z.string(),
+    title: z.string(),
+    description: z.string(),
+    thumbnail: z.object({
+      img: image(),
+      alt: z.string(),
     }),
-    alt: z.string(),
-  }),
-  publishDate: z.date(),
-  category: z.string(),
-  tags: z.array(z.string()),
-  draft: z.boolean(),
-  minutesRead: z.number(),
-});
+    publishDate: z.date(),
+    category: z.string(),
+    tags: z.array(z.string()),
+    draft: z.boolean(),
+    minutesRead: z.number(),
+  });
