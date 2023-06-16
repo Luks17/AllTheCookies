@@ -2,6 +2,7 @@ import { MagnifyingGlass } from "@/resources/static/Icons";
 import type { PostFrontmatter } from "@/types/Posts";
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useRef, useState } from "react";
+import Card from "./Card";
 
 interface FuseResult {
   refIndex: number;
@@ -107,6 +108,16 @@ function Results({ searchResults }: { searchResults: FuseResult[] }) {
             Encontramos <span className="text-skin-alternate">{len} </span>
             resultado{len > 1 ? "s" : ""} para sua busca
           </p>
+
+          <ul>
+            {searchResults.map((result) => {
+              return (
+                <li key={result.refIndex}>
+                  <Card post={result.item} />
+                </li>
+              );
+            })}
+          </ul>
         </div>
       ) : (
         <p>

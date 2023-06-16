@@ -3,11 +3,12 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import PageDescription from "@/components/segments/PageDescription.astro";
 import SearchBar from "@/components/segments/Search";
 import { getCollection } from "astro:content";
+import { optimizePostImages } from "@/util/posts-utils";
 
 // retrieves all posts that are not drafts
 const posts = await getCollection("post", ({data}) => !data.draft);
 
-const postsToSearch = posts.map(({ data }) => data);
+const postsToSearch = await optimizePostImages(posts);
 ---
 
 <PageLayout>

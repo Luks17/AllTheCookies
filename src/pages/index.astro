@@ -3,7 +3,7 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import { getImage } from "astro:assets";
 import cookieCoffe from "/public/assets/cookies_n_coffee.png";
 import { getSortedPosts, optimizePostImages } from "@/util/posts-utils";
-import Card from "@/components/segments/Card.astro";
+import Card from "@/components/segments/Card";
 
 const oCookieCoffe = await getImage({ src: cookieCoffe });
 
