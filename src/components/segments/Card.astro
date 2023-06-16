@@ -1,10 +1,9 @@
 ---
 import { getFormatedDate } from "@/util/date";
-import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
+import type { PostFrontmatter } from "@/types/Posts";
 
 export interface Props {
-  post: CollectionEntry<"post">;
+  post: PostFrontmatter;
   showCategory?: boolean;
   special?: boolean;
 }
@@ -21,36 +20,36 @@ const { post, showCategory=true, special=false } = Astro.props;
 
   <!-- thumb -->
   <div class="flex items-center justify-center bg-fg-base m-4">
-    <Image src={post.data.thumbnail.img} alt={post.data.thumbnail.alt} width={1280} height={720} />
+    <img src={post.thumbnail.img.src} alt={post.thumbnail.alt} width={1280} height={720} />
   </div>
 
   <div class="w-full flex my-1 px-5 text-xs items-center justify-between">
     <!-- category -->
     {showCategory && <a href="#" class="bg-primary font-semibold text-skin-alternate w-fit px-2 py-0.5 uppercase">
-      {post.data.category}
+      {post.category}
     </a>
     }
 
     <!-- date -->
     <span class="text-skin-muted">
-      <time>{getFormatedDate(post.data.publishDate)}</time>
+      <time>{getFormatedDate(post.publishDate)}</time>
     </span>
   </div>
 
   <div class="px-2 py-1">
     <!-- title -->
     <h3 class="text-skin-accent font-bold px-1 pb-2">
-      {post.data.title}
+      {post.title}
     </h3>
 
     <!-- description -->
-    <p class={`text-skin-subtext text-sm px-1 line-clamp-2 overflow-ellipsis ${special && "md:text-lg"}`}>{post.data.description}</p>
+    <p class={`text-skin-subtext text-sm px-1 line-clamp-2 overflow-ellipsis ${special && "md:text-lg"}`}>{post.description}</p>
   </div>
 
   <!-- tags -->
   <div class="flex py-2 px-3 gap-1.5">
     {
-      post.data.tags.map((tag) => {
+      post.tags.map((tag) => {
         return <a class={`text-skin-muted bg-mantle text-sm px-2 ${special && "md:text-lg bg-primary"}`}>{tag}</a>;
       })
     }

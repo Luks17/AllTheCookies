@@ -2,14 +2,14 @@
 import PageLayout from "@/layouts/PageLayout.astro";
 import { getImage } from "astro:assets";
 import cookieCoffe from "/public/assets/cookies_n_coffee.png";
-import { getSortedPosts } from "@/util/posts-utils";
+import { getSortedPosts, optimizePostImages } from "@/util/posts-utils";
 import Card from "@/components/segments/Card.astro";
 
 const oCookieCoffe = await getImage({ src: cookieCoffe });
 
 const description = "AllTheCookies é um pequeno blog colaborativo de tecnologia. Tendo como conteúdo notícias, tutoriais & artigos pessoais.";
 
-const sortedPosts = await getSortedPosts();
+const sortedPosts = await optimizePostImages(await getSortedPosts());
 const latestPost = sortedPosts[0];
 const otherPosts = sortedPosts.slice(1, 3);
 ---
