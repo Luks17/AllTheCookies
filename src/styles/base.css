@@ -71,7 +71,7 @@
 }
 
 @layer components {
-  .sidebar-opacity {
+  .overlay-opacity {
     background: rgba(0, 0, 0, 0.3);
   }
 
