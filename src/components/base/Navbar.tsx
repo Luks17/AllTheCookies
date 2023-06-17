@@ -5,7 +5,7 @@ import Submenu from "@/components/segments/Submenu";
 
 function Navbar() {
   return (
-    <nav className="flex gap-24 text-skin-base font-bold text-2xl">
+    <nav className="flex gap-24 z-20 text-skin-base font-bold text-2xl">
       {links.map((link) => {
         const { id, sublinks, url, name } = link;
 
