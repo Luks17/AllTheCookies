@@ -2,13 +2,13 @@
 import PageLayout from "@/layouts/PageLayout.astro";
 import PageDescription from "@/components/segments/PageDescription.astro";
 import SearchBar from "@/components/segments/Search";
-import { getCollection } from "astro:content";
-import { optimizePostImages } from "@/util/posts-utils";
+import { optimizePostImages, getUnsortedPosts } from "@/util/posts-utils";
+import type { PostFrontmatter } from "@/types/Posts";
 
 // retrieves all posts that are not drafts
-const posts = await getCollection("post", ({data}) => !data.draft);
+const posts = await getUnsortedPosts();
 
-const postsToSearch = await optimizePostImages(posts);
+const postsToSearch: PostFrontmatter[] = await optimizePostImages(posts);
 ---
 
 <PageLayout>

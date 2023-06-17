@@ -25,7 +25,7 @@ function filterPostsByCategory(
   return posts.filter((post) => getPostCategory(post) === category);
 }
 
-export async function getSortedPosts(
+export async function getUnsortedPosts(
   category?: string
 ): Promise<CollectionEntry<"post">[]> {
   if (!loaded_posts) await load_posts();
@@ -33,6 +33,14 @@ export async function getSortedPosts(
   let posts = loaded_posts;
 
   if (category !== undefined) posts = filterPostsByCategory(posts, category);
+
+  return posts;
+}
+
+export async function getSortedPosts(
+  category?: string
+): Promise<CollectionEntry<"post">[]> {
+  const posts = await getUnsortedPosts(category);
 
   return posts.sort((a, b) => getPostDateTime(b) - getPostDateTime(a));
 }
