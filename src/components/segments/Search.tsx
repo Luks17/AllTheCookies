@@ -3,6 +3,7 @@ import type { PostFrontmatter } from "@/types/Posts";
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Card from "./Card";
+import { SITE } from "@/config.mjs";
 
 interface FuseResult {
   refIndex: number;
@@ -98,19 +99,30 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
 }
 
 function Results({ searchResults }: { searchResults: FuseResult[] }) {
+  const [currentLastPost, setCurrentLastPost] = useState(SITE.postsPerPage);
   const len = searchResults.length;
+
+  let showedPosts = searchResults.slice(0, currentLastPost);
+
+  function showMore() {
+    const newLastPost = currentLastPost + SITE.postsPerPage;
+    const newSlice = searchResults.slice(currentLastPost, newLastPost);
+
+    showedPosts = showedPosts.concat(showedPosts, newSlice);
+    setCurrentLastPost(newLastPost);
+  }
 
   return (
     <div className="mt-6 text-skin-base">
       {len > 0 ? (
-        <div>
+        <div className="flex flex-col items-center">
           <p>
             Encontramos <span className="text-skin-alternate">{len} </span>
             resultado{len > 1 ? "s" : ""} para sua busca
           </p>
 
           <ul>
-            {searchResults.map((result) => {
+            {showedPosts.map((result) => {
               return (
                 <li key={result.refIndex}>
                   <Card post={result.item} />
@@ -118,6 +130,15 @@ function Results({ searchResults }: { searchResults: FuseResult[] }) {
               );
             })}
           </ul>
+
+          {currentLastPost < len && (
+            <button
+              className="text-skin-muted hover:text-skin-subtext transition-colors font-semibold"
+              onClick={showMore}
+            >
+              Show more results
+            </button>
+          )}
         </div>
       ) : (
         <p>
