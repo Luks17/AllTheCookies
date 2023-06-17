@@ -55,6 +55,13 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
     }
   }
 
+  function closeAndCleanSearch() {
+    setInputFieldText("");
+    // is this redundant? Yes, but it also bypasses the useEffect timeout
+    history.replaceState(null, "", window.location.pathname);
+    closeSearch();
+  }
+
   useEffect(() => {
     const inputField = inputContainer.current!;
     const query = new URLSearchParams(window.location.search).get("q");
@@ -67,7 +74,7 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
   }, []);
 
   // This useEffect tries to execute the search only after the user has finished typing,
-  // so it delays the execution of the search by 2 seconds.
+  // so it delays the execution of the search by 1 second.
   // Every time the component is rerendered, react summons a new useEffect that has
   // a completely different timedId, so we need to clear the old timeout before creating
   // the new timer.
@@ -83,11 +90,14 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
   return (
     <Overlay
       maxW_sm={false}
-      closeFunction={closeSearch}
+      closeFunction={closeAndCleanSearch}
       condition={$isSearchOpen}
     >
-      <div className="mt-20">
-        <label className="relative">
+      <p className="absolute w-full text-skin-muted font-bold text-center pr-4 mt-8">
+        Busque posts em todo o site
+      </p>
+      <div className="mt-20 flex flex-col">
+        <label className="relative mx-auto">
           <div className="absolute top-0 left-0 flex items-center h-full px-1 text-skin-muted">
             <MagnifyingGlass />
           </div>
@@ -144,10 +154,11 @@ function Results({ searchResults }: { searchResults: FuseResult[] }) {
 
           {currentLastPost < len && (
             <button
-              className="text-skin-muted hover:text-skin-subtext transition-colors font-semibold"
+              className="text-skin-muted flex flex-col pb-5 hover:text-skin-subtext transition-colors font-semibold"
               onClick={showMore}
             >
-              Show more results
+              <span>Show more results</span>
+              <span>⬇</span>
             </button>
           )}
         </div>
