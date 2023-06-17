@@ -1,12 +1,11 @@
-import React from "react";
 import { useStore } from "@nanostores/react";
 
+import Overlay from "@/components/segments/Overlay";
 import SidebarLink from "@/components/segments/SidebarLink";
 import ThemeToggle from "@/components/segments/ThemeToggle";
 
 import { closeSidebar, isSidebarOpen } from "@/resources/stores/nav-store";
 import { links } from "@/resources/static/links";
-import Overlay from "./Overlay";
 
 function Sidebar() {
   const $isSidebarOpen = useStore(isSidebarOpen);

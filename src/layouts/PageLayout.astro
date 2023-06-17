@@ -8,16 +8,24 @@ import Footer from "@/components/base/Footer.astro";
 import background from "/public/assets/bg.png";
 
 import { getImage } from "astro:assets";
+import Search from "@/components/segments/Search";
+
+import { getUnsortedPosts, optimizePostImages } from "@/util/posts-utils";
 
 const optimizedBg = await getImage({ src: background });
+
+const posts = await getUnsortedPosts();
+const postsToSearch = await optimizePostImages(posts);
 ---
 
 <Layout>
   <!-- 
     client:media only loads the component JS when a css condition is met 
+    client:only renders component only in client (no static content)
   -->
   <Header />
   <Sidebar client:media="(max-width: 1024px)" />
+  <Search elementsToSearch={postsToSearch} client:only="react" />
 
   <main class="mx-auto max-w-7xl items-center pb-10 px-10 relative min-h-screen">
     <div style={`background-image: url('${optimizedBg.src}')`} class="left-0 absolute h-full 

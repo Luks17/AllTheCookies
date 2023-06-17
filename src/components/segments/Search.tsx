@@ -1,9 +1,13 @@
+import Card from "./Card";
+import Overlay from "./Overlay";
+
 import { MagnifyingGlass } from "@/resources/static/Icons";
 import type { PostFrontmatter } from "@/types/Posts";
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useRef, useState } from "react";
-import Card from "./Card";
 import { SITE } from "@/config.mjs";
+import { closeSearch, isSearchOpen } from "@/resources/stores/nav-store";
+import { useStore } from "@nanostores/react";
 
 interface FuseResult {
   refIndex: number;
@@ -11,6 +15,7 @@ interface FuseResult {
 }
 
 function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
+  const $isSearchOpen = useStore(isSearchOpen);
   const [inputFieldText, setInputFieldText] = useState("");
   const [searchResults, setSearchResults] = useState([] as FuseResult[]);
   const [showResults, setShowResults] = useState(false);
@@ -76,25 +81,31 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
   }, [inputFieldText]);
 
   return (
-    <>
-      <label className="relative">
-        <div className="absolute top-0 left-0 flex items-center h-full px-1 text-skin-muted">
-          <MagnifyingGlass />
-        </div>
-        <input
-          className="w-80 md:w-[36rem] lg:w-[48rem] h-12 px-8 py-1 bg-fg-secondary outline-none focus:outline-primary rounded-xl text-skin-base placeholder:text-skin-muted placeholder:italic"
-          type="text"
-          value={inputFieldText}
-          placeholder="Pesquise algo..."
-          onChange={changeHandler}
-          autoComplete="off"
-          autoFocus
-          ref={inputContainer}
-        />
-      </label>
+    <Overlay
+      maxW_sm={false}
+      closeFunction={closeSearch}
+      condition={$isSearchOpen}
+    >
+      <div className="mt-20">
+        <label className="relative">
+          <div className="absolute top-0 left-0 flex items-center h-full px-1 text-skin-muted">
+            <MagnifyingGlass />
+          </div>
+          <input
+            className="px-8 py-1 bg-fg-secondary outline-none focus:outline-primary rounded-xl text-skin-base placeholder:text-skin-muted placeholder:italic"
+            type="text"
+            value={inputFieldText}
+            placeholder="Pesquise algo..."
+            onChange={changeHandler}
+            autoComplete="off"
+            autoFocus
+            ref={inputContainer}
+          />
+        </label>
 
-      {showResults && <Results searchResults={searchResults} />}
-    </>
+        {showResults && <Results searchResults={searchResults} />}
+      </div>
+    </Overlay>
   );
 }
 

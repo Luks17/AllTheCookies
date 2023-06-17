@@ -1,10 +1,9 @@
 ---
 import Logo from "@/components/Logo.astro";
 import SidebarButton from "@/components/segments/SidebarButton";
+import SearchButton from "@/components/segments/SearchButton";
 import Navbar from "@/components/base/Navbar";
 import ThemeToggle from "@/components/segments/ThemeToggle";
-
-import { Github, MagnifyingGlass } from "@/resources/static/Icons";
 ---
 
 <header
@@ -19,7 +18,7 @@ import { Github, MagnifyingGlass } from "@/resources/static/Icons";
 
     <ul class="flex gap-3 text-skin-base items-center justify-end">
       <li class="hoverable-btn">
-        <a href="/search"><MagnifyingGlass /></a>
+        <SearchButton client:idle />
       </li>
 
       <li class="hidden lg:flex">
