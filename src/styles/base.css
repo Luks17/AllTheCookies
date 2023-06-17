@@ -71,7 +71,7 @@
 }
 
 @layer components {
-  .sidebar-opacity {
+  .overlay-opacity {
     background: rgba(0, 0, 0, 0.3);
   }
 
@@ -89,5 +89,9 @@
 
   .background-opacity {
     opacity: var(--bg-opacity);
+  }
+
+  .display-none {
+    display: none;
   }
 }

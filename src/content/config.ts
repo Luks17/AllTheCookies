@@ -3,7 +3,6 @@ import { postSchema } from "./_schemas";
 
 const post = defineCollection({
   schema: postSchema,
-})
+});
 
 export const collections = { post };
-
