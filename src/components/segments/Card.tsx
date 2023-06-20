@@ -30,6 +30,8 @@ function Card({ post, showCategory = true, special = false }: Props) {
           alt={post.thumbnail.alt}
           width={1280}
           height={720}
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
