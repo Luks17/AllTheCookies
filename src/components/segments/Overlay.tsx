@@ -20,13 +20,16 @@ function Overlay({
 }: Props) {
   return (
     <aside
-      className={`fixed flex z-20 ${lgHidden ? "lg:hidden " : " "
-        }top-0 right-0 h-full w-full justify-center items-center overlay-opacity transition-all duration-100 ease-linear ${condition ? "scale-100 visible" : "scale-0 invisible"
-        }`}
+      className={`fixed flex z-20 ${
+        lgHidden ? "lg:hidden " : " "
+      }top-0 overlay right-0 h-full w-full justify-center items-center overlay-opacity transition-all duration-100 ease-linear ${
+        condition ? "scale-100 visible" : "scale-0 invisible"
+      }`}
     >
       <div
-        className={`bg-mantle overflow-y-auto rounded-md relative shadow-black h-[95%] w-[90%] border-primary border-2 ${maxW_sm ? "max-w-sm" : "max-w-md"
-          }`}
+        className={`bg-mantle scroll-smooth overflow-y-auto rounded-md relative shadow-black h-[95%] w-[90%] border-primary border-2 ${
+          maxW_sm ? "max-w-sm" : "max-w-md"
+        }`}
       >
         <button onClick={() => closeFunction()}>
           <svg

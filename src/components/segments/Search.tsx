@@ -93,6 +93,7 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
       closeFunction={closeAndCleanSearch}
       condition={$isSearchOpen}
     >
+      <a id="search-top"></a>
       <p className="absolute w-full text-skin-muted font-bold text-center pr-4 mt-8">
         Busque posts em todo o site
       </p>

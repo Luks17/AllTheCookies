@@ -1,14 +1,15 @@
 ---
 import "@/styles/base.css";
 
+import { getImage } from "astro:assets";
+
 import Layout from "./BaseLayout.astro";
 import Header from "@/components/base/Header.astro";
 import Sidebar from "@/components/base/Sidebar";
 import Footer from "@/components/base/Footer.astro";
-import background from "/public/assets/bg.png";
-
-import { getImage } from "astro:assets";
 import Search from "@/components/segments/Search";
+import ScrollTopBtn from "@/components/segments/ScrollTopBtn";
+import background from "/public/assets/bg.png";
 
 import { getUnsortedPosts, optimizePostImages } from "@/util/posts-utils";
 
@@ -33,10 +34,12 @@ const postsToSearch = await optimizePostImages(posts);
       w-full -z-50 background-opacity rotate-1 bg-contain"></div>
     <div class="mx-auto max-w-7xl pb-10 px-10 ">
       <slot />
+      <ScrollTopBtn client:idle />
     </div>
   </main>
 
   <Footer />
+
 
   <script>
     import { setPreferredTheme } from "@/resources/stores/theme-store";
