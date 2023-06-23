@@ -17,15 +17,18 @@ function ScrollTopBtn() {
 
   function handleScroll(e: Event) {
     const targetElement = e.target!;
+    const offSet = 200;
 
     if ($isSearchOpen) {
-      if (!isBtnVisible && targetElement.scrollTop > 50) setIsBtnVisible(true);
+      if (!isBtnVisible && targetElement.scrollTop > offSet)
+        setIsBtnVisible(true);
       else setIsBtnVisible(false);
     } else {
+      // in some browsers it is documentElement.scrollTop and in others it its body.scrollTop
       if (
         !isBtnVisible &&
-        (targetElement.documentElement.scrollTop > 50 ||
-          targetElement.body.scrollTop > 50)
+        (targetElement.documentElement.scrollTop > offSet ||
+          targetElement.body.scrollTop > offSet)
       )
         setIsBtnVisible(true);
       else setIsBtnVisible(false);
@@ -35,9 +38,11 @@ function ScrollTopBtn() {
   useEffect(() => {
     toggleHref();
 
-    document.removeEventListener("scroll", handleScroll, true);
-
     document.addEventListener("scroll", handleScroll, true);
+
+    return () => {
+      document.removeEventListener("scroll", handleScroll, true);
+    };
   }, [$isSearchOpen]);
 
   return (
@@ -45,7 +50,7 @@ function ScrollTopBtn() {
       <a
         className={`fixed z-50 ${
           isBtnVisible ? "block" : "display-none"
-        } text-lg cursor-pointer max-lg:top-5 max-lg:left-1/2 lg:right-5 lg:bottom-12 px-3 py-1.5 
+        } text-lg cursor-pointer shadow-black shadow-sm right-4 top-4 px-3 py-1.5 
       bg-fg-base rounded-full text-skin-muted`}
         ref={btnContainer}
       >
