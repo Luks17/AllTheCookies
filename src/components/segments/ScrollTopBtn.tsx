@@ -46,17 +46,15 @@ function ScrollTopBtn() {
   }, [$isSearchOpen]);
 
   return (
-    <div>
-      <a
-        className={`fixed z-50 ${
-          isBtnVisible ? "block" : "display-none"
-        } text-lg cursor-pointer shadow-black shadow-sm right-4 top-4 px-3 py-1.5 
-      bg-fg-base rounded-full text-skin-muted`}
-        ref={btnContainer}
-      >
-        ↑
-      </a>
-    </div>
+    <a
+      className={`fixed z-50 ${
+        isBtnVisible ? "block" : "display-none"
+      } text-lg cursor-pointer shadow-black shadow-sm right-4 top-4 px-3 py-1.5 
+      bg-fg-base rounded-full text-skin-muted hoverable-btn hover:bg-fg-secondary`}
+      ref={btnContainer}
+    >
+      ↑
+    </a>
   );
 }
 

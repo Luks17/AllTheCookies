@@ -52,7 +52,7 @@ export function Sun() {
 export function Lines() {
   return (
     <svg
-      className="h8 w-8 text-skin-base"
+      className="h8 w-8"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
