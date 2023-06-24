@@ -10,10 +10,11 @@ interface Props {
 function Card({ post, showCategory = true, special = false }: Props) {
   return (
     <div
-      className={`p-2 my-5 bg-crust rounded-md max-md:max-w-2xl text-xl mx-auto ${special
+      className={`p-2 bg-crust rounded-md text-xl ${
+        special
           ? "border-x-2 md:border-y-2 md:text-2xl border-secondary bg-mantle"
-          : "max-w-md"
-        }`}
+          : ""
+      }`}
     >
       {special && (
         <div className="flex justify-center">
@@ -58,8 +59,9 @@ function Card({ post, showCategory = true, special = false }: Props) {
 
         {/* description */}
         <p
-          className={`text-skin-subtext text-sm px-1 line-clamp-2 overflow-ellipsis ${special && "md:text-lg"
-            }`}
+          className={`text-skin-subtext text-sm px-1 line-clamp-2 overflow-ellipsis ${
+            special && "md:text-lg"
+          }`}
         >
           {post.description}
         </p>
@@ -71,8 +73,9 @@ function Card({ post, showCategory = true, special = false }: Props) {
           return (
             <a
               key={id}
-              className={`text-skin-muted bg-mantle text-sm px-2 ${special && "md:text-lg bg-primary"
-                }`}
+              className={`text-skin-muted bg-mantle text-sm px-2 ${
+                special && "md:text-lg bg-primary"
+              }`}
             >
               {tag}
             </a>

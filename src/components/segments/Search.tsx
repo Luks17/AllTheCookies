@@ -138,7 +138,7 @@ function Results({ searchResults }: { searchResults: FuseResult[] }) {
     <div className="mt-6 text-skin-base">
       {len > 0 ? (
         <div className="flex flex-col items-center">
-          <p>
+          <p className="mb-1.5">
             Encontramos <span className="text-skin-alternate">{len} </span>
             resultado{len > 1 ? "s" : ""} para sua busca
           </p>
@@ -146,7 +146,7 @@ function Results({ searchResults }: { searchResults: FuseResult[] }) {
           <ul>
             {showedPosts.map((result) => {
               return (
-                <li key={result.refIndex}>
+                <li className="my-3 w-[95%] mx-auto" key={result.refIndex}>
                   <Card post={result.item} />
                 </li>
               );

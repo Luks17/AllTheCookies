@@ -36,7 +36,7 @@ const posts = await optimizePostImages(await getSortedPosts(slug));
     pageName={categoryName}
   />
 
-  <ul class="flex-col text-skin-base">
-    {posts.map((post) => <Card post={post} showCategory={false} />)}
+  <ul class="grid text-skin-base grid-cols-1 lg:grid-cols-2 mt-5 max-w-3xl mx-auto">
+    {posts.map((post) => <div class="max-w-sm my-2.5 lg:mx-2.5 place-self-center"><Card post={post} showCategory={false} /></div>)}
   </ul>
 </PageLayout>
