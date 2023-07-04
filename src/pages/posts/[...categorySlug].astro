@@ -19,7 +19,7 @@ export async function getStaticPaths() {
     // iterates through all pages of the post category
     return numbers.map(pageNumber => (
       {
-        params: { slug: category.slug + `${(pageNumber !== 1) ? ("/" + pageNumber) : ""}` },
+        params: { categorySlug: category.slug + `${(pageNumber !== 1) ? ("/" + pageNumber) : ""}` },
         props: {
           categoryName: category.name,
           categorySlug: category.slug,
@@ -35,7 +35,22 @@ export async function getStaticPaths() {
 
 const { categoryName, currentPage, categoryDescription, categorySlug } = Astro.props;
 
-const numberOfPages = await getNumberOfPages(categorySlug);
+
+function getHref(next: boolean) {
+  const link = `/posts/${categorySlug}`;
+  let pageNumber = currentPage;
+
+  if(next) {
+    if(++pageNumber % SITE.postsPerPage === 0)
+      pageNumber = 1;
+  }
+  else {
+    if(--pageNumber === 0) 
+      pageNumber = SITE.postsPerPage - 1;
+  }
+
+  return link + (pageNumber === 1 ? "" : `/${pageNumber}`);
+}
 
 const posts = await getSortedPosts(categorySlug);
 
@@ -43,6 +58,8 @@ const lastPost = currentPage * SITE.postsPerPage;
 const startPost = lastPost - SITE.postsPerPage;
 
 const showedPosts = posts.slice(startPost, lastPost);
+const numberOfPages = await getNumberOfPages(categorySlug);
+const btnClass = "w-5 h-5 hoverable-btn bg-fg-secondary px-7 py-5 rounded-3xl flex items-center justify-center text-2xl";
 ---
 
 <PageLayout>
@@ -57,4 +74,13 @@ const showedPosts = posts.slice(startPost, lastPost);
   <ul class="grid text-skin-base grid-cols-1 lg:grid-cols-2 mt-5 max-w-3xl mx-auto">
     {showedPosts.map((post) => <div class="max-w-sm my-2.5 lg:mx-2.5 place-self-center"><Card post={post} showCategory={false} /></div>)}
   </ul>
+
+  {numberOfPages > 1 && <div class="text-skin-subtext font-semibold mt-5 w-full flex justify-between">
+      <a href={getHref(false)} class={btnClass}>↩</a>
+      <p class="bg-fg-base text-md self-center px-3 py-1 rounded-lg text-skin-accent">
+        {`Página ${currentPage} de ${numberOfPages}`}
+      </p>
+      <a href={getHref(true)} class={btnClass}>↪</a>
+   </div>
+  }
 </PageLayout>
