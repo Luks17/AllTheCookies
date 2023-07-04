@@ -1,0 +1,60 @@
+---
+import { postCategories } from "@/resources/static/links";
+import Card from "@/components/segments/Card";
+import PageDescription from "@/components/segments/PageDescription.astro";
+import PageLayout from "@/layouts/PageLayout.astro";
+import { getNumberOfPages, getSortedPosts } from "@/util/posts-utils";
+import { SITE } from "@/config.mjs";
+
+export async function getStaticPaths() {
+
+  // iterates through all posts categories (3 at the time of writing)
+  const paths = await Promise.all(postCategories.map(async (category) => {
+    const numbers: number[] = [1];
+
+    for(let i = 1; i <= (await getNumberOfPages(category.slug)); ++i) {
+      numbers.push(i);
+    }
+
+    // iterates through all pages of the post category
+    return numbers.map(pageNumber => (
+      {
+        params: { slug: category.slug + `${(pageNumber !== 1) ? ("/" + pageNumber) : ""}` },
+        props: {
+          categoryName: category.name,
+          categorySlug: category.slug,
+          currentPage: pageNumber,
+          categoryDescription: category.description,
+        },
+      }
+    ));
+  }));
+
+  return paths.flat();
+}
+
+const { categoryName, currentPage, categoryDescription, categorySlug } = Astro.props;
+
+const numberOfPages = await getNumberOfPages(categorySlug);
+
+const posts = await getSortedPosts(categorySlug);
+
+const lastPost = currentPage * SITE.postsPerPage;
+const startPost = lastPost - SITE.postsPerPage;
+
+const showedPosts = posts.slice(startPost, lastPost);
+---
+
+<PageLayout>
+  <PageDescription
+    numberOfPages={numberOfPages}
+    currentPageNumber={currentPage}
+    description={categoryDescription}
+    pathToPage={["posts", categorySlug!]}
+    pageName={categoryName}
+  />
+
+  <ul class="grid text-skin-base grid-cols-1 lg:grid-cols-2 mt-5 max-w-3xl mx-auto">
+    {showedPosts.map((post) => <div class="max-w-sm my-2.5 lg:mx-2.5 place-self-center"><Card post={post} showCategory={false} /></div>)}
+  </ul>
+</PageLayout>

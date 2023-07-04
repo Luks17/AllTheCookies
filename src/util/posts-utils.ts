@@ -1,3 +1,4 @@
+import { SITE } from "@/config.mjs";
 import type { OptimizedImg, PostFrontmatter } from "@/types/Posts";
 import { getImage } from "astro:assets";
 import { CollectionEntry, getCollection } from "astro:content";
@@ -85,4 +86,11 @@ export async function getNumberOfPosts(category?: string): Promise<number> {
   if (category !== undefined) posts = filterPostsByCategory(posts, category);
 
   return posts.length;
+}
+
+export async function getNumberOfPages(category?: string): Promise<number> {
+  return Math.ceil(
+    (await getNumberOfPosts(category ? category : undefined)) /
+    SITE.postsPerPage
+  );
 }
