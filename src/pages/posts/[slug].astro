@@ -4,7 +4,7 @@ import Card from "@/components/segments/Card";
 import PageDescription from "@/components/segments/PageDescription.astro";
 import { SITE } from "@/config.mjs";
 import PageLayout from "@/layouts/PageLayout.astro";
-import { getNumberOfPosts, getSortedPosts, optimizePostImages } from "@/util/posts-utils";
+import { getNumberOfPosts, getSortedPosts } from "@/util/posts-utils";
 
 export function getStaticPaths() {
   return postCategories.map((category) => {
@@ -25,7 +25,7 @@ const numberOfPages: number = Math.ceil(
   (await getNumberOfPosts(slug)) / SITE.postsPerPage
 );
 
-const posts = await optimizePostImages(await getSortedPosts(slug));
+const posts = await getSortedPosts(slug);
 ---
 
 <PageLayout>

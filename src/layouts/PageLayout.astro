@@ -11,12 +11,11 @@ import Search from "@/components/segments/Search";
 import ScrollTopBtn from "@/components/segments/ScrollTopBtn";
 import background from "/public/assets/bg.png";
 
-import { getUnsortedPosts, optimizePostImages } from "@/util/posts-utils";
+import { getUnsortedPosts } from "@/util/posts-utils";
 
 const optimizedBg = await getImage({ src: background });
 
-const posts = await getUnsortedPosts();
-const postsToSearch = await optimizePostImages(posts);
+const postsToSearch = await getUnsortedPosts();
 ---
 
 <Layout>

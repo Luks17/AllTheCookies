@@ -64,8 +64,9 @@ function Carousel({ sortedPosts }: Props) {
           className="flex w-min transition-transform ease-in-out duration-500"
           /* moves the ul to the correct post using only css */
           style={{
-            transform: `translateX(-${postIndex * (SLIDE_WIDTH + GAP_WIDTH)
-              }px)`,
+            transform: `translateX(-${
+              postIndex * (SLIDE_WIDTH + GAP_WIDTH)
+            }px)`,
             columnGap: `${GAP_WIDTH}px`,
           }}
         >
