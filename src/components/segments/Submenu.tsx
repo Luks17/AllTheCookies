@@ -34,9 +34,8 @@ function Submenu({ buttonName, sublinks }: SubmenuProps) {
       </button>
       {/* Tailwindcss does not support dynamic values for classes, so I need to use the style prop to align the submenu */}
       <aside
-        className={`absolute w-fit origin-top transition-transform ease-in flex flex-col items-center justify-center ${
-          !isSubmenuOpen && "scale-y-0"
-        }`}
+        className={`absolute w-fit origin-top transition-transform ease-in flex flex-col items-center justify-center ${!isSubmenuOpen && "scale-y-0"
+          }`}
         style={{ left: `${submenuAbsolutePosition}px` }}
       >
         <div className="submenu-triangle"></div>

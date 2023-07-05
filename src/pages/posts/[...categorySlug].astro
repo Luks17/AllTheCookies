@@ -75,7 +75,7 @@ const btnClass = "w-5 h-5 hoverable-btn bg-fg-secondary px-7 py-5 rounded-3xl fl
     {showedPosts.map((post) => <div class="max-w-sm my-2.5 lg:mx-2.5 place-self-center"><Card post={post} showCategory={false} /></div>)}
   </ul>
 
-  {numberOfPages > 1 && <div class="text-skin-subtext font-semibold mt-5 w-full flex justify-between">
+  {numberOfPages > 1 && <div class="text-skin-subtext font-semibold mt-5 w-full max-w-md mx-auto flex justify-between">
       <a href={getHref(false)} class={btnClass}>↩</a>
       <p class="bg-fg-base text-md self-center px-3 py-1 rounded-lg text-skin-accent">
         {`Página ${currentPage} de ${numberOfPages}`}

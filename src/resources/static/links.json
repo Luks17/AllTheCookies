@@ -1,0 +1,38 @@
+{
+  "links": [
+    {
+      "id": 1,
+      "slug": "about",
+      "name": "Sobre"
+    },
+    {
+      "id": 2,
+      "slug": "Posts",
+      "sublinks": [
+        {
+          "id": 2000,
+          "slug": "tutorials",
+          "name": "tutoriais",
+          "description": "Todos os tutoriais postados, de todos os tipos"
+        },
+        {
+          "id": 2001,
+          "slug": "blog",
+          "name": "blog",
+          "description": "Todos os posts pessoais dos contribuidores do site"
+        },
+        {
+          "id": 2002,
+          "slug": "news",
+          "name": "notícias",
+          "description": "Todas as notícias postadas, de todos os tipos"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "authors",
+      "name": "Contribuidores"
+    }
+  ]
+}

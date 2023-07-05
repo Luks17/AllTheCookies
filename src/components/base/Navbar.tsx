@@ -1,5 +1,3 @@
-import React from "react";
-
 import { links } from "@/resources/static/links";
 import Submenu from "@/components/segments/Submenu";
 
