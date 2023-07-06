@@ -3,26 +3,29 @@
     {
       "id": 1,
       "slug": "about",
+      "description": "Por que fazer este site?",
       "name": "Sobre"
     },
     {
       "id": 2,
-      "slug": "Posts",
+      "slug": "posts",
+      "name": "Posts",
+      "description": "Todos as postagens",
       "sublinks": [
         {
-          "id": 2000,
+          "id": 200,
           "slug": "tutorials",
           "name": "tutoriais",
           "description": "Todos os tutoriais postados, de todos os tipos"
         },
         {
-          "id": 2001,
+          "id": 201,
           "slug": "blog",
           "name": "blog",
           "description": "Todos os posts pessoais dos contribuidores do site"
         },
         {
-          "id": 2002,
+          "id": 202,
           "slug": "news",
           "name": "notícias",
           "description": "Todas as notícias postadas, de todos os tipos"
@@ -32,6 +35,7 @@
     {
       "id": 3,
       "slug": "authors",
+      "description": "Todos os contribuidores",
       "name": "Contribuidores"
     }
   ]

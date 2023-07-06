@@ -1,4 +1,4 @@
-import type { ItemTemplate, LinkTemplate } from "@/types/Header";
+import type { ItemTemplate, LinkTemplate } from "@/types/Links";
 
 // uses scale-y-0 to hide the ul sublinks and scales it back toggling it
 // the absolute is used because, even when scaled down, the elements still take space
@@ -29,7 +29,7 @@ function SidebarLink(link: LinkTemplate) {
   return (
     <div className="text-xl md:text-2xl font-bold text-skin-base w-full border-crust border-b-2">
       {sublinks === undefined ? (
-        <a href={link.url}>
+        <a href={"/posts/" + link.slug}>
           <Item {...link} />
         </a>
       ) : (
@@ -44,7 +44,7 @@ function SidebarLink(link: LinkTemplate) {
           >
             {sublinks.map((sublink) => (
               <li key={sublink.id}>
-                <a href={sublink.url}>
+                <a href={"/posts/" + sublink.slug}>
                   <Item {...sublink} />
                 </a>
               </li>

@@ -5,7 +5,7 @@ import SidebarLink from "@/components/segments/SidebarLink";
 import ThemeToggle from "@/components/segments/ThemeToggle";
 
 import { closeSidebar, isSidebarOpen } from "@/resources/stores/nav-store";
-import { links } from "@/resources/static/links";
+import { navLinks } from "@/resources/static/links";
 
 function Sidebar() {
   const $isSidebarOpen = useStore(isSidebarOpen);
@@ -22,7 +22,7 @@ function Sidebar() {
 
       {/* links */}
       <nav className="relative border-crust mt-20 border-t-2">
-        {links.map((link) => (
+        {navLinks.map((link) => (
           <SidebarLink key={link.id} {...link} />
         ))}
       </nav>

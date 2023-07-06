@@ -1,15 +1,11 @@
-export type SubmenuCords = {
-  center: number;
-  bottom: number;
-};
-
 export interface ItemTemplate {
   name: string;
-  Icon: JSX.Element;
+  Icon?: JSX.Element;
 }
 
 export interface LinkTemplate extends ItemTemplate {
   id: number;
-  url?: string;
+  slug: string;
+  description: string;
   sublinks?: LinkTemplate[];
 }

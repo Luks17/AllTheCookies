@@ -1,15 +1,17 @@
 ---
-import { postCategories } from "@/resources/static/links";
 import Card from "@/components/segments/Card";
 import PageDescription from "@/components/segments/PageDescription.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
+
+import { postsCategories } from "@/resources/static/links";
 import { getNumberOfPages, getSortedPosts } from "@/util/posts-utils";
 import { SITE } from "@/config.mjs";
+
 
 export async function getStaticPaths() {
 
   // iterates through all posts categories (3 at the time of writing)
-  const paths = await Promise.all(postCategories.map(async (category) => {
+  const paths = await Promise.all(postsCategories.map(async (category) => {
     const numbers: number[] = [1];
 
     for(let i = 1; i <= (await getNumberOfPages(category.slug)); ++i) {

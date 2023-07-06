@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import type { LinkTemplate } from "@/types/Header";
+import type { LinkTemplate } from "@/types/Links";
 
 interface SubmenuProps {
   buttonName: string;
@@ -44,7 +44,7 @@ function Submenu({ buttonName, sublinks }: SubmenuProps) {
           style={{ padding: submenuPadding }}
         >
           {sublinks.map((sublink) => {
-            const { id, name, Icon, url } = sublink;
+            const { id, name, Icon, slug } = sublink;
 
             return (
               <li
@@ -52,7 +52,7 @@ function Submenu({ buttonName, sublinks }: SubmenuProps) {
                 className="flex items-center text-skin-base hoverable-btn py-1 capitalize"
               >
                 {Icon}
-                <a href={url}>{name}</a>
+                <a href={"/posts/" + slug}>{name}</a>
               </li>
             );
           })}
