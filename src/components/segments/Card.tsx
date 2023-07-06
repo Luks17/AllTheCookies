@@ -10,26 +10,26 @@ interface Props {
 function Card({ post, showCategory = true, special = false }: Props) {
   return (
     <div
-      className={`p-2 my-5 bg-crust rounded-md max-md:max-w-2xl text-xl mx-auto ${special
-          ? "border-x-2 md:border-y-2 md:text-2xl border-secondary bg-mantle"
-          : "max-w-md"
+      className={`p-2 bg-crust rounded-md text-xl ${special ? "border-2 border-secondary bg-mantle" : ""
         }`}
     >
       {special && (
         <div className="flex justify-center">
-          <h4 className="text-skin-accent-secondary font-bold pt-1">
+          <h4 className="text-skin-accent-secondary text-lg font-bold pt-1">
             Mais recente
           </h4>
         </div>
       )}
 
       {/* thumb */}
-      <div className="flex items-center justify-center bg-fg-base m-4">
+      <div className="flex items-center justify-center bg-fg-base m-4 mt-3">
         <img
           src={post.thumbnail.img.src}
           alt={post.thumbnail.alt}
           width={1280}
           height={720}
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
@@ -55,10 +55,7 @@ function Card({ post, showCategory = true, special = false }: Props) {
         <h3 className="text-skin-accent font-bold px-1 pb-2">{post.title}</h3>
 
         {/* description */}
-        <p
-          className={`text-skin-subtext text-sm px-1 line-clamp-2 overflow-ellipsis ${special && "md:text-lg"
-            }`}
-        >
+        <p className="text-skin-subtext text-sm px-1 line-clamp-2 overflow-ellipsis">
           {post.description}
         </p>
       </div>
@@ -69,7 +66,7 @@ function Card({ post, showCategory = true, special = false }: Props) {
           return (
             <a
               key={id}
-              className={`text-skin-muted bg-mantle text-sm px-2 ${special && "md:text-lg bg-primary"
+              className={`text-skin-muted bg-mantle text-sm px-2 ${special && "bg-primary"
                 }`}
             >
               {tag}

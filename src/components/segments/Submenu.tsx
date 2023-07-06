@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import type { LinkTemplate } from "@/types/Header";
+import type { LinkTemplate } from "@/types/Links";
 
 interface SubmenuProps {
   buttonName: string;
@@ -34,9 +34,8 @@ function Submenu({ buttonName, sublinks }: SubmenuProps) {
       </button>
       {/* Tailwindcss does not support dynamic values for classes, so I need to use the style prop to align the submenu */}
       <aside
-        className={`absolute w-fit origin-top transition-transform ease-in flex flex-col items-center justify-center ${
-          !isSubmenuOpen && "scale-y-0"
-        }`}
+        className={`absolute w-fit origin-top transition-transform ease-in flex flex-col items-center justify-center ${!isSubmenuOpen && "scale-y-0"
+          }`}
         style={{ left: `${submenuAbsolutePosition}px` }}
       >
         <div className="submenu-triangle"></div>
@@ -45,7 +44,7 @@ function Submenu({ buttonName, sublinks }: SubmenuProps) {
           style={{ padding: submenuPadding }}
         >
           {sublinks.map((sublink) => {
-            const { id, name, Icon, url } = sublink;
+            const { id, name, Icon, slug } = sublink;
 
             return (
               <li
@@ -53,7 +52,7 @@ function Submenu({ buttonName, sublinks }: SubmenuProps) {
                 className="flex items-center text-skin-base hoverable-btn py-1 capitalize"
               >
                 {Icon}
-                <a href={url}>{name}</a>
+                <a href={"/posts/" + slug}>{name}</a>
               </li>
             );
           })}
