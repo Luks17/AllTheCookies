@@ -10,33 +10,33 @@
       "id": 2,
       "slug": "posts",
       "name": "Posts",
-      "description": "Todos as postagens",
+      "description": "Todas as postagens",
       "sublinks": [
         {
           "id": 200,
+          "slug": "all",
+          "name": "todos",
+          "description": "Todos as postagens, de todo tipo"
+        },
+        {
+          "id": 201,
           "slug": "tutorials",
           "name": "tutoriais",
           "description": "Todos os tutoriais postados, de todos os tipos"
         },
         {
-          "id": 201,
+          "id": 202,
           "slug": "blog",
           "name": "blog",
           "description": "Todos os posts pessoais dos contribuidores do site"
         },
         {
-          "id": 202,
+          "id": 203,
           "slug": "news",
           "name": "notícias",
           "description": "Todas as notícias postadas, de todos os tipos"
         }
       ]
-    },
-    {
-      "id": 3,
-      "slug": "authors",
-      "description": "Todos os contribuidores",
-      "name": "Contribuidores"
     }
   ]
 }

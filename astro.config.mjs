@@ -18,10 +18,13 @@ export default defineConfig({
       },
     },
   },
-  experimental: { assets: true },
+  experimental: { assets: true, redirects: true },
   integrations: [react(), tailwind(), markdoc()],
   image: {
     service: sharpImageService(),
+  },
+  redirects: {
+    "/posts": "/posts/all",
   },
 
   site: "http://127.0.0.1:3000",

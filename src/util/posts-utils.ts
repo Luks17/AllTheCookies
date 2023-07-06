@@ -51,12 +51,12 @@ function getPostDateTime(post: PostFrontmatter): number {
   return post.publishDate.getTime();
 }
 
-export function filterPostsByCategory(
-  posts: PostFrontmatter[],
-  category: string
-) {
+function filterPostsByCategory(posts: PostFrontmatter[], category: string) {
   return posts.filter((post) => getPostCategory(post) === category);
 }
+
+const hasCategory = (category: string | undefined) =>
+  category !== undefined && category !== "all" ? true : false;
 
 export async function getUnsortedPosts(
   category?: string
@@ -65,7 +65,7 @@ export async function getUnsortedPosts(
 
   let posts = loaded_posts;
 
-  if (category !== undefined) posts = filterPostsByCategory(posts, category);
+  if (hasCategory(category)) posts = filterPostsByCategory(posts, category!);
 
   return posts;
 }
@@ -83,7 +83,7 @@ export async function getNumberOfPosts(category?: string): Promise<number> {
 
   let posts = loaded_posts;
 
-  if (category !== undefined) posts = filterPostsByCategory(posts, category);
+  if (hasCategory(category)) posts = filterPostsByCategory(posts, category!);
 
   return posts.length;
 }
