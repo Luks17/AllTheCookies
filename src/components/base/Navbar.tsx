@@ -10,7 +10,7 @@ function Navbar() {
         return (
           <div key={id} className="hoverable-btn">
             {sublinks === undefined ? (
-              <a href={"/posts/" + slug}>{name}</a>
+              <a href={"/" + slug}>{name}</a>
             ) : (
               <Submenu buttonName={name} sublinks={sublinks} />
             )}

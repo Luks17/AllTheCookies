@@ -29,7 +29,7 @@ function SidebarLink(link: LinkTemplate) {
   return (
     <div className="text-xl md:text-2xl font-bold text-skin-base w-full border-crust border-b-2">
       {sublinks === undefined ? (
-        <a href={"/posts/" + link.slug}>
+        <a href={"/" + link.slug}>
           <Item {...link} />
         </a>
       ) : (
