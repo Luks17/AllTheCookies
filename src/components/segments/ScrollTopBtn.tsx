@@ -7,6 +7,8 @@ function ScrollTopBtn() {
   const [isBtnVisible, setIsBtnVisible] = useState(false);
   const btnContainer = useRef<HTMLAnchorElement | null>(null);
 
+  const OFFSET = 200;
+
   function toggleHref() {
     // the #top href just goes to the top of the current document, as simple as that
     // the #search-top goes to the anchor with tag id
@@ -16,19 +18,21 @@ function ScrollTopBtn() {
   }
 
   function handleScroll(e: Event) {
-    const targetElement = e.target!;
-    const offSet = 200;
-
+    // if isSearchOpen, the ScrollTopBtn will scroll the overlay div, and not the Document.body
     if ($isSearchOpen) {
-      if (!isBtnVisible && targetElement.scrollTop > offSet)
+      const targetElement = e.target! as HTMLDivElement;
+
+      if (!isBtnVisible && targetElement.scrollTop > OFFSET)
         setIsBtnVisible(true);
       else setIsBtnVisible(false);
     } else {
+      const targetElement = e.target! as Document;
+
       // in some browsers it is documentElement.scrollTop and in others it its body.scrollTop
       if (
         !isBtnVisible &&
-        (targetElement.documentElement.scrollTop > offSet ||
-          targetElement.body.scrollTop > offSet)
+        (targetElement.documentElement.scrollTop > OFFSET ||
+          targetElement.body.scrollTop > OFFSET)
       )
         setIsBtnVisible(true);
       else setIsBtnVisible(false);

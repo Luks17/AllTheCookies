@@ -33,7 +33,7 @@ const postsToSearch = await getUnsortedPosts();
       w-full -z-50 background-opacity rotate-1 bg-contain"></div>
     <div class="mx-auto max-w-7xl pb-10 px-10 ">
       <slot />
-      <ScrollTopBtn client:idle />
+      <ScrollTopBtn client:only />
     </div>
   </main>
 
