@@ -26,6 +26,13 @@ function Overlay({
         condition ? "scale-100 visible" : "scale-0 invisible"
       }`}
     >
+      {/* this div's only purpose is to close the overlay when the user clicks outside content  */}
+      <div
+        className="absolute -z-50 w-full h-full"
+        onClick={() => closeFunction()}
+      ></div>
+
+      {/* this div is the actual content */}
       <div
         className={`bg-mantle scroll-smooth overflow-y-auto rounded-md relative shadow-black h-[95%] w-[90%] border-primary border-2 ${
           maxW_sm ? "max-w-sm" : "max-w-md"
