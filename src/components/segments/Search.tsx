@@ -124,6 +124,9 @@ function Results({ searchResults }: { searchResults: FuseResult[] }) {
   const [currentLastPost, setCurrentLastPost] = useState(SITE.postsPerPage);
   const len = searchResults.length;
 
+  const navButtonsClasses =
+    "text-skin-muted flex flex-col pb-5 hover:text-skin-subtext transition-colors font-semibold w-full items-center";
+
   let showedPosts = searchResults.slice(0, currentLastPost);
 
   function showMore() {
@@ -153,14 +156,16 @@ function Results({ searchResults }: { searchResults: FuseResult[] }) {
             })}
           </ul>
 
-          {currentLastPost < len && (
-            <button
-              className="text-skin-muted flex flex-col pb-5 hover:text-skin-subtext transition-colors font-semibold"
-              onClick={showMore}
-            >
-              <span>Show more results</span>
+          {currentLastPost < len ? (
+            <button className={navButtonsClasses} onClick={showMore}>
+              <span>Mostrar mais resultados</span>
               <span>⬇</span>
             </button>
+          ) : (
+            <a href="#search-top" className={navButtonsClasses}>
+              <span>↑</span>
+              <span>Voltar ao topo</span>
+            </a>
           )}
         </div>
       ) : (
