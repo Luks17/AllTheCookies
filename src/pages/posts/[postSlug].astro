@@ -1,0 +1,13 @@
+---
+import { getPostSlug, getUnsortedPosts } from "@/util/posts-utils";
+
+
+export async function getStaticPaths() {
+  const posts = await getUnsortedPosts();
+  return posts.map(post => (
+    {
+      params: {postSlug: getPostSlug(post)}
+    }
+  ));
+}
+---

@@ -94,3 +94,15 @@ export async function getNumberOfPages(category?: string): Promise<number> {
     SITE.postsPerPage
   );
 }
+
+export function getPostSlug(post: PostFrontmatter): string {
+  let slug = post.title.toLowerCase().trim();
+
+  // replaces all '-' and spaces by '-'
+  slug = slug.replace(/[\s-]+/g, "-");
+
+  // replaces all accents and special symbols to their closes unicode equivalent
+  slug = slug.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  return slug;
+}
