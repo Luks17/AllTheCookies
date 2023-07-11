@@ -2,7 +2,6 @@ import { SITE } from "@/config.mjs";
 import { validateTags } from "@/util/post-validation";
 import { z, ImageFunction } from "astro:content";
 
-// TODO: tags validation is not working
 export const postSchema = ({ image }: { image: ImageFunction }) =>
   z.object({
     authors: z.array(z.string()),

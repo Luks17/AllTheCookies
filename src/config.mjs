@@ -41,5 +41,8 @@ export const SITE = {
     "IA",
     "docker",
     "git",
+    "dados",
+    "sql",
+    "nosql",
   ],
 };

@@ -16,7 +16,7 @@ function toggleSublinks(id: number): void {
 
 function Item({ name, Icon }: ItemTemplate) {
   return (
-    <div className="p-1.5 justify-center m-1.5 flex items-center hoverable-btn capitalize">
+    <div className="p-1.5 justify-center m-1.5 flex items-center gap-0.5 hoverable-btn capitalize">
       {Icon}
       <h6>{name}</h6>
     </div>
