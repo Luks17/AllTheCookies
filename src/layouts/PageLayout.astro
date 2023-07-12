@@ -14,7 +14,7 @@ import { getUnsortedPosts } from "@/util/posts-utils";
 
 const optimizedBg = await getImage({ src: background });
 
-const postsToSearch = await getUnsortedPosts();
+const postsToSearch = (await getUnsortedPosts()).map(post => post.data);
 ---
 
 <Layout>

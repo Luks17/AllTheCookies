@@ -10,7 +10,7 @@ const oCookieCoffe = await getImage({ src: cookieCoffe });
 
 const description = "AllTheCookies é um pequeno blog colaborativo de tecnologia. Tendo como conteúdo notícias, tutoriais & artigos pessoais.";
 
-const sortedPosts = await getSortedPosts();
+const sortedPosts = (await getSortedPosts()).map(post => post.data);
 ---
 
 

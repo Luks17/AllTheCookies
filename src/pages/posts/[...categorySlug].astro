@@ -56,7 +56,7 @@ function getHref(next: boolean) {
   return link + (pageNumber === 1 ? "" : `/${pageNumber}`);
 }
 
-const posts = await getSortedPosts(categorySlug);
+const posts = (await getSortedPosts(categorySlug)).map(post => post.data);
 
 const lastPost = currentPage * SITE.postsPerPage;
 const startPost = lastPost - SITE.postsPerPage;
