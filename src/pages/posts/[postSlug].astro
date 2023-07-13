@@ -1,14 +1,25 @@
 ---
+import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import { getPostSlug, getUnsortedPosts } from "@/util/posts-utils";
+import type { CollectionEntry } from "astro:content";
 
+export interface Props {
+  post: CollectionEntry<"post">,
+}
 
 export async function getStaticPaths() {
   const posts = await getUnsortedPosts();
-  return posts.map((post) => (
-    {
+  return posts.map((post) => {
+    return {
       params: {postSlug: getPostSlug(post.data)},
-      props: {}
+      props: {
+        post,
+      }
     }
-  ));
+  });
 }
+
+const { post } = Astro.props;
 ---
+
+<ArticleLayout article={post} />

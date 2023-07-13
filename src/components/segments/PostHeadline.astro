@@ -1,0 +1,56 @@
+---
+import { Clock } from "@/resources/static/Icons";
+
+import { postsCategories } from "@/resources/static/links";
+import type { PostFrontmatter } from '@/types/Posts';
+import { getFormatedDate } from '@/util/date';
+
+export interface Props {
+  post: PostFrontmatter;
+}
+
+const { post } = Astro.props;
+
+const thumb = post.thumbnail;
+
+const categorySlug = post.category;
+const category = postsCategories.find(sublink => sublink.slug === categorySlug)!.name;
+
+---
+
+<div class="max-w-4xl mx-auto flex flex-col text-skin-base py-2 relative border-[1px] border-b-4 border-l-[3px] border-crust 
+  bg-primary my-7 rounded-xl">
+
+  <p class="flex justify-center w-full text-skin-muted text-xs sm:text-sm gap-3 pt-1.5">
+    <span class="flex items-center gap-1"><Clock />{post.minutesRead} minutos de leitura</span>
+    <span class="flex items-center">·</span>
+    <span class="flex items-center">{`${getFormatedDate(post.publishDate)}`}</span>
+  </p>
+
+  <!-- title -->
+  <h1 class="text-3xl sm:text-5xl md:text-6xl mx-auto py-4 md:py-5">{post.title}</h1>
+
+  <!-- thumb with category -->
+  <div class="mx-4 rounded-xl border-2 border-crust">
+    <div class="relative flex justify-center font-bold text-xs sm:text-sm text-skin-accent-secondary sm:opacity-90 
+      hover:opacity-100 ease-in-out transition-opacity">
+      <a href={`/posts/${categorySlug}`} class="absolute p-2 rounded-b-lg capitalize bg-crust">{category}</a>
+    </div>
+    <img src={thumb.img.src} 
+      alt={thumb.alt}
+      width={1280}
+      height={720}
+      loading="lazy"
+      decoding="async" />
+  </div>
+
+  <!-- authors -->
+  <div class="border-l-2 mt-4 ml-5 mb-2 border-secondary">
+    <p class="text-xs pl-2 text-skin-muted">Escrito por</p>
+  </div>
+
+
+  
+
+</div>
+

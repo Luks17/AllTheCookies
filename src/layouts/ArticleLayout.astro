@@ -1,15 +1,30 @@
 ---
 import PageLayout from "./PageLayout.astro";
+import PostHeadline from "@/components/segments/PostHeadline.astro";
+
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  article: CollectionEntry<"post">,
+}
+
+const { article } = Astro.props;
+
+const { Content } = await article.render();
 ---
 
 <PageLayout>
 
-  <slot />
+  <PostHeadline post={article.data} />
+
+  <section class="text-skin-base post-body">
+    <Content />
+  </section>
 
   <!-- scroll back to top btn -->
-  <div class="scroll-btn-container absolute top-0 right-4 h-full">
+  <section class="scroll-btn-container absolute top-0 right-4 h-full">
     <a href="#top" class="bg-fg-base rounded-full text-skin-muted hoverable-btn px-3 py-2">↑</a>
-  </div>
+  </section>
 
   <style>
     .scroll-btn-container:before {
