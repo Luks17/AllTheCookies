@@ -19,3 +19,10 @@ export const postSchema = ({ image }: { image: ImageFunction }) =>
     draft: z.boolean(),
     minutesRead: z.number(),
   });
+
+export const authorSchema = ({ image }: { image: ImageFunction }) =>
+  z.object({
+    name: z.string(),
+    image: image(),
+    socials: z.array(z.string()),
+  });

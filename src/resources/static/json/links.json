@@ -37,6 +37,12 @@
           "description": "Todas as notícias postadas, de todos os tipos"
         }
       ]
+    },
+    {
+      "id": 3,
+      "slug": "authors",
+      "description": "Todos os contribuidores",
+      "name": "Contribuidores"
     }
   ]
 }
