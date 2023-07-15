@@ -31,7 +31,8 @@ const CategoryIcons: { [key: string]: JSX.Element } = {
       />
     </svg>
   ),
-  authors: (
+  // TODO: change this and the json to just authors when there is more contributors
+  "authors/luks": (
     <svg
       className="w-6 h-6"
       xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +114,7 @@ const CategoryIcons: { [key: string]: JSX.Element } = {
   ),
 };
 
-export function Github() {
+export function Github(): React.JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +127,7 @@ export function Github() {
   );
 }
 
-export function Moon() {
+export function Moon(): React.JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +146,7 @@ export function Moon() {
   );
 }
 
-export function Sun() {
+export function Sun(): React.JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +165,7 @@ export function Sun() {
   );
 }
 
-export function Lines() {
+export function Lines(): React.JSX.Element {
   return (
     <svg
       className="h8 w-8"
@@ -183,7 +184,7 @@ export function Lines() {
   );
 }
 
-export function MagnifyingGlass() {
+export function MagnifyingGlass(): React.JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +203,7 @@ export function MagnifyingGlass() {
   );
 }
 
-export function Clock() {
+export function Clock(): React.JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -216,6 +217,25 @@ export function Clock() {
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
+    </svg>
+  );
+}
+
+export function ChevronUp(): React.JSX.Element {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M4.5 15.75l7.5-7.5 7.5 7.5"
       />
     </svg>
   );
