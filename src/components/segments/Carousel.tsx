@@ -56,6 +56,10 @@ function Carousel({ sortedPosts }: Props) {
 
   return (
     <div className="relative">
+      <div className="text-skin-muted text-2xl absolute top-[42%] flex justify-between w-full">
+        <Button icon="🠈" func={prev} />
+        <Button icon="🠊" func={next} />
+      </div>
       <div
         className="mx-auto overflow-x-clip transition-[width] ease-in-out duration-500"
         style={{ width: getContainerWidth() }}
@@ -76,10 +80,6 @@ function Carousel({ sortedPosts }: Props) {
           ))}
         </ul>
       </div>
-      <div className="text-skin-muted text-2xl absolute top-[42%] flex justify-between w-full">
-        <Button icon="🠈" func={prev} />
-        <Button icon="🠊" func={next} />
-      </div>
     </div>
   );
 }
@@ -87,7 +87,7 @@ function Carousel({ sortedPosts }: Props) {
 function Button({ icon, func }: ButtonProps) {
   return (
     <button
-      className="bg-crust w-10 h-10 flex items-center justify-center rounded-full hoverable-btn"
+      className="bg-crust w-10 h-10 z-10 flex items-center border-2 border-third justify-center rounded-full hoverable-btn"
       onClick={func}
     >
       {icon}
