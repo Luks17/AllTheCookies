@@ -1,8 +1,13 @@
 ---
+// tags styles
+import "@/styles/tags/aside.css";
+
+// other imports
 import PageLayout from "./PageLayout.astro";
 import PostHeadline from "@/components/segments/PostHeadline.astro";
 
 import type { CollectionEntry } from "astro:content";
+
 
 export interface Props {
   article: CollectionEntry<"post">,
@@ -40,4 +45,22 @@ const { Content } = await article.render();
       font-size: 20px;
     }
   </style>
+
 </PageLayout>
+
+<!-- aside script -->
+<script>
+const buttons = document.querySelectorAll(".title"); 
+const contents = document.querySelectorAll(".content");
+const chevrons = document.querySelectorAll(".chevron");
+
+function handleClick(id: number) {
+  chevrons?.item(id).classList.toggle("-rotate-180"); 
+  contents?.item(id).classList.toggle("scale-y-0");
+  contents?.item(id).classList.toggle("absolute");
+}
+
+buttons?.forEach((button, id) => {
+  button.addEventListener("click", () => handleClick(id));
+});
+</script>
