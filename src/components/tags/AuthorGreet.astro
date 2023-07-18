@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
+
+export interface Props {
+  author: string,
+}
+
+const { author } = Astro.props;
+
+const authorEntry = await getEntry("author", author);
+
+if(authorEntry === undefined)
+  throw new Error("'author' attribute on 'AuthorGreet' tag does not exist");
+---
+
+<div class="grid md:grid-cols-5 md:px-8">
+  <div class="md:col-span-2 rotate-1 max-md:max-w-sm max-md:mx-auto">
+    <Image src={authorEntry.data.image}
+      alt={authorEntry.data.name}
+      class="shadow-black shadow-md rounded-lg" />
+  </div>
+  <div class="md:col-span-3 text-2xl text-skin-base max-md:my-8 md:mx-8">
+    <slot />
+  </div>
+</div>

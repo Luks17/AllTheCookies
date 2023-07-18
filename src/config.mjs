@@ -4,7 +4,7 @@ export const SITE = {
   description: "Personal Website about technology",
   socialImage: "",
 
-  postsPerPage: 3,
+  postsPerPage: 6,
   maxTagsPerPost: 4,
   origin: "",
   basePathname: "/",

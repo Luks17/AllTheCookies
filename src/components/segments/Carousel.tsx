@@ -2,14 +2,15 @@ import type { PostFrontmatter } from "@/types/Posts";
 import { MouseEventHandler, useEffect, useState } from "react";
 import { useMediaQuery } from "@/util/hooks";
 import Card from "./Card";
+import { SITE } from "@/config.mjs";
 
-const MAX_INDEX = 5;
 const SHOWED_POSTS_LG = 3;
 const SLIDE_WIDTH = 288;
 const GAP_WIDTH = 40;
 
 interface Props {
   sortedPosts: PostFrontmatter[];
+  maxIndex: number;
 }
 
 interface ButtonProps {
@@ -17,20 +18,20 @@ interface ButtonProps {
   func: MouseEventHandler<HTMLButtonElement>;
 }
 
-function Carousel({ sortedPosts }: Props) {
+function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
   const [postIndex, setPostIndex] = useState(0);
   const isLg = useMediaQuery("(min-width: 1028px)");
 
-  const posts = sortedPosts.slice(0, MAX_INDEX);
+  const posts = sortedPosts.slice(0, maxIndex);
 
   function getCorrectIndex(index = postIndex) {
     // if screen isLg, it will show 3 posts instead of 1,
-    // so we need to divide the total posts by the showed posts
-    const postsRatioLg = Math.ceil(MAX_INDEX / SHOWED_POSTS_LG);
+    // so we need to subtract the postsPerPage by 3
+    const postsRatioLg = maxIndex - SHOWED_POSTS_LG;
 
     if (index < 0) {
-      return !isLg ? MAX_INDEX - 1 : postsRatioLg;
-    } else if (index >= MAX_INDEX || (isLg && index > postsRatioLg)) {
+      return !isLg ? maxIndex - 1 : postsRatioLg;
+    } else if (index >= maxIndex || (isLg && index > postsRatioLg)) {
       return 0;
     }
 
