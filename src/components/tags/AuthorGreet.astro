@@ -12,15 +12,29 @@ const authorEntry = await getEntry("author", author);
 
 if(authorEntry === undefined)
   throw new Error("'author' attribute on 'AuthorGreet' tag does not exist");
+
+const socials = authorEntry.data.socials;
 ---
 
-<div class="grid md:grid-cols-5 md:px-8">
-  <div class="md:col-span-2 rotate-1 max-md:max-w-sm max-md:mx-auto">
+<div class="grid md:grid-cols-5 md:px-12 md:gap-5 text-skin-base">
+  <!-- thumb -->
+  <div class="md:col-span-2 rotate-1 max-w-sm m-auto">
     <Image src={authorEntry.data.image}
       alt={authorEntry.data.name}
       class="shadow-black shadow-md rounded-lg" />
   </div>
-  <div class="md:col-span-3 text-2xl text-skin-base max-md:my-8 md:mx-8">
+  <!-- text -->
+  <div class="md:col-span-3 text-xl lg:text-2xl max-md:my-8">
     <slot />
   </div>
+
+  <!-- TODO: decorate socials -->
+  <!-- socials -->
+  <ul class="flex w-full gap-3">{
+    socials.length !== 0 && socials.map(social => {
+      return <li>
+        <a class="capitalize font-semibold" href={social!.link}>{social!.name}</a>
+      </li>
+    })
+    }</ul>
 </div>

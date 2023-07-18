@@ -2,6 +2,8 @@ import { SITE } from "@/config.mjs";
 import { validateTags } from "@/util/post-validation";
 import { z, ImageFunction } from "astro:content";
 
+import type { AuthorSocials } from "@/types/Authors";
+
 export const postSchema = ({ image }: { image: ImageFunction }) =>
   z.object({
     authors: z.array(z.string()),
@@ -24,5 +26,14 @@ export const authorSchema = ({ image }: { image: ImageFunction }) =>
   z.object({
     name: z.string(),
     image: image(),
-    socials: z.array(z.string()),
+    socials: z.array(
+      z
+        .object({
+          name: z
+            .string()
+            .refine((socialName) => typeof socialName as AuthorSocials),
+          link: z.string(),
+        })
+        .optional()
+    ),
   });
