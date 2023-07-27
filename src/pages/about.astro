@@ -1,6 +1,6 @@
 ---
 import PageDescription from "@/components/segments/PageDescription.astro";
-import PageLayout from "@/layouts/PageLayout.astro";
+import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import { navLinks } from "@/resources/static/links";
 import { Image } from "astro:assets";
 import heroImg from "@/assets/about.png"; 
@@ -9,7 +9,7 @@ import astroLogo from "@/assets/astro.png";
 const aboutPage = navLinks.filter(link => link.slug === "about")[0];
 ---
 
-<PageLayout>
+<ArticleLayout>
   <PageDescription pathToPage={[aboutPage.slug]} pageName={aboutPage.name} description={aboutPage.description} />
 
   <section class="max-w-2xl mx-auto bg-fg-base my-10 rounded-3xl border-b-8 border-2 border-crust">
@@ -62,7 +62,7 @@ const aboutPage = navLinks.filter(link => link.slug === "about")[0];
     <Image src={astroLogo} alt="AstroJS Logo" width={218}></Image>
   </section>
 
-</PageLayout>
+</ArticleLayout>
 
 <style>
 @tailwind base;

@@ -1,4 +1,8 @@
 ---
+// tags css
+import "@/styles/tags/aside.css";
+
+import PostHeadline from "@/components/segments/PostHeadline.astro";
 import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import { getSlug } from "@/util/common";
 import { getUnsortedPosts } from "@/util/posts-utils";
@@ -21,6 +25,34 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
+
+const { Content } = await post.render();
 ---
 
-<ArticleLayout article={post} />
+<ArticleLayout>
+  <section>
+    <PostHeadline post={post.data} />
+  </section>
+
+  <section>
+    <Content />
+  </section>
+</ArticleLayout>
+
+<!-- aside tag script -->
+<script>
+const buttons = document.querySelectorAll(".title"); 
+const contents = document.querySelectorAll(".content");
+const chevrons = document.querySelectorAll(".chevron");
+
+function handleClick(id: number) {
+  chevrons?.item(id).classList.toggle("-rotate-180"); 
+  contents?.item(id).classList.toggle("scale-y-0");
+  contents?.item(id).classList.toggle("absolute");
+}
+
+buttons?.forEach((button, id) => {
+  button.addEventListener("click", () => handleClick(id));
+});
+</script>
+
