@@ -3,15 +3,18 @@ import PageLayout from "./PageLayout.astro";
 ---
 
 <PageLayout>
+  <section>
+    <slot name="header" />
+  </section>
 
-  <div class="text-skin-base">
+  <section class="text-skin-base max-w-3xl mx-auto">
     <slot />
-  </div>
+  </section>
 
   <!-- scroll back to top btn -->
-  <div class="scroll-btn-container absolute top-0 right-4 h-full">
+  <aside class="scroll-btn-container absolute top-0 right-4 h-full">
     <a href="#top" class="bg-fg-base rounded-full text-skin-muted hoverable-btn px-3 py-2">↑</a>
-  </div>
+  </aside>
 
   <style>
     .scroll-btn-container:before {

@@ -22,7 +22,7 @@ const category = postsCategories.find(sublink => sublink.slug === categorySlug)!
 const authors = await extractAuthorsFromPost(post);
 ---
 
-<div class="max-w-4xl mx-auto flex flex-col text-skin-base py-2 border-[1px] border-b-4 border-l-[3px] border-crust 
+<div class="max-w-3xl mx-auto flex flex-col text-skin-base py-2 border-[1px] border-b-4 border-l-[3px] border-crust 
   bg-primary my-7 rounded-xl">
 
   <p class="flex justify-center w-full text-skin-muted text-xs sm:text-sm gap-3 pt-1.5">
@@ -32,7 +32,7 @@ const authors = await extractAuthorsFromPost(post);
   </p>
 
   <!-- title -->
-  <h1 class="text-3xl sm:text-5xl md:text-6xl mx-auto py-4 md:py-5">{post.title}</h1>
+  <h1 class="text-3xl sm:text-4xl lg:text-5xl mx-auto py-4 md:py-5 font-bold text-skin-accent">{post.title}</h1>
 
   <!-- thumb with category -->
   <div class="mx-4 rounded-xl border-2 border-crust">

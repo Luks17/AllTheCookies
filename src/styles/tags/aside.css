@@ -1,5 +1,5 @@
 :root,
-html[page-theme="dark"] aside {
+html[page-theme="dark"] .aside-tag {
   --danger: 354, 45%;
   --caution: 23, 51%;
   --tip: 102, 38%;
@@ -9,7 +9,7 @@ html[page-theme="dark"] aside {
   --aside-border-lightness: 30%;
 }
 
-html[page-theme="light"] aside {
+html[page-theme="light"] .aside-tag {
   --danger: 354, 45%;
   --caution: 34, 73%;
   --tip: 102, 38%;
@@ -19,7 +19,7 @@ html[page-theme="light"] aside {
   --aside-border-lightness: 50%;
 }
 
-aside {
+.aside-tag {
   --aside-color: var(--danger);
   --aside-border-color: hsl(var(--aside-color), var(--aside-border-lightness));
 
