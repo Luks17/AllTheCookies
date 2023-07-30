@@ -4,13 +4,17 @@ import { getImage } from "astro:assets";
 import { CollectionEntry, getCollection } from "astro:content";
 
 // variable to store loaded posts so they don't get reloaded all the time
-let loaded_posts: PostFrontmatter[];
+let loaded_posts: CollectionEntry<"post">[];
 
-async function optimizePostImages(posts: CollectionEntry<"post">[]) {
+async function optimizePostImages(
+  posts: CollectionEntry<"post">[]
+): Promise<CollectionEntry<"post">[]> {
   return await Promise.all(
-    posts.map(async ({ data }): Promise<PostFrontmatter> => {
+    posts.map(async (post): Promise<CollectionEntry<"post">> => {
+      let optPost = post;
+
       const optImg = await getImage({
-        src: data.thumbnail.img,
+        src: post.data.thumbnail.img,
         width: 1280,
         height: 720,
         format: "webp",
@@ -23,13 +27,12 @@ async function optimizePostImages(posts: CollectionEntry<"post">[]) {
           height: optImg.options.height,
           format: optImg.options.format,
         } as OptimizedImg,
-        alt: data.thumbnail.alt,
+        alt: post.data.thumbnail.alt,
       };
 
-      return {
-        ...data,
-        thumbnail: optThumb,
-      };
+      optPost.data.thumbnail = optThumb;
+
+      return optPost;
     })
   );
 }
@@ -43,39 +46,40 @@ async function load_posts(): Promise<void> {
   loaded_posts = await optimizePostImages(unoptimizedPosts);
 }
 
-function getPostCategory(post: PostFrontmatter): string {
-  return post.category;
-}
-
 function getPostDateTime(post: PostFrontmatter): number {
   return post.publishDate.getTime();
 }
 
-export function filterPostsByCategory(
-  posts: PostFrontmatter[],
+function filterPostsByCategory(
+  posts: CollectionEntry<"post">[],
   category: string
 ) {
-  return posts.filter((post) => getPostCategory(post) === category);
+  return posts.filter((post) => post.data.category === category);
 }
+
+const hasCategory = (category: string | undefined) =>
+  category !== undefined && category !== "all" ? true : false;
 
 export async function getUnsortedPosts(
   category?: string
-): Promise<PostFrontmatter[]> {
+): Promise<CollectionEntry<"post">[]> {
   if (!loaded_posts) await load_posts();
 
   let posts = loaded_posts;
 
-  if (category !== undefined) posts = filterPostsByCategory(posts, category);
+  if (hasCategory(category)) posts = filterPostsByCategory(posts, category!);
 
   return posts;
 }
 
 export async function getSortedPosts(
   category?: string
-): Promise<PostFrontmatter[]> {
+): Promise<CollectionEntry<"post">[]> {
   const posts = await getUnsortedPosts(category);
 
-  return posts.sort((a, b) => getPostDateTime(b) - getPostDateTime(a));
+  return posts.sort(
+    (a, b) => getPostDateTime(b.data) - getPostDateTime(a.data)
+  );
 }
 
 export async function getNumberOfPosts(category?: string): Promise<number> {
@@ -83,7 +87,7 @@ export async function getNumberOfPosts(category?: string): Promise<number> {
 
   let posts = loaded_posts;
 
-  if (category !== undefined) posts = filterPostsByCategory(posts, category);
+  if (hasCategory(category)) posts = filterPostsByCategory(posts, category!);
 
   return posts.length;
 }

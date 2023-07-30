@@ -1,7 +1,7 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
 import { getImage } from "astro:assets";
-import cookieCoffe from "/public/assets/cookies_n_coffee.png";
+import cookieCoffe from "@/assets/cookies_n_coffee.png";
 import { getSortedPosts } from "@/util/posts-utils";
 
 import Carousel from "@/components/segments/Carousel";
@@ -10,7 +10,7 @@ const oCookieCoffe = await getImage({ src: cookieCoffe });
 
 const description = "AllTheCookies é um pequeno blog colaborativo de tecnologia. Tendo como conteúdo notícias, tutoriais & artigos pessoais.";
 
-const sortedPosts = await getSortedPosts();
+const sortedPosts = (await getSortedPosts()).map(post => post.data);
 ---
 
 
@@ -32,7 +32,7 @@ const sortedPosts = await getSortedPosts();
 
 
 <!-- latest posts -->
-<section class="w-full py-5 rounded-md">
+<section class="w-full py-5">
   <h3 class="text-skin-base text-center py-1 md:py-2.5 font-bold text-xl sm:text-2xl">Nossas <span class="text-skin-accent-secondary">últimas</span> postagens</h3> 
   <div class="mt-4">
     <Carousel sortedPosts={sortedPosts} client:visible />

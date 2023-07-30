@@ -13,8 +13,9 @@ export async function getStaticPaths() {
   // iterates through all posts categories (3 at the time of writing)
   const paths = await Promise.all(postsCategories.map(async (category) => {
     const numbers: number[] = [1];
+    const numberOfPages = await getNumberOfPages(category.slug);
 
-    for(let i = 1; i <= (await getNumberOfPages(category.slug)); ++i) {
+    for(let i = 1; i <= numberOfPages; ++i) {
       numbers.push(i);
     }
 
@@ -27,6 +28,7 @@ export async function getStaticPaths() {
           categorySlug: category.slug,
           currentPage: pageNumber,
           categoryDescription: category.description,
+          numberOfPages,
         },
       }
     ));
@@ -35,7 +37,7 @@ export async function getStaticPaths() {
   return paths.flat();
 }
 
-const { categoryName, currentPage, categoryDescription, categorySlug } = Astro.props;
+const { categoryName, currentPage, categoryDescription, categorySlug, numberOfPages } = Astro.props;
 
 
 function getHref(next: boolean) {
@@ -54,13 +56,12 @@ function getHref(next: boolean) {
   return link + (pageNumber === 1 ? "" : `/${pageNumber}`);
 }
 
-const posts = await getSortedPosts(categorySlug);
+const posts = (await getSortedPosts(categorySlug)).map(post => post.data);
 
 const lastPost = currentPage * SITE.postsPerPage;
 const startPost = lastPost - SITE.postsPerPage;
 
 const showedPosts = posts.slice(startPost, lastPost);
-const numberOfPages = await getNumberOfPages(categorySlug);
 const btnClass = "w-5 h-5 hoverable-btn bg-fg-secondary px-7 py-5 rounded-3xl flex items-center justify-center text-2xl";
 ---
 
@@ -74,7 +75,9 @@ const btnClass = "w-5 h-5 hoverable-btn bg-fg-secondary px-7 py-5 rounded-3xl fl
   />
 
   <ul class="grid text-skin-base grid-cols-1 lg:grid-cols-2 mt-5 max-w-3xl mx-auto">
-    {showedPosts.map((post) => <div class="max-w-sm my-2.5 lg:mx-2.5 place-self-center"><Card post={post} showCategory={false} /></div>)}
+    {showedPosts.map((post) => <div class="max-w-sm my-2.5 lg:mx-2.5 place-self-center">
+      <Card post={post} showCategory={categorySlug !== "all" ? false : true} />
+    </div>)}
   </ul>
 
   {numberOfPages > 1 && <div class="text-skin-subtext font-semibold mt-5 w-full max-w-md mx-auto flex justify-between">

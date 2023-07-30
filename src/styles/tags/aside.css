@@ -1,0 +1,45 @@
+:root,
+html[page-theme="dark"] .aside-tag {
+  --danger: 354, 45%;
+  --caution: 23, 51%;
+  --tip: 102, 38%;
+  --note: 285, 29%;
+
+  --aside-lightness: 47%;
+  --aside-border-lightness: 30%;
+}
+
+html[page-theme="light"] .aside-tag {
+  --danger: 354, 45%;
+  --caution: 34, 73%;
+  --tip: 102, 38%;
+  --note: 285, 29%;
+
+  --aside-lightness: 67%;
+  --aside-border-lightness: 50%;
+}
+
+.aside-tag {
+  --aside-color: var(--danger);
+  --aside-border-color: hsl(var(--aside-color), var(--aside-border-lightness));
+
+  background-color: hsl(var(--aside-color), var(--aside-lightness));
+  border-left-width: 4px;
+  border-color: var(--aside-border-color);
+}
+
+.danger {
+  --aside-color: var(--danger);
+}
+
+.caution {
+  --aside-color: var(--caution);
+}
+
+.tip {
+  --aside-color: var(--tip);
+}
+
+.note {
+  --aside-color: var(--note);
+}

@@ -31,7 +31,8 @@ const CategoryIcons: { [key: string]: JSX.Element } = {
       />
     </svg>
   ),
-  authors: (
+  // TODO: change this and the json to just authors when there is more contributors
+  "authors/luks": (
     <svg
       className="w-6 h-6"
       xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +48,7 @@ const CategoryIcons: { [key: string]: JSX.Element } = {
       />
     </svg>
   ),
-  tutorials: (
+  all: (
     <svg
       className="h6 w-6"
       xmlns="http://www.w3.org/2000/svg"
@@ -95,9 +96,25 @@ const CategoryIcons: { [key: string]: JSX.Element } = {
       />
     </svg>
   ),
+  tutorials: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+      />
+    </svg>
+  ),
 };
 
-export function Github() {
+export function Github(): React.JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +127,7 @@ export function Github() {
   );
 }
 
-export function Moon() {
+export function Moon(): React.JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +146,7 @@ export function Moon() {
   );
 }
 
-export function Sun() {
+export function Sun(): React.JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +165,7 @@ export function Sun() {
   );
 }
 
-export function Lines() {
+export function Lines(): React.JSX.Element {
   return (
     <svg
       className="h8 w-8"
@@ -167,7 +184,7 @@ export function Lines() {
   );
 }
 
-export function MagnifyingGlass() {
+export function MagnifyingGlass(): React.JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -181,6 +198,44 @@ export function MagnifyingGlass() {
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+      />
+    </svg>
+  );
+}
+
+export function Clock(): React.JSX.Element {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-5 h-5"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
+    </svg>
+  );
+}
+
+export function ChevronUp(): React.JSX.Element {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M4.5 15.75l7.5-7.5 7.5 7.5"
       />
     </svg>
   );

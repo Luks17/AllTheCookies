@@ -1,0 +1,51 @@
+---
+import Carousel from '@/components/segments/Carousel';
+import { SITE } from '@/config.mjs';
+import PageLayout from '@/layouts/PageLayout.astro';
+import { getSlug } from '@/util/common';
+import { getSortedPosts } from '@/util/posts-utils';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export interface Props {
+  author: CollectionEntry<"author">;
+}
+
+export async function getStaticPaths() {
+  const authors = await getCollection("author");
+
+  return authors.map((author) => {
+    return {
+      params: { slug: getSlug(author.data.name) },
+      props: {
+        author,
+      }
+    }
+  });
+}
+
+const { author } = Astro.props;
+
+const authorSlug = getSlug(author.data.name);
+
+const allPosts = (await getSortedPosts()).map(post => post.data);
+const authorPosts = allPosts.filter(post => !post.authors.includes(authorSlug));
+
+const { Content } = await author.render();
+---
+
+<PageLayout>
+
+  <section class="py-6">
+    <Content />
+  </section>
+
+  {(authorPosts.length > 0) &&
+    <section class="w-full text-skin-base py-6 border-t-2 border-secondary">
+      <h4 class="font-bold text-2xl text-center mb-8"><span class="text-skin-alternate">Últimos</span> posts compostos pelo autor</h4>
+      <!-- shows at max SITE.postsPerPage posts  -->
+      <Carousel 
+        sortedPosts={authorPosts} 
+        maxIndex={(authorPosts.length >= SITE.postsPerPage) ? SITE.postsPerPage : authorPosts.length}
+        client:visible />
+    </section>}
+</PageLayout>

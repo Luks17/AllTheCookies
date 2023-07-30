@@ -37,6 +37,7 @@ module.exports = {
       primary: "var(--peach)",
       secondary: "var(--mauve)",
       crust: "var(--crust)",
+      third: "var(--surface0)",
     },
 
     outlineColor: {

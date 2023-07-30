@@ -2,7 +2,7 @@ import { MagnifyingGlass } from "@/resources/static/Icons";
 
 import { openSearch } from "@/resources/stores/nav-store";
 
-function SidebarButton() {
+function SearchButton() {
   return (
     <button className="flex items-center" onClick={() => openSearch()}>
       <MagnifyingGlass />
@@ -10,4 +10,4 @@ function SidebarButton() {
   );
 }
 
-export default SidebarButton;
+export default SearchButton;

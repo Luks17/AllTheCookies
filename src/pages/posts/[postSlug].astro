@@ -1,0 +1,56 @@
+---
+// tags css
+import "@/styles/tags/aside.css";
+
+import PostHeadline from "@/components/segments/PostHeadline.astro";
+import ArticleLayout from "@/layouts/ArticleLayout.astro";
+import { getSlug } from "@/util/common";
+import { getUnsortedPosts } from "@/util/posts-utils";
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  post: CollectionEntry<"post">,
+}
+
+export async function getStaticPaths() {
+  const posts = await getUnsortedPosts();
+  return posts.map((post) => {
+    return {
+      params: {postSlug: getSlug(post.data.title)},
+      props: {
+        post,
+      }
+    }
+  });
+}
+
+const { post } = Astro.props;
+
+const { Content } = await post.render();
+---
+
+<ArticleLayout>
+
+  <PostHeadline slot="header" post={post.data} />
+
+  <Content />
+
+</ArticleLayout>
+
+<!-- aside tag script -->
+<script>
+const buttons = document.querySelectorAll(".title"); 
+const contents = document.querySelectorAll(".content");
+const chevrons = document.querySelectorAll(".chevron");
+
+function handleClick(id: number) {
+  chevrons?.item(id).classList.toggle("-rotate-180"); 
+  contents?.item(id).classList.toggle("scale-y-0");
+  contents?.item(id).classList.toggle("absolute");
+}
+
+buttons?.forEach((button, id) => {
+  button.addEventListener("click", () => handleClick(id));
+});
+</script>
+
