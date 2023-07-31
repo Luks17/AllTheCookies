@@ -10,7 +10,7 @@ const GAP_WIDTH = 40;
 
 interface Props {
   sortedPosts: PostFrontmatter[];
-  maxIndex: number;
+  maxIndex?: number;
 }
 
 interface ButtonProps {
