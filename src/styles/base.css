@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 @layer base {
-  /* catppuccin latte for lightmode and frappe for darkmode */
+  /* catppuccin latte (modified) for lightmode and frappe for darkmode */
   :root,
   html[page-theme="dark"] {
     --rosewater: #f2d5cf;
@@ -43,17 +43,17 @@
     --rosewater: #dc8a78;
     --flamingo: #dd7878;
     --pink: #ea76cb;
-    --mauve: #8839ef;
+    --mauve: #8caaee;
     --red: #d20f39;
-    --maroon: #e64553;
-    --peach: #fe640b;
+    --maroon: #e78284;
+    --peach: #dc8a78;
     --yellow: #df8e1d;
     --green: #40a02b;
     --teal: #179299;
     --sky: #04a5e5;
     --sapphire: #209fb5;
     --blue: #1e66f5;
-    --lavender: #7287fd;
+    --lavender: #838ba7;
     --text: #4c4f69;
     --subtext1: #5c5f77;
     --subtext0: #6c6f85;
