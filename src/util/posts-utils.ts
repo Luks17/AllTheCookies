@@ -58,7 +58,7 @@ function filterPostsByCategory(
 }
 
 const hasCategory = (category: string | undefined) =>
-  category !== undefined && category !== "all" ? true : false;
+  category !== undefined && category !== "all";
 
 export async function getUnsortedPosts(
   category?: string
@@ -95,6 +95,6 @@ export async function getNumberOfPosts(category?: string): Promise<number> {
 export async function getNumberOfPages(category?: string): Promise<number> {
   return Math.ceil(
     (await getNumberOfPosts(category ? category : undefined)) /
-    SITE.postsPerPage
+      SITE.postsPerPage
   );
 }

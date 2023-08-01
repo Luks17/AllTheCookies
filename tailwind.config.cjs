@@ -2,7 +2,6 @@
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
-    // extend: {
     backgroundColor: {
       primary: "var(--base)",
       crust: "var(--crust)",
@@ -48,7 +47,12 @@ module.exports = {
     fontFamily: {
       primary: ["Raleway", "Roboto", "Ubuntu", "sans-serif"],
     },
-    // }
+
+    extend: {
+      transitionProperty: {
+        "max-height": "max-height",
+      },
+    },
   },
   plugins: [],
 };
