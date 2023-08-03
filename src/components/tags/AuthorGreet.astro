@@ -33,13 +33,13 @@ const socials = authorEntry.data.socials;
   </div>
 
   <!-- socials -->
-  <ul class="flex w-full gap-3">
+  <ul class="flex-row sm:flex w-full gap-3">
     {
       socials.length !== 0 &&
         socials.map((social) => {
           if (social !== undefined) {
             return (
-              <li>
+              <li class="max-w-[16rem] mx-auto">
                 <SocialButton {...social} client:load />
               </li>
             );
