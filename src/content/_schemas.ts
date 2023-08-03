@@ -1,8 +1,7 @@
 import { SITE } from "@/config.mjs";
+import { AuthorPossibleSocials } from "@/types/Authors";
 import { validateTags } from "@/util/post-validation";
 import { z, ImageFunction } from "astro:content";
-
-import type { AuthorSocials } from "@/types/Authors";
 
 export const postSchema = ({ image }: { image: ImageFunction }) =>
   z.object({
@@ -19,6 +18,7 @@ export const postSchema = ({ image }: { image: ImageFunction }) =>
       message: `Cannot have more than ${SITE.maxTagsPerPost} tags.\nYour post tags may not be valid`,
     }),
     draft: z.boolean(),
+    edited: z.boolean(),
     minutesRead: z.number(),
   });
 
@@ -29,9 +29,7 @@ export const authorSchema = ({ image }: { image: ImageFunction }) =>
     socials: z.array(
       z
         .object({
-          name: z
-            .string()
-            .refine((socialName) => typeof socialName as AuthorSocials),
+          name: z.nativeEnum(AuthorPossibleSocials),
           link: z.string(),
         })
         .optional()

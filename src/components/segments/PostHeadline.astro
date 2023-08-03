@@ -2,9 +2,9 @@
 import { Clock } from "@/resources/static/Icons";
 
 import { postsCategories } from "@/resources/static/links";
-import type { PostFrontmatter } from '@/types/Posts';
+import type { PostFrontmatter } from "@/types/Posts";
 import { extractAuthorsFromPost } from "@/util/authors";
-import { getFormatedDate } from '@/util/date';
+import { getFormatedDate } from "@/util/date";
 import { getSlug } from "@/util/common";
 import { Image } from "astro:assets";
 
@@ -17,61 +17,87 @@ const { post } = Astro.props;
 const thumb = post.thumbnail;
 
 const categorySlug = post.category;
-const category = postsCategories.find(sublink => sublink.slug === categorySlug)!.name;
+const category = postsCategories.find(
+  (sublink) => sublink.slug === categorySlug
+)!.name;
 
 const authors = await extractAuthorsFromPost(post);
 ---
 
-<div class="max-w-3xl mx-auto flex flex-col text-skin-base py-2 border-[1px] border-b-4 border-l-[3px] border-crust 
-  bg-primary my-7 rounded-xl">
-
-  <p class="flex justify-center w-full text-skin-muted text-xs sm:text-sm gap-3 pt-1.5">
-    <span class="flex items-center gap-1"><Clock />{post.minutesRead} minutos de leitura</span>
+<div
+  class="max-w-3xl mx-auto flex flex-col text-skin-base py-2 border-[1px] border-b-4 border-l-[3px] border-crust bg-primary my-7 rounded-xl"
+>
+  {
+    post.edited && (
+      <p class="text-skin-muted text-[0.6rem] opacity-60 w-full text-right px-4">
+        Editado
+      </p>
+    )
+  }
+  <p
+    class="flex justify-center w-full text-skin-subtext text-xs sm:text-sm gap-3 pt-1.5"
+  >
+    <span class="flex items-center gap-1"
+      ><Clock />{post.minutesRead} minutos de leitura</span
+    >
     <span class="flex items-center">·</span>
-    <span class="flex items-center">{`${getFormatedDate(post.publishDate)}`}</span>
+    <span class="flex items-center"
+      >{`${getFormatedDate(post.publishDate)}`}</span
+    >
   </p>
 
   <!-- title -->
-  <h1 class="text-3xl sm:text-4xl lg:text-5xl mx-auto py-4 md:py-5 font-bold text-skin-accent">{post.title}</h1>
+  <h1
+    class="text-3xl sm:text-4xl lg:text-5xl mx-auto py-4 md:py-5 font-bold text-skin-accent"
+  >
+    {post.title}
+  </h1>
 
   <!-- thumb with category -->
   <div class="mx-4 rounded-xl border-2 border-crust">
-    <div class="relative flex justify-center font-bold text-xs sm:text-sm text-skin-accent-secondary sm:opacity-90 
-      hover:opacity-100 ease-in-out transition-opacity">
-      <a href={`/posts/${categorySlug}`} class="absolute p-2 rounded-b-lg capitalize bg-crust">{category}</a>
+    <div
+      class="relative flex justify-center font-bold text-xs sm:text-sm text-skin-accent-secondary sm:opacity-90 hover:opacity-100 ease-in-out transition-opacity"
+    >
+      <a
+        href={`/posts/${categorySlug}`}
+        class="absolute p-2 rounded-b-lg capitalize bg-crust">{category}</a
+      >
     </div>
-    <img src={thumb.img.src} 
+    <img
+      src={thumb.img.src}
       alt={thumb.alt}
       width={1280}
       height={720}
       loading="lazy"
-      decoding="async" />
+      decoding="async"
+    />
   </div>
 
   <!-- authors -->
   <div class="border-l-2 mt-4 ml-5 mb-2 border-secondary">
     <div class="pl-2 text-xs">
-      <p class="text-skin-muted mb-2">Escrito por:</p>
+      <p class="text-skin-subtext mb-2">Escrito por:</p>
       <ul class="flex items-center gap-2">
-        {authors.map(author => {
-          return <li class="w-fit">
-            <a href={`/authors/${getSlug(author.name)}`}>
-              <Image src={author.image} 
-                alt={thumb.alt}
-                class="rounded-full"
-                width={50}
-                height={50}
-                loading="lazy"
-                decoding="async" />
-            </a>
-          </li>
-        })}
+        {
+          authors.map((author) => {
+            return (
+              <li class="w-fit">
+                <a href={`/authors/${getSlug(author.name)}`}>
+                  <Image
+                    src={author.image}
+                    alt={thumb.alt}
+                    class="rounded-full"
+                    width={50}
+                    height={50}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              </li>
+            );
+          })
+        }
       </ul>
     </div>
   </div>
-
-
-  
-
 </div>
-
