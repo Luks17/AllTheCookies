@@ -1,8 +1,11 @@
 ---
 import PageLayout from "./PageLayout.astro";
+import type { MetaTags as Props } from "@/types/Meta";
+
+const meta = Astro.props;
 ---
 
-<PageLayout>
+<PageLayout {...meta}>
   <section>
     <slot name="header" />
   </section>
@@ -13,12 +16,16 @@ import PageLayout from "./PageLayout.astro";
 
   <!-- scroll back to top btn -->
   <aside class="scroll-btn-container absolute top-0 right-4 h-full">
-    <a href="#top" class="bg-fg-base rounded-full text-skin-muted hoverable-btn px-3 py-2">↑</a>
+    <a
+      href="#top"
+      class="bg-fg-base rounded-full text-skin-muted hoverable-btn px-3 py-2"
+      >↑</a
+    >
   </aside>
 
   <style>
     .scroll-btn-container:before {
-      content: '';
+      content: "";
       display: block;
       height: 100vh;
       pointer-events: none;
@@ -30,6 +37,4 @@ import PageLayout from "./PageLayout.astro";
       font-size: 20px;
     }
   </style>
-
 </PageLayout>
-

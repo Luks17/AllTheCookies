@@ -7,6 +7,7 @@ import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import { getSlug } from "@/util/common";
 import { getUnsortedPosts } from "@/util/posts-utils";
 import type { CollectionEntry } from "astro:content";
+import type { MetaTags } from "@/types/Meta";
 
 export interface Props {
   post: CollectionEntry<"post">;
@@ -26,10 +27,18 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
+// TODO: check better options than using only the first author
+const meta = {
+  title: post.data.title,
+  description: post.data.description,
+  author: post.data.authors[0],
+  socialImage: post.data.thumbnail.img.src,
+} as MetaTags;
+
 const { Content } = await post.render();
 ---
 
-<ArticleLayout>
+<ArticleLayout {...meta}>
   <PostHeadline slot="header" post={post.data} />
 
   <Content />

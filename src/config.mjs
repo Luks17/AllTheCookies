@@ -2,7 +2,7 @@ export const SITE = {
   title: "AllTheCookies",
   author: "Luks17",
   description: "Personal Website about technology",
-  socialImage: "",
+  socialImage: "@/assets/Logo.png",
 
   postsPerPage: 6,
   maxTagsPerPost: 4,
