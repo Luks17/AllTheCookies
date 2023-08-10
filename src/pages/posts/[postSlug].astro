@@ -8,6 +8,7 @@ import { getSlug } from "@/util/common";
 import { getUnsortedPosts } from "@/util/posts-utils";
 import type { CollectionEntry } from "astro:content";
 import type { MetaTags } from "@/types/Meta";
+import { SITE } from "@/config.mjs";
 
 export interface Props {
   post: CollectionEntry<"post">;
@@ -33,6 +34,7 @@ const meta = {
   description: post.data.description,
   author: post.data.authors[0],
   socialImage: post.data.thumbnail.img.src,
+  canonicalURL: `${SITE.url}/posts/${getSlug(post.data.title)}`,
 } as MetaTags;
 
 const { Content } = await post.render();

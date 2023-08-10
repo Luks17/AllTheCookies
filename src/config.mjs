@@ -1,7 +1,9 @@
 export const SITE = {
   title: "AllTheCookies",
   author: "Luks17",
-  description: "Personal Website about technology",
+  url: "https://www.allthecookies.com.br",
+  description:
+    "Um simples site pessoal sobre tecnologia para pessoas que gostam de tecnologia",
   socialImage: "@/assets/Logo.png",
 
   postsPerPage: 6,

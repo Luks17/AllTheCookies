@@ -3,5 +3,5 @@ export interface MetaTags {
   description?: string;
   author?: string;
   socialImage?: string;
-  canonicalURL?: URL;
+  canonicalURL?: string;
 }
