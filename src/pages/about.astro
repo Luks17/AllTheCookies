@@ -3,87 +3,77 @@ import PageDescription from "@/components/segments/PageDescription.astro";
 import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import { navLinks } from "@/resources/static/links";
 import { Image } from "astro:assets";
-import heroImg from "@/assets/about.png"; 
+import heroImg from "@/assets/about.png";
 import astroLogo from "@/assets/astro.png";
 
-const aboutPage = navLinks.filter(link => link.slug === "about")[0];
+const aboutPage = navLinks.filter((link) => link.slug === "about")[0];
 ---
 
 <ArticleLayout>
-  <PageDescription 
-    slot="header" 
-    pathToPage={[aboutPage.slug]} 
-    pageName={aboutPage.name} 
-    description={aboutPage.description} />
+  <PageDescription
+    slot="header"
+    pathToPage={[aboutPage.slug]}
+    pageName={aboutPage.name}
+    description={aboutPage.description}
+  />
 
-  <div class="max-w-2xl mx-auto bg-fg-base my-10 rounded-3xl border-b-8 border-2 border-crust">
-    <Image src={heroImg} alt="Hero Image"></Image>
+  <div
+    class="max-w-2xl mx-auto bg-fg-base my-10 rounded-3xl border-b-8 border-2 border-crust"
+  >
+    <Image src={heroImg} alt="Hero Image" />
   </div>
 
-  <div class="text-section text-justify">
-    <h2 class="title">O que é este site</h2>
+  <article>
+    <h2>O que é este site</h2>
     <p>
-      Esta página foi feita por mim, <a class="link" href="/authors/luks">Luks</a>, para ser um site de notícias, 
-      artigos pessoais e tutoriais. A ideia inicialmente era que ela sirva como um repositório de conhecimento para o futuro, 
-      pois tenho péssima memória e esqueço das coisas que aprendo e descubro muito rápido. 
+      Esta página foi feita por mim, <a class="link" href="/authors/luks"
+        >Luks</a
+      >, para ser um site de notícias, artigos pessoais e tutoriais. A ideia
+      inicialmente era que ela sirva como um repositório de conhecimento para o
+      futuro, pois tenho péssima memória e esqueço das coisas que aprendo e
+      descubro muito rápido.
     </p>
-    <br>
     <p>
-      No entanto, decidi expandir a ideia para um site colaborativo entre amigos. Além disso, também uso esta página para
-      documentar projetos pessoais.
+      No entanto, decidi expandir a ideia para um site colaborativo entre
+      amigos. Além disso, também uso esta página para documentar projetos
+      pessoais.
     </p>
-  </div>
 
-  <div class="text-section text-justify">
-    <h2 class="title">Como foi feito</h2>
+    <h2>Como foi feito</h2>
     <p>
-      Este site foi criado utilizando o gerador de páginas estáticas 
-      <a class="link" href="https://astro.build/">AstroJS</a>.
-      Ele foi escolhido por ser leve, rápido, flexível e ter features de um framework web completo,
-      como <i class="accent">file-based routing</i> e <span class="accent">otimização de imagens</span>. 
-      No entanto, a feature mais atrente do Astro são as suas <i class="accent">Component Islands</i>.
+      Este site foi criado utilizando o gerador de páginas estáticas
+      <a href="https://astro.build/">AstroJS</a>. Ele foi escolhido por ser
+      leve, rápido, flexível e ter features de um framework web completo, como <i
+        class="accent">file-based routing</i
+      > e <span class="accent">otimização de imagens</span>. No entanto, a
+      feature mais atrente do Astro são as suas <i class="accent"
+        >Component Islands</i
+      >.
     </p>
-    <br>
     <p>
-      As <i class="accent">Component Islands</i> do Astro podem ser traduzidas para o português como 
-      "Ilhas de Componentes", e fazem exatamente o que você deve estar imaginando: isolam os componentes da sua página.
-      Logo, o Astro te permite fazer coisas interessantes como:
+      As <i class="accent">Component Islands</i> do Astro podem ser traduzidas para
+      o português como "Ilhas de Componentes", e fazem exatamente o que você deve
+      estar imaginando: isolam os componentes da sua página. Logo, o Astro te permite
+      fazer coisas interessantes como:
     </p>
-    <ul class="list-disc w-11/12 mx-auto mt-2 text-skin-accent">
-      <li>Utilizar e misturar componentes de diferentes bibliotecas e frameworks;</li>
-      <li>Carregar componentes apenas quando certas condições são cumpridas;</li>
+    <ul class="list-disc w-11/12 mx-auto mt-2 text-skin-base font-article">
+      <li>
+        Utilizar e misturar componentes de diferentes bibliotecas e frameworks;
+      </li>
+      <li>
+        Carregar componentes apenas quando certas condições são cumpridas;
+      </li>
       <li>Isolar JavaScript e CSS de componentes</li>
     </ul>
-    <br>
     <p>
-      Algo que me irrita da web moderna é como as páginas são pesadas e cheias de anúncios.
-      O <span class="accent">AstroJS</span> por padrão gera as páginas com <span class="accent">Zero JavaScript</span>. 
-      Sabendo de tudo isso, decidi utilizar o Astro para construir este site.
+      Algo que me irrita da web moderna é como as páginas são pesadas e cheias
+      de anúncios. O <span class="accent">AstroJS</span> por padrão gera as páginas
+      com <span class="accent">Zero JavaScript</span>. Sabendo de tudo isso,
+      decidi utilizar o Astro para construir este site.
     </p>
-  </div>
 
-  <div class="mx-auto w-fit p-4">
-    <Image src={astroLogo} alt="AstroJS Logo" width={218}></Image>
-  </div>
-
+    <div class="mx-auto w-fit p-4">
+      <Image src={astroLogo} alt="AstroJS Logo" width={218} />
+    </div>
+  </article>
 </ArticleLayout>
-
-<style>
-@tailwind base;
-
-.title {
-  @apply text-2xl md:text-3xl font-bold text-skin-accent-secondary w-full text-center p-3.5;
-}
-
-.text-section {
-  @apply md:text-lg text-skin-base my-5;
-}
-
-.link {
-  @apply text-skin-alternate font-semibold hover:underline;
-}
-
-.accent {
-  @apply text-skin-accent font-semibold;
-}
-</style>

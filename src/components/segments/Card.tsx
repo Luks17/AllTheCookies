@@ -63,7 +63,7 @@ function Card({ post, showCategory = true, special = false }: Props) {
 
       {/* thumb */}
       <div className="flex items-center justify-center bg-fg-base m-4 mt-3">
-        <a href={postSlug} className="h-full w-full">
+        <a href={postSlug} className="h-full w-full overflow-clip">
           <img
             src={post.thumbnail.img.src}
             alt={post.thumbnail.alt}

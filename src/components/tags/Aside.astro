@@ -25,10 +25,10 @@ const { type, title } = Astro.props;
 ---
 
 <aside
-  class={`my-5 px-3 rounded-md aside-tag ${type} max-h-[99rem] transition-max-height origin-top duration-200`}
+  class={`my-5 px-3 rounded-md aside-tag ${type} max-h-[99rem] transition-max-height origin-top duration-200 text-skin-base`}
 >
   <button class="flex w-full justify-between title pt-2">
-    <h4 class="flex items-center capitalize font-bold text-lg">
+    <h4 class="flex items-center font-bold text-lg">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -49,5 +49,5 @@ const { type, title } = Astro.props;
     </div>
   </button>
 
-  <div class="content transition-opacity py-2"><slot /></div>
+  <div class="content transition-opacity py-2 font-semibold"><slot /></div>
 </aside>

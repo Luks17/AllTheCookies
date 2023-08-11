@@ -46,6 +46,8 @@ module.exports = {
 
     fontFamily: {
       primary: ["Raleway", "Roboto", "Ubuntu", "sans-serif"],
+      article: ["EB+Garamond", "Raleway", "sans-serif"],
+      "article-title": ["Roboto", "sans-serif"],
     },
 
     extend: {

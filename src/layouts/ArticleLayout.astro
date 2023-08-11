@@ -1,4 +1,6 @@
 ---
+import "@/styles/article.css";
+
 import PageLayout from "./PageLayout.astro";
 import type { MetaTags as Props } from "@/types/Meta";
 
@@ -10,7 +12,7 @@ const meta = Astro.props;
     <slot name="header" />
   </section>
 
-  <section class="text-skin-base max-w-3xl mx-auto">
+  <section class="max-w-[45rem] mx-auto content-body">
     <slot />
   </section>
 
