@@ -27,5 +27,5 @@ export default defineConfig({
     "/posts": "/posts/all",
   },
 
-  site: "http://127.0.0.1:3000",
+  site: "https://www.allthecookies.com.br",
 });

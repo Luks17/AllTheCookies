@@ -1,0 +1,24 @@
+.content-body article > h1,
+.content-body article > h2,
+.content-body article > h3,
+.content-body article > h4,
+.content-body article > h5,
+.content-body article > h6 {
+  @apply text-xl md:text-2xl font-bold text-skin-accent w-full text-center font-article-title;
+}
+
+.content-body article > p {
+  @apply text-lg text-skin-base my-5 font-article;
+}
+
+.content-body article a {
+  @apply text-skin-alternate font-semibold hover:underline hover:text-skin-selected transition-colors;
+}
+
+.content-body article > ul {
+  @apply text-lg font-semibold text-skin-subtext list-disc py-2;
+}
+
+.content-body .accent {
+  @apply font-semibold text-skin-accent;
+}

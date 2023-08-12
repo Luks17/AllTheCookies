@@ -1,7 +1,15 @@
 ---
 import type { MetaTags as Props } from "@/types/Meta";
+import { SITE } from "@/config.mjs";
 
-const { title, description, author, socialImage, canonicalURL } = Astro.props;
+// if page does not define any meta info, these will be the defaults
+const {
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  title = SITE.title,
+  description = SITE.description,
+  author = SITE.author,
+  socialImage = SITE.socialImage,
+} = Astro.props;
 ---
 
 <!-- Basic Meta Tags -->
@@ -15,13 +23,13 @@ const { title, description, author, socialImage, canonicalURL } = Astro.props;
 <meta name="author" content={author} />
 
 <!-- Icons  -->
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#9d5346">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#9d5346" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#ffffff" />
 
 <!-- Open Graph -->
 <meta property="og:title" content={title} />

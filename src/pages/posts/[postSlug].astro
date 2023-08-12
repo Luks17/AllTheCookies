@@ -7,50 +7,60 @@ import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import { getSlug } from "@/util/common";
 import { getUnsortedPosts } from "@/util/posts-utils";
 import type { CollectionEntry } from "astro:content";
+import type { MetaTags } from "@/types/Meta";
+import { SITE } from "@/config.mjs";
 
 export interface Props {
-  post: CollectionEntry<"post">,
+  post: CollectionEntry<"post">;
 }
 
 export async function getStaticPaths() {
   const posts = await getUnsortedPosts();
   return posts.map((post) => {
     return {
-      params: {postSlug: getSlug(post.data.title)},
+      params: { postSlug: getSlug(post.data.title) },
       props: {
         post,
-      }
-    }
+      },
+    };
   });
 }
 
 const { post } = Astro.props;
 
+// TODO: check better options than using only the first author
+const meta = {
+  title: post.data.title,
+  description: post.data.description,
+  author: post.data.authors[0],
+  socialImage: post.data.thumbnail.img.src,
+  canonicalURL: `${SITE.url}/posts/${getSlug(post.data.title)}`,
+} as MetaTags;
+
 const { Content } = await post.render();
 ---
 
-<ArticleLayout>
-
+<ArticleLayout {...meta}>
   <PostHeadline slot="header" post={post.data} />
 
   <Content />
-
 </ArticleLayout>
 
 <!-- aside tag script -->
 <script>
-const buttons = document.querySelectorAll(".title"); 
-const contents = document.querySelectorAll(".content");
-const chevrons = document.querySelectorAll(".chevron");
+  const asides = document.querySelectorAll(".aside-tag");
+  const contents = document.querySelectorAll(".content");
+  const buttons = document.querySelectorAll(".title");
+  const chevrons = document.querySelectorAll(".chevron");
 
-function handleClick(id: number) {
-  chevrons?.item(id).classList.toggle("-rotate-180"); 
-  contents?.item(id).classList.toggle("scale-y-0");
-  contents?.item(id).classList.toggle("absolute");
-}
+  function handleClick(id: number) {
+    chevrons?.item(id).classList.toggle("-rotate-180");
+    asides?.item(id).classList.toggle("max-h-12");
+    asides?.item(id).classList.toggle("max-h-[99rem]");
+    contents?.item(id).classList.toggle("opacity-0");
+  }
 
-buttons?.forEach((button, id) => {
-  button.addEventListener("click", () => handleClick(id));
-});
+  buttons?.forEach((button, id) => {
+    button.addEventListener("click", () => handleClick(id));
+  });
 </script>
-

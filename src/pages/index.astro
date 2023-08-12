@@ -1,42 +1,56 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
-import { getImage } from "astro:assets";
-import cookieCoffe from "@/assets/cookies_n_coffee.png";
+import hero from "@/assets/LogoAlternate_fc.png";
 import { getSortedPosts } from "@/util/posts-utils";
 
 import Carousel from "@/components/segments/Carousel";
+import { Image } from "astro:assets";
 
-const oCookieCoffe = await getImage({ src: cookieCoffe });
+const description =
+  "AllTheCookies é um pequeno blog colaborativo de tecnologia. Tendo como conteúdo notícias, tutoriais & artigos pessoais.";
 
-const description = "AllTheCookies é um pequeno blog colaborativo de tecnologia. Tendo como conteúdo notícias, tutoriais & artigos pessoais.";
-
-const sortedPosts = (await getSortedPosts()).map(post => post.data);
+const sortedPosts = (await getSortedPosts()).map((post) => post.data);
 ---
 
-
 <PageLayout>
-
-<!-- greeting -->
-<section class="py-12 md:py-6 max-w-5xl mx-auto xl:px-8 md:flex items-center justify-center">
-  <div class="text-skin-base">
-    <h1 class="text-3xl lg:text-4xl font-bold pb-2">Bem vindo! <span class="text-skin-alternate">Aceite</span> nossos cookies.</h1>
-    <p class="text-md text-skin-muted lg:text-lg max-w-xl overflow-hidden text-ellipsis">{description}</p>
-  </div>
-  <div class="flex justify-center md:justify-start">
-    <div class="relative w-fit">
-      <div class="absolute bg-glow-primary inset-5 blur opacity-0 hover:opacity-[0.03] rounded-full transition-opacity ease-in"></div>
-      <img src={oCookieCoffe.src} alt="Cookie with coffe" class="w-[200px] xl:w-[280px]" loading="lazy" decoding="async">
+  <!-- greeting -->
+  <section
+    class="py-12 md:py-6 max-w-5xl mx-auto xl:px-8 md:flex items-center justify-center"
+  >
+    <div class="text-skin-base">
+      <h1 class="text-3xl lg:text-4xl font-bold pb-2">
+        Bem vindo! <span class="text-skin-alternate">Aceite</span> nossos cookies.
+      </h1>
+      <p
+        class="text-md text-skin-muted lg:text-lg max-w-xl overflow-hidden text-ellipsis"
+      >
+        {description}
+      </p>
     </div>
-  </div>
-</section>
+    <div class="flex justify-center md:justify-start">
+      <div class="relative w-fit">
+        <div
+          class="absolute bg-glow-primary inset-5 blur opacity-0 hover:opacity-[0.03] rounded-full transition-opacity ease-in"
+        >
+        </div>
+        <Image
+          src={hero}
+          alt="Cookie with coffe"
+          class="max-lg:w-[20rem] max-w-[30rem]"
+        />
+      </div>
+    </div>
+  </section>
 
-
-<!-- latest posts -->
-<section class="w-full py-5">
-  <h3 class="text-skin-base text-center py-1 md:py-2.5 font-bold text-xl sm:text-2xl">Nossas <span class="text-skin-accent-secondary">últimas</span> postagens</h3> 
-  <div class="mt-4">
-    <Carousel sortedPosts={sortedPosts} client:visible />
-  </div>
-</section>
-
+  <!-- latest posts -->
+  <section class="w-full pb-5">
+    <h3
+      class="text-skin-base text-center py-1 md:py-2.5 font-bold text-xl sm:text-2xl"
+    >
+      Nossas <span class="text-skin-accent-secondary">últimas</span> postagens
+    </h3>
+    <div class="mt-4">
+      <Carousel sortedPosts={sortedPosts} client:visible />
+    </div>
+  </section>
 </PageLayout>

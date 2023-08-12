@@ -1,14 +1,18 @@
 ---
+import LogoIcon from "@/assets/Logo.png";
+import { Image } from "astro:assets";
 ---
 
 <a href="/">
-  <div class="relative">
+  <div class="relative flex items-center gap-x-2">
     <div
       class="absolute bg-glow-primary -inset-1 blur opacity-5 hover:opacity-10 ease-in transition-opacity rounded-3xl"
     >
     </div>
+
+    <Image src={LogoIcon} alt="Logo Icon" class="w-9 sm:w-10" />
     <h2 class="text-2xl sm:text-3xl text-skin-base font-semibold">
-      🍪 AllTheCookies
+      AllTheCookies
     </h2>
   </div>
 </a>

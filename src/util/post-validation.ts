@@ -1,4 +1,7 @@
 import { SITE } from "@/config.mjs";
+import { postsCategories } from "@/resources/static/links";
+
+const categories = postsCategories.map((category) => category.slug);
 
 export function validateTags(tags: string[]): boolean {
   if (tags.length > SITE.maxTagsPerPost) return false;
@@ -10,4 +13,8 @@ export function validateTags(tags: string[]): boolean {
   }
 
   return true;
+}
+
+export function validateCategory(category: string): boolean {
+  return categories.includes(category);
 }
