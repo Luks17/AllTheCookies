@@ -11,7 +11,7 @@ function Summary() {
     const content = document.querySelector(".content-body > article");
 
     if (content === null)
-      throw new Error("Summary cannot be used outside of a markdoc article");
+      throw new Error("Summary cannot be used outside an article");
 
     const headlines = content.querySelectorAll(
       "article > h1, article > h2, article > h3, article > h4, article > h5, article > h6"

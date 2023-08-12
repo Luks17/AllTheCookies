@@ -2,8 +2,9 @@
 import PageDescription from "@/components/segments/PageDescription.astro";
 import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import { navLinks } from "@/resources/static/links";
+import Summary from "@/components/tags/ui/Summary";
+
 import { Image } from "astro:assets";
-import heroImg from "@/assets/about.png";
 import astroLogo from "@/assets/astro.png";
 
 const aboutPage = navLinks.filter((link) => link.slug === "about")[0];
@@ -17,14 +18,10 @@ const aboutPage = navLinks.filter((link) => link.slug === "about")[0];
     description={aboutPage.description}
   />
 
-  <div
-    class="max-w-2xl mx-auto bg-fg-base my-10 rounded-3xl border-b-8 border-2 border-crust"
-  >
-    <Image src={heroImg} alt="Hero Image" />
-  </div>
+  <article class="mt-10">
+    <Summary client:visible />
 
-  <article>
-    <h2>O que é este site</h2>
+    <h2 id="heading-1">O que é este site</h2>
     <p>
       Esta página foi feita por mim, <a class="link" href="/authors/luks"
         >Luks</a
@@ -39,7 +36,7 @@ const aboutPage = navLinks.filter((link) => link.slug === "about")[0];
       pessoais.
     </p>
 
-    <h2>Como foi feito</h2>
+    <h2 id="heading-2">Como foi feito</h2>
     <p>
       Este site foi criado utilizando o gerador de páginas estáticas
       <a href="https://astro.build/">AstroJS</a>. Ele foi escolhido por ser
@@ -65,15 +62,24 @@ const aboutPage = navLinks.filter((link) => link.slug === "about")[0];
       </li>
       <li>Isolar JavaScript e CSS de componentes</li>
     </ul>
+    <div class="mx-auto w-fit p-4">
+      <Image src={astroLogo} alt="AstroJS Logo" width={218} />
+    </div>
     <p>
-      Algo que me irrita da web moderna é como as páginas são pesadas e cheias
-      de anúncios. O <span class="accent">AstroJS</span> por padrão gera as páginas
+      Algo que irrita da web moderna é como as páginas são pesadas e cheias de
+      anúncios. O <span class="accent">AstroJS</span> por padrão gera as páginas
       com <span class="accent">Zero JavaScript</span>. Sabendo de tudo isso,
       decidi utilizar o Astro para construir este site.
     </p>
 
-    <div class="mx-auto w-fit p-4">
-      <Image src={astroLogo} alt="AstroJS Logo" width={218} />
-    </div>
+    <h2 id="heading-3">Por quê em Português?</h2>
+    <p>
+      Muitos programadores ao fazer um site pessoal os fazem em Inglês. No
+      entanto, já há muito conteúdo bom disponível nessa língua na internet,
+      logo não vejo o que posso trazer muito de novo. Além disso, como a maioria
+      dos desenvolvedores que conheço são brasileiros, foi mais fácil encontrar
+      pessoas dispostas a escrever neste site comigo. Por causa disso, decidi
+      fazer este site em Português.
+    </p>
   </article>
 </ArticleLayout>

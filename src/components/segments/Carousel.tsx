@@ -2,6 +2,7 @@ import type { PostFrontmatter } from "@/types/Posts";
 import { MouseEventHandler, useEffect, useState } from "react";
 import { useMediaQuery } from "@/util/hooks";
 import Card from "./Card";
+import { ArrowLeft, ArrowRight } from "@/resources/static/Icons";
 import { SITE } from "@/config.mjs";
 
 const SHOWED_POSTS_LG = 3;
@@ -14,7 +15,7 @@ interface Props {
 }
 
 interface ButtonProps {
-  icon: string;
+  icon: () => JSX.Element;
   func: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -58,8 +59,8 @@ function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
   return (
     <div className="relative">
       <div className="text-skin-muted text-2xl absolute top-[42%] flex justify-between w-full">
-        <Button icon="🠈" func={prev} />
-        <Button icon="🠊" func={next} />
+        <Button icon={ArrowLeft} func={prev} />
+        <Button icon={ArrowRight} func={next} />
       </div>
       <div
         className="mx-auto overflow-x-clip transition-[width] ease-in-out duration-500"
@@ -69,9 +70,8 @@ function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
           className="flex w-min transition-transform ease-in-out duration-500"
           /* moves the ul to the correct post using only css */
           style={{
-            transform: `translateX(-${
-              postIndex * (SLIDE_WIDTH + GAP_WIDTH)
-            }px)`,
+            transform: `translateX(-${postIndex * (SLIDE_WIDTH + GAP_WIDTH)
+              }px)`,
             columnGap: `${GAP_WIDTH}px`,
           }}
         >
@@ -92,7 +92,7 @@ function Button({ icon, func }: ButtonProps) {
       className="bg-crust w-10 h-10 z-10 flex items-center border-2 border-third justify-center rounded-full hoverable-btn"
       onClick={func}
     >
-      {icon}
+      {icon()}
     </button>
   );
 }

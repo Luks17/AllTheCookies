@@ -169,7 +169,7 @@ function Results({ searchResults }: { searchResults: FuseResult[] }) {
           )}
         </div>
       ) : (
-        <p>
+        <p className="w-full text-center p-20">
           Não encontramos <span className="text-skin-alternate">nenhum </span>
           resultado para sua busca
         </p>
