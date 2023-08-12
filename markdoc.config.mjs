@@ -28,5 +28,8 @@ export default defineMarkdocConfig({
         name: { type: String },
       },
     },
+    summary: {
+      render: getTag("Summary.astro"),
+    },
   },
 });
