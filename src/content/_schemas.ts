@@ -6,8 +6,8 @@ import { z, ImageFunction } from "astro:content";
 export const postSchema = ({ image }: { image: ImageFunction }) =>
   z.object({
     authors: z.array(z.string()),
-    title: z.string().refine((title) => title.length < 40, {
-      message: "Title cannot be longer than 40 characters",
+    title: z.string().refine((title) => title.length < 50, {
+      message: "Title cannot be longer than 70 characters",
     }),
     description: z.string().refine((desc) => desc.length < 200, {
       message: "Description cannot be longer than 200 characters",

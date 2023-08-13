@@ -42,9 +42,11 @@ export const SITE = {
     "cloud",
     "IA",
     "docker",
+    "containers",
     "git",
     "dados",
     "sql",
     "nosql",
+    "futurologia",
   ],
 };
