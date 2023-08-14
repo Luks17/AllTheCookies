@@ -1,0 +1,21 @@
+---
+export interface Props {
+  word: string;
+}
+
+const { word } = Astro.props;
+---
+
+<!-- currently does not work, because it will appear outsite the paragraphs in the rendered markdoc -->
+<span class="group relative cursor-pointer py-2 w-fit">
+  <div
+    class="invisible absolute bottom-7 mb-3 w-72 rounded-md bg-fg-secondary px-4 py-2 text-sm group-hover:visible"
+  >
+    <div class="text-skin-base font-semibold"><slot /></div>
+    <div class="absolute bottom-[-10px] z-10 buzzword-triangle rotate-180">
+    </div>
+  </div>
+  <span class="hover:cursor-pointer text-skin-accent-secondary font-bold"
+    >{word}</span
+  >
+</span>
