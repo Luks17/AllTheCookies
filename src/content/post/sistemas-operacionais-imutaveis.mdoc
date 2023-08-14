@@ -1,0 +1,83 @@
+---
+authors: ["Luks"]
+title: Imutabilidade é o futuro das distros Linux?
+description: Flatpaks e Snaps estão cada vez mais ganhando popularidade no mundo Linux, tornando possível sistemas operacionais totalmente containerizados no User Space.
+thumbnail: {
+  img: "@/assets/posts/sistemas-operacionais-imutaveis/thumb.jpg",
+  alt: Flatpak and snap are the future?
+}
+publishDate: 2023-08-14T15:57:00Z
+category: blog
+tags: ["linux", "containers", "futurologia"]
+draft: false
+minutesRead: 9
+edited: false
+---
+
+{% summary / %}
+
+## Introdução
+
+Tradicionalmente, no mundo Linux, as várias distribuições testam, gerenciam e distribuem uma seleção 
+de pacotes que elas desejam que seus usuários tenham como opção para instalar em sua distribuição 
+(distro). Esses pacotes ficam armazenados em repositórios também geridos pela distribuição, e o 
+usuário os instala utilizando um gerenciador de pacotes, que irá manejar as dependências e 
+atualizações desses programas.
+
+Na maioria das vezes, o desenvolvedor do programa não é o que controla a sua distribuição e atualização 
+nos repositórios das distribuições. Logo, por exemplo, uma distro A pode ofertar uma versão mais antiga 
+da aplicação, enquanto a distro B disponibiliza a mais nova e a distro C nem tem o programa nos seus 
+repositórios. Além disso, esses programas são instalados diretamente no diretório root do Sistema 
+Operacional, usualmente em /usr/bin.
+
+Esta abordagem, nos últimos anos, está sendo repensada na comunidade Linux. Isso pois hoje em dia, com 
+o surgimento de tecnologias de containerização como [Flatpak](https://flatpak.org/) e [Snap](https://snapcraft.io/), é possível 
+armazenar aplicações em um repositório único para qualquer distro Linux, não havendo mais a necessidade 
+das distribuições ofertarem todos os programas. Além disso, programas instalados com essas ferramentas 
+são instalados apenas no diretório do usuário (e não no root), garantindo assim uma segurança e 
+isolamento maior.
+
+Porém, a discussão vai mais além disso: pois se é possível distribuir programas dessa forma, qual a 
+necessidade de mexer no diretório root de seu Sistema Operacional? Para vários, não há necessidade 
+alguma, e por isso hoje em dia se discute sobre Sistemas Operacionais Imutáveis.
+
+## O que é um Sistema Operacional Imutável
+
+Um Sistema Operacional Imutável é aquele em que seu sistema de arquivos principal (/usr, /dev e /boot por exemplo) 
+é *Read-Only* (apenas leitura), estarei usando como exemplo neste artigo o [Fedora Silverblue](https://fedoraproject.org/silverblue/). 
+
+O Silverblue permite a instalação de pacotes apenas com Flatpak, logo é possível conseguir as vantagens 
+de segurança que mencionei anteriormente. Flatpak funciona provendo *containers* imutáveis de aplicações, 
+logo no caso do Silverblue você terá imutabilidade dupla - tanto nos diretórios root quanto nas aplicações 
+de usuário.
+
+Já que os principais diretórios do sistema são de apenas leitura, levanta-se questões como: e se eu 
+quiser atualizar meu kernel ou outros pacotes essenciais do meu sistema?
+	
+Para isso, existe um simples mecanismo: cria-se uma nova imagem de boot, que inclui os pacotes essenciais 
+do sistema atualizados, e utiliza-se ela para dar boot no sistema na sua próxima inicialização! Esse 
+mecanismo também permite trocar entre versões do seu sistema facilmente, basta dar boot na imagem antiga 
+(*rollback*). Logo, se a nova versão der problema ou você quer testar múltiplas versões, será trivial fazer 
+esse *rollback*.
+
+## Limitações
+
+Tecnologias como Flatpak e Snap manejam dependências de uma forma diferente do que gerenciadores de pacotes 
+tradicionais. Em vez de manterem versões específicas das dependências e seus dependentes, eles empacotam 
+várias versões das dependências dependendo do que a aplicação precisar. Logo, ocupam mais espaço de disco 
+para poder manter várias versões do mesmo programa.
+
+Além disso, as várias imagens do Sistema Operacional podem rapidamente consumir quantidades enormes de espaço 
+de disco. No caso de distribuições que guardem essas imagens na partição de boot, que normalmente tem menos 
+de meio giga alocado de espaço, isso pode ser problemático.
+
+Por fim, atualizações de programas essenciais do Sistema Operacional não são possíveis em tempo de execução 
+como em distros tradicionais. Deve-se isso ao fato de que atualizações requerem a reiniciação do sistema para 
+dar boot na nova imagem do Sistema Operacional. Por isso, fica inviável para sistemas que precisem desse tipo 
+de atualização imediata sem downtime.
+
+### Referências
+
+- [Immutable Operating Systems: A Survey](https://www.researchgate.net/publication/370528248_Immutable_Operating_Systems_A_Survey)
+- [Immutable Linux with Silverblue: My favorite superpower](https://www.redhat.com/sysadmin/immutability-silverblue)
+

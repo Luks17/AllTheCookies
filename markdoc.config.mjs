@@ -31,5 +31,11 @@ export default defineMarkdocConfig({
     summary: {
       render: getTag("Summary.astro"),
     },
+    // buzzword: {
+    //   render: getTag("Buzzword.astro"),
+    //   attributes: {
+    //     word: { type: String },
+    //   },
+    // },
   },
 });

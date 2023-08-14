@@ -85,6 +85,14 @@
     border-bottom: 16px solid var(--surface0);
   }
 
+  .buzzword-triangle {
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid var(--surface1);
+  }
+
   .hoverable-btn {
     @apply opacity-90 hover:opacity-100 hover:text-skin-selected transition-colors ease-linear;
   }
