@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ArrowLeft } from "@/resources/static/Icons";
+---
+
+<BaseLayout>
+  <div
+    class="from-primary via-mantle to-crust bg-gradient-to-bl w-screen h-screen flex flex-col justify-center items-center"
+  >
+    <h1 class="text-skin-base text-7xl font-bold">404</h1>
+    <p class="text-skin-subtext text-xl font-semibold">
+      Nenhum cookie para você!
+    </p>
+    <a
+      href="/"
+      class="text-skin-alternate font-semibold text-lg flex items-center hover:text-skin-selected transition-colors mt-36"
+    >
+      <ArrowLeft />
+      <span>Voltar ao inicio</span>
+    </a>
+  </div>
+</BaseLayout>

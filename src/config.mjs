@@ -50,5 +50,6 @@ export const SITE = {
     "sql",
     "nosql",
     "futurologia",
+    "atualidades",
   ],
 };
