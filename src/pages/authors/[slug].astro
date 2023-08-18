@@ -1,4 +1,5 @@
 ---
+import Card from '@/components/segments/Card';
 import Carousel from '@/components/segments/Carousel';
 import { SITE } from '@/config.mjs';
 import PageLayout from '@/layouts/PageLayout.astro';
@@ -28,7 +29,7 @@ const { author } = Astro.props;
 const authorSlug = getSlug(author.data.name);
 
 const allPosts = (await getSortedPosts()).map(post => post.data);
-const authorPosts = allPosts.filter(post => !post.authors.includes(authorSlug));
+const authorPosts = allPosts.filter(post => post.authors.includes(authorSlug));
 
 const { Content } = await author.render();
 ---
@@ -39,13 +40,16 @@ const { Content } = await author.render();
     <Content />
   </section>
 
-  {(authorPosts.length > 3) &&
-    <section class="w-full text-skin-base py-6 border-t-2 border-secondary">
-      <h4 class="font-bold text-2xl text-center mb-8"><span class="text-skin-alternate">Últimos</span> posts compostos pelo autor</h4>
+  <section class="w-full text-skin-base py-6 border-t-2 border-secondary">
+    <h4 class="font-bold text-2xl text-center mb-8"><span class="text-skin-alternate">Últimos</span> posts compostos pelo autor</h4>
+    {(authorPosts.length > 3) ?
       <!-- shows at max SITE.postsPerPage posts  -->
       <Carousel 
         sortedPosts={authorPosts} 
         maxIndex={(authorPosts.length >= SITE.postsPerPage) ? SITE.postsPerPage : authorPosts.length}
         client:visible />
-    </section>}
+    : <ul class="flex max-md:flex-col gap-4">
+      {authorPosts.map(post => <li class="max-w-sm mx-auto"><Card post={post} /></li>)}
+      </ul>}
+  </section>
 </PageLayout>
