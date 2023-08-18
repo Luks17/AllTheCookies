@@ -31,6 +31,14 @@ export default defineMarkdocConfig({
     summary: {
       render: getTag("Summary.astro"),
     },
+    quote: {
+      render: getTag("Quote.astro"),
+      attributes: {
+        title: { type: String },
+        author: { type: String },
+        url: { type: String },
+      },
+    },
     // buzzword: {
     //   render: getTag("Buzzword.astro"),
     //   attributes: {

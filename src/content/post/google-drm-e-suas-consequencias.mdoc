@@ -6,11 +6,11 @@ thumbnail: {
   img: "@/assets/posts/google-drm-e-suas-consequencias/thumb.jpg",
   alt: Google pegando fogo
 }
-publishDate: 2023-08-14T10:31:00Z
+publishDate: 2023-08-18T13:43:00Z
 category: blog
 tags: ["web", "google", "atualidades"]
-draft: true
-minutesRead: 8
+draft: false
+minutesRead: 7
 edited: false
 ---
 
@@ -24,31 +24,81 @@ a privacidade e segurança do usuário para mostrar anúncios.
 
 Por causa disso, muitos usuários sentem-se incomodados com a grande quantidade de anúncios que são expostos 
 todo dia em tudo o que usam. Logo, utilizam ferramentas como extensões de navegadores para bloqueá-los 
-completamente ou permitir para um grupo seleto de páginas.
+completamente ou permiti-los apenas para um grupo seleto de páginas.
 
 Para combater isso, o Google começou a impor regras mais rigorosas para a implementação de extensões para 
-seu navegador Chrome. Como o Google controla a maior parcela do mercado de Internet Browsers, sendo quase 
+seu navegador Chrome. Já que ele controla a maior parcela do mercado de Internet Browsers, sendo praticamente 
 um monopólio, essa mudança acabou afetando muitos usuários. No entanto, Mozilla e navegadores baseados em 
 Chromium começaram a trabalhar para “driblar” essas regras novas.
 
 No entanto, a Google parece não ter deixado barato, pois no último mês decidiu começar a implementar a 
-Web Integrity API (WEI). Basicamente, ele fornece uma forma para as páginas web verificarem a autenticidade 
+Web Environment Integrity API (WEI). Basicamente, ele fornece uma forma para as páginas web verificarem a autenticidade 
 do usuário e o ambiente em que eles estão. Isso é feito, segundo a proposta, por meio de um teste de autenticidade 
 antes do website começar a enviar qualquer dado. 
 
-Com esse mecanismo o Google permite que sites deixem apenas uma seleção de Web Browser e Sistemas Operacionais 
-que, de preferência para eles, não tenham mecanismos de bloqueio de anúncios, por exemplo. Por sua similaridade 
-a o que aplicações desktop pagas fazem para verificar a autenticidade do software, por meio de DRMs, essa proposta 
-do Google ganhou o apelido de “Google’s DRM for the Web”.
+Com esse mecanismo o Google permite que sites deixem apenas uma seleção de Web Browser e Sistemas Operacionais. 
+Por sua similaridade a o que aplicações desktop pagas fazem para verificar a autenticidade do software, por meio 
+de DRMs, essa proposta do Google ganhou o apelido de “Google’s DRM for the Web”.
 
 ## Controvérsias
+	
+A empresa alega que sua proposta ajudaria páginas a bloquear robôs coletores de dados. 
+Esse problema é algo que realmente é relevante para muitos, principalmente com o surgimento 
+de modelos de aprendizagem de linguagem que são treinados utilizando dados de páginas web 
+sem o consentimento delas. No entanto, a solução proposta pelo Google recebeu diversas críticas.
 
+A Mozilla, Brave, Vivaldi e Free Software Foundation [já se manifestaram contra a proposta](#posicionamentos). Além disso, 
+várias pessoas no [repositório do github da proposta](#referencias) criaram issues criticando a proposta antes do Google fechar eles, 
+vejamos alguns deles traduzidos ao português:
 
+{% quote title="Completamente não ético e contra a web aberta" author="joshuamauldin" %}
 
+[...] é difícil imaginar como isto não é uma DRM para browsers que força mais anúncios e monitoramento para as pessoas. Não há benefícios nisto para os usuários, apenas para anunciantes.
+A ética por trás disto é, no mínimo, duvidosa. Tudo sobre ele não parece genuíno.
+
+{% /quote %}
+
+{% quote title="O uso desta proposta por anunciantes pode ser um risco para usuários" author="dmarti" %}
+
+Esta proposta facilita o uso de anúncios pelo Google (e possivelmente outras entidades) em sites com métricas de usuário não confiáveis.
+Monitorar e coletar dados de pessoas em sites não confiáveis é perigoso, pois beneficia pessoas mal intencionadas a construir páginas desse tipo e dar visitas para elas enganando os usuários.
+
+{% /quote %}
+
+{% quote title="Por favor, não escute os viciados em adblock, lance este projeto o mais rápido possível!" author="zb3" %}
+
+O bloqueio de anúncios é um vírus que está se espalhando e todos sabemos que deixa as pessoas infelizes, visto que para uma pessoa ser feliz ela precisa pelo menos ver 250 anúncios todos os dias…
+
+{% /quote %}
+
+Espera um momento. Esse último é meio suspeito...
+
+## Problemática
+ 
+A proposta abrirá as portas para páginas web coletarem ainda mais dados sobre seus usuários. Além disso, 
+permitirá esses sites bloquearem o acesso de navegadores que tenham adblock integrado ou que permitam 
+esse tipo de programa na forma de extensões. 
+
+Páginas como o Youtube, que é do Google, poderão obrigar os seus usuários a acessá-lo apenas 
+pelo Chrome ou pelo aplicativo oficial em um sistema operacional que o usuário não tenha acesso root.
+
+Além disso, como o Google tem um monopólio no mercado de navegadores web, a maioria dos usuários comuns 
+não irão perceber diferença nenhuma quando isso for implementado. Logo, será normalizado e não haverá 
+mais nada que possa ser feito quando chegar a esse ponto.
+
+{% anchor name="referencias" / %}
 ### Referências
 
-- [O repositório do Google](https://github.com/RupertBenWiser/Web-Environment-Integrity/tree/main)
+- [O repositório do projeto de funcionários do Google](https://github.com/RupertBenWiser/Web-Environment-Integrity/tree/main)
 - [Artigo do Website Terra](https://www.terra.com.br/byte/google-propoe-drm-da-internet-para-web-mais-segura-especialistas-criticam,6cbd5909cc1ef7abce3b566161f63c6estfp6431.html)
 - [Artigo do Website Manual do Usuário](https://manualdousuario.net/google-wei-drm-web-proposta/)
 - [Artigo da Ars Technica](https://arstechnica.com/gadgets/2023/07/googles-web-integrity-api-sounds-like-drm-for-the-web/)
-- [Posicionamento da Mozilla sobre o tema](https://github.com/mozilla/standards-positions/issues/852#issuecomment-1648820747)
+
+
+{% anchor name="posicionamentos" /%}
+### Posicionamentos sobre o tema
+
+- [Mozilla](https://github.com/mozilla/standards-positions/issues/852#issuecomment-1648820747)
+- [Vivaldi](https://vivaldi.com/blog/googles-new-dangerous-web-environment-integrity-spec/)
+- [Free Software Foundation](https://www.fsf.org/blogs/community/web-environment-integrity-is-an-all-out-attack-on-the-free-internet)
+- [Brave](https://www.ghacks.net/2023/07/31/brave-browser-wont-support-googles-web-environment-integrity-api/)

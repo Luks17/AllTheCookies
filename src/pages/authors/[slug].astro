@@ -49,7 +49,7 @@ const { Content } = await author.render();
         maxIndex={(authorPosts.length >= SITE.postsPerPage) ? SITE.postsPerPage : authorPosts.length}
         client:visible />
     : <ul class="flex max-md:flex-col gap-4">
-      {authorPosts.map(post => <li class="max-w-sm mx-auto"><Card post={post} /></li>)}
+      {authorPosts.map(post => <li class="max-w-sm mx-auto"><Card post={post} client:visible /></li>)}
       </ul>}
   </section>
 </PageLayout>
