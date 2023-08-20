@@ -39,6 +39,17 @@ export default defineMarkdocConfig({
         url: { type: String },
       },
     },
+    codepen: {
+      render: getTag("Codepen.astro"),
+      attributes: {
+        url: { type: String },
+        penName: { type: String },
+        defaultTab: {
+          type: String,
+          matches: ["html", "css", "js"],
+        },
+      },
+    },
     // buzzword: {
     //   render: getTag("Buzzword.astro"),
     //   attributes: {

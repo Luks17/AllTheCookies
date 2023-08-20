@@ -6,17 +6,114 @@ thumbnail: {
   img: "@/assets/posts/botao-voltar-ao-topo-sem-js/thumb.jpg",
   alt: Ilustração do botão
 }
-publishDate: 2023-08-13T22:39:00Z
+publishDate: 2023-08-20T13:33:00Z
 category: tutorials
 tags: ["html/css", "web", "otimização"]
-draft: true
+draft: false
 minutesRead: 7
 edited: false
 ---
 
 {% summary / %}
 
-## Introdução
+## Introdução	
 
-H
+Quando pesquisamos para implementar coisas simples para páginas web, muitas vezes nos deparamos com soluções simples porém nada eficientes pelo uso excessivo de JavaScript. 
+
+Uma feature simples que muitos sites, especialmente blogs, costumam ter é um botão para voltar ao topo da página. Algo desejável desse tipo de botão é que ele esteja presente quase sempre na página, estando fixo no mesmo lugar. No entanto, é melhor ainda quando esse botão é dinâmico, ou seja, aparece apenas após o usuário dar um pouco de scroll, pois ele é inútil no topo da página.
+ 
+Tudo isso que citei é possível de implementar apenas com HTML e CSS básico, sem nenhum JavaScript. Neste tutorial ensinarei como!
+
+## O botão
+
+Primeiramente, não há como fugir, criaremos um botão utilizando HTML básico e encheremos a nossa página com um Lorem Ipsum para comprovar a dinamicidade do botão mais adiante:
+
+```html
+<h1>Titulo muito bom</h1>
+<br>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in turpis egestas, tristique nunc id, tempus orci. Aenean volutpat risus nunc, in tincidunt risus convallis lacinia. Fusce et velit ac nisi pharetra pellentesque ut et velit. Nulla consequat euismod risus, a fermentum odio aliquam quis. Nunc vestibulum, metus ut aliquet porta, purus sem maximus metus, in vehicula libero tortor in odio. Phasellus gravida mattis malesuada. Donec varius mollis lectus sed venenatis. Nulla placerat massa velit, ut aliquam ligula laoreet id. Aliquam convallis pretium sem sit amet blandit. Nunc fermentum, tellus in vestibulum pretium, tortor risus euismod urna, ut placerat nulla libero et dui. Donec ac nulla id lectus rutrum interdum eget sed lectus. Phasellus id turpis augue. In hac habitasse platea dictumst.
+<br><br><br>
+Sed eu tellus sem. Proin tincidunt lorem eu ipsum sodales fermentum. Nam sed nibh ornare urna porta luctus sit amet a elit. Duis ut bibendum erat. Ut pulvinar elit diam, nec rhoncus ex consequat vel. Donec malesuada placerat erat, nec vulputate dolor efficitur eu. Nullam nisl libero, dapibus at convallis sit amet, mollis a lacus. Etiam ornare dapibus tellus eget fermentum. Donec mollis vitae turpis vel vehicula. Ut non nunc ut eros venenatis sagittis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi arcu eros, sagittis quis felis quis, scelerisque ultricies quam.
+<br><br><br>
+Nunc in tincidunt massa. Nulla facilisi. Etiam vel tortor vitae ex dictum accumsan in at libero. Nullam ipsum diam, maximus vitae posuere vel, sagittis sed odio. Duis vestibulum libero at pellentesque consequat. Donec nec rhoncus ex. Vivamus vehicula libero quam, non facilisis orci scelerisque id. Vestibulum id turpis sed felis posuere maximus ultricies eget ante. Nulla molestie id leo sodales facilisis. Curabitur suscipit, nunc eget ultrices luctus, est leo commodo lacus, sed iaculis sem erat quis diam. Proin ut dolor vehicula, elementum sem at, gravida metus. Cras auctor sem mauris, a porttitor sem pharetra a.
+<br><br><br>
+Duis pellentesque quam at dui elementum elementum. Praesent finibus leo nulla, id interdum mi sollicitudin id. Donec quis posuere ligula. Aenean quis leo eleifend elit iaculis ultricies quis sit amet leo. Maecenas interdum vulputate elit, at tristique nisl suscipit vitae. Fusce purus justo, porta eu accumsan nec, rhoncus eu turpis. Sed hendrerit volutpat elit at efficitur. Mauris pellentesque efficitur justo, in lacinia leo porttitor vel. Praesent condimentum, turpis maximus volutpat efficitur, augue dolor tincidunt augue, eu luctus lacus purus tristique enim. Donec mollis ipsum a leo iaculis, vel accumsan lacus ultricies. Integer vel molestie lorem. Nullam tempor eu eros id feugiat.
+<br><br><br>
+Fusce laoreet magna urna, eu placerat est ultrices sed. Sed id placerat dui. Maecenas porttitor risus magna, in pulvinar purus placerat in. Mauris tempor sed velit rhoncus elementum. Integer lorem massa, tempus ac quam a, mattis interdum sapien. Nullam iaculis pulvinar dignissim. Sed eu condimentum sem, ac sagittis erat.
+<br><br><br>
+Vestibulum vitae purus a urna condimentum euismod. Mauris in augue at leo dignissim facilisis nec non augue. Praesent accumsan ipsum placerat, tempus diam id, viverra orci. In malesuada porttitor faucibus. Donec auctor dapibus mollis. Praesent vel magna nec magna tincidunt consequat ac eu ligula. Vivamus ultricies turpis at felis blandit tincidunt.
+<br><br><br>
+Nullam volutpat, libero ut dignissim consectetur, augue elit malesuada tellus, quis finibus ipsum diam vitae justo. Nunc vehicula ut ante nec ornare. Sed viverra nec ligula ac eleifend. Donec id turpis vel libero fringilla rhoncus ut eget ante. Nunc nisl augue, pretium nec porta eu, venenatis vitae velit. Aenean maximus laoreet dapibus. Etiam maximus odio ut nulla venenatis, in porttitor lorem interdum. Mauris tristique, nibh ullamcorper semper tempus, est tortor luctus velit, dapibus accumsan quam tortor ac tellus.
+</p>
+<aside class="go-top-btn-container">
+  <a href="#top">🔝</a>
+</aside>
+```
+
+Como pode-se ver, o botão é contido por um aside com a classe “go-top-btn-container”, o utilizaremos para manipular o botão e também facilitar nossa vida. O botão em si é uma âncora com href para “#top”, esse valor de id é algo padronizado na maioria dos navegadores web modernos para referir-se ao topo da página.
+
+Para um scroll suave até o topo, podemos utilizar o atributo “scroll-behavior” do CSS para o html da nossa página:
+
+```css
+html {
+  scroll-behavior: smooth;
+}
+```
+
+Apenas com isso, já deixamos de usar JS para ir ao topo da página e suavizar o scroll até lá!
+
+## Dinamicidade
+
+Por enquanto, nosso botão ainda está estático no fim da página. Pode parecer tentador implementar nosso botão com o atributo “position: fixed” do CSS para ele começar a aparecer sempre na tela em um lugar fixo. 
+
+No entanto, com esse atributo ficaria difícil de implementar a parte dinâmica do botão, pois usaremos pseudo elementos. Por isso, usaremos “position: sticky” e alguns truques para chegar lá. 
+
+{% aside type="tip" title="Diferença entre sticky e fixed" %}
+A diferença entre o sticky e o fixed é que o sticky leva em consideração seu elemento pai.
+{% /aside %}
+
+Se lembram do nosso aside? O utilizaremos agora como um elemento absoluto, que tem como altura a página inteira começando do topo. Isso nos é bastante útil, pois nosso botão utilizará esse espaço do aside para aparecer e ficar fixo com o “position: sticky”. 
+
+```css
+body {
+  position: relative;
+}
+
+.go-top-btn-container {
+  position: absolute;
+  top: 0px;
+  /* este right é apenas para o botão não ficar  	
+     grudado na direita */
+  right: 1rem;
+  height: 100%;
+}
+```
+
+Como queremos que o botão apareça apenas após um pouco de scroll do usuário, vamos usar um pseudo elemento para nosso aside que tenha altura de 100vh (1 tela de visualização do usuário). 
+
+Esse pseudo elemento não vai ter nenhum conteúdo, apenas será usado para ocupar espaço quando o usuário está no topo da página para não mostrar o botão. 
+Por fim, nosso botão será sticky e estará a 85vh do topo (85% da tela do usuário indo para baixo).
+
+```css
+.go-top-btn-container:before {
+  content: "";
+  display: block;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.go-top-btn-container a {
+  position: sticky;
+  top: 85vh;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+```
+
+Com isso, conseguimos fazer um botão sem precisar verificar a posição do usuário na tela sempre que ele der scroll com JavaScript!
+
+O código final pode ser visto e executado abaixo:
+
+{% codepen url="https://codepen.io/Luksb10/pen/xxmxzPx" penName="Go back to top example" defaultTab="css" / %}
 
