@@ -53,4 +53,6 @@ export const SITE = {
     "atualidades",
     "ciência",
   ],
+
+  authorTags: ["programador", "autor"],
 };

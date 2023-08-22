@@ -4,7 +4,7 @@ import Carousel from '@/components/segments/Carousel';
 import { SITE } from '@/config.mjs';
 import PageLayout from '@/layouts/PageLayout.astro';
 import { getSlug } from '@/util/common';
-import { getSortedPosts } from '@/util/posts-utils';
+import { getPostsByAuthor } from '@/util/posts-utils';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 export interface Props {
@@ -26,10 +26,7 @@ export async function getStaticPaths() {
 
 const { author } = Astro.props;
 
-const authorSlug = getSlug(author.data.name);
-
-const allPosts = (await getSortedPosts()).map(post => post.data);
-const authorPosts = allPosts.filter(post => post.authors.includes(authorSlug));
+const authorPosts = (await getPostsByAuthor(author)).map(post => post.data);
 
 const { Content } = await author.render();
 ---

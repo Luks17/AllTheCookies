@@ -31,8 +31,7 @@ const CategoryIcons: { [key: string]: JSX.Element } = {
       />
     </svg>
   ),
-  // TODO: change this and the json to just authors when there is more contributors
-  "authors/luks": (
+  authors: (
     <svg
       className="w-6 h-6"
       xmlns="http://www.w3.org/2000/svg"

@@ -1,5 +1,6 @@
 import { SITE } from "@/config.mjs";
 import { AuthorPossibleSocials } from "@/types/Authors";
+import { validateAuthorTags } from "@/util/authors";
 import { validateCategory, validateTags } from "@/util/post-validation";
 import { z, ImageFunction } from "astro:content";
 
@@ -40,4 +41,7 @@ export const authorSchema = ({ image }: { image: ImageFunction }) =>
         })
         .optional()
     ),
+    tags: z.array(z.string()).refine((tags) => validateAuthorTags(tags), {
+      message: "Author tags do not exist",
+    }),
   });
