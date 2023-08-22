@@ -1,0 +1,27 @@
+---
+import { Quotes } from "@/resources/static/Icons";
+
+export interface Props {
+  title: string;
+  author: string;
+  url?: string;
+}
+
+// TODO: figure out what to do with the url
+const { title, author, url } = Astro.props;
+---
+
+<blockquote
+  class="relative mt-7 bg-fg-base text-skin-base rounded-md px-3 py-6 flex flex-col border-primary border-t-2 shadow-black shadow-sm"
+>
+  <aside
+    class="bg-crust text-skin-selected rounded-full p-2 absolute w-fit left-[46.66%] -top-5"
+  >
+    <Quotes />
+  </aside>
+  <h6 class="font-bold">{title}</h6>
+  <span class="text-skin-subtext">{author}</span>
+  <p class="mt-3">
+    <slot />
+  </p>
+</blockquote>

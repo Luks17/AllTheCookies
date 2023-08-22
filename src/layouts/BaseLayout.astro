@@ -1,4 +1,6 @@
 ---
+import "@/styles/base.css";
+
 import Meta from "@/components/base/Meta.astro";
 import type { MetaTags as Props } from "@/types/Meta";
 
@@ -14,5 +16,15 @@ const meta = Astro.props;
   <!-- lining-nums fixes raleway font oddly placed numbers -->
   <body class="bg-primary h-full w-full font-primary lining-nums">
     <slot />
+    <script>
+      import { setPreferredTheme } from "@/resources/stores/theme-store";
+      import { openSearch } from "@/resources/stores/nav-store";
+
+      const query = new URLSearchParams(window.location.search).get("q");
+
+      if (query !== null) openSearch();
+
+      setPreferredTheme();
+    </script>
   </body>
 </html>

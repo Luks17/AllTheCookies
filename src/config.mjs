@@ -50,5 +50,9 @@ export const SITE = {
     "sql",
     "nosql",
     "futurologia",
+    "atualidades",
+    "ciência",
   ],
+
+  authorTags: ["programador", "autor"],
 };

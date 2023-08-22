@@ -2,6 +2,7 @@ import { SITE } from "@/config.mjs";
 import type { OptimizedImg, PostFrontmatter } from "@/types/Posts";
 import { getImage } from "astro:assets";
 import { CollectionEntry, getCollection } from "astro:content";
+import { getSlug } from "./common";
 
 // variable to store loaded posts so they don't get reloaded all the time
 let loaded_posts: CollectionEntry<"post">[];
@@ -97,4 +98,12 @@ export async function getNumberOfPages(category?: string): Promise<number> {
     (await getNumberOfPosts(category ? category : undefined)) /
       SITE.postsPerPage
   );
+}
+
+export async function getPostsByAuthor(author: CollectionEntry<"author">) {
+  if (!loaded_posts) await load_posts();
+
+  const authorSlug = getSlug(author.data.name);
+
+  return loaded_posts.filter((post) => post.data.authors.includes(authorSlug));
 }

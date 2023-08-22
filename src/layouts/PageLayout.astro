@@ -1,6 +1,4 @@
 ---
-import "@/styles/base.css";
-
 import { getImage } from "astro:assets";
 
 import type { MetaTags as Props } from "@/types/Meta";
@@ -43,15 +41,4 @@ const postsToSearch = (await getUnsortedPosts()).map((post) => post.data);
   </main>
 
   <Footer />
-
-  <script>
-    import { setPreferredTheme } from "@/resources/stores/theme-store";
-    import { openSearch } from "@/resources/stores/nav-store";
-
-    const query = new URLSearchParams(window.location.search).get("q");
-
-    if (query !== null) openSearch();
-
-    setPreferredTheme();
-  </script>
 </Layout>

@@ -1,14 +1,19 @@
 ---
-import { Github } from "@/resources/static/Icons";
+import { Github, RSS } from "@/resources/static/Icons";
 
 const currentYear = new Date().getUTCFullYear();
 ---
 
-<footer class="flex justify-between bg-mantle py-2 px-4 w-full text-skin-base text-sm items-center">
-  <ul>
+<footer
+  class="flex justify-between bg-mantle py-2 px-4 w-full text-skin-base text-sm items-center"
+>
+  <ul class="flex gap-x-4">
+    <li class="hoverable-btn">
+      <a href="/rss.xml"><RSS /></a>
+    </li>
     <li class="hoverable-btn">
       <a href="https://github.com/Luks17/AllTheCookies"><Github /></a>
     </li>
   </ul>
-  <p>© {currentYear} Lucas Dávalos</p> 
+  <p>© {currentYear} Lucas Dávalos</p>
 </footer>
