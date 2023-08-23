@@ -14,6 +14,7 @@
     "@astrojs/react": "^2.2.1",
     "@astrojs/rss": "^2.4.3",
     "@astrojs/tailwind": "^4.0.0",
+    "@fontsource-variable/raleway": "^5.0.9",
     "@nanostores/react": "^0.7.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
