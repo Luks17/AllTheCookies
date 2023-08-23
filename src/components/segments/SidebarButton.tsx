@@ -4,7 +4,11 @@ import { openSidebar } from "@/resources/stores/nav-store";
 
 function SidebarButton() {
   return (
-    <button className="flex items-center" onClick={() => openSidebar()}>
+    <button
+      aria-label="Abre barra de navegação"
+      className="flex items-center"
+      onClick={() => openSidebar()}
+    >
       <Lines />
     </button>
   );

@@ -1,5 +1,4 @@
-:root,
-html[page-theme="dark"] .aside-tag {
+.aside-tag {
   --danger: 354, 45%;
   --caution: 23, 51%;
   --tip: 102, 38%;
@@ -7,19 +6,6 @@ html[page-theme="dark"] .aside-tag {
 
   --aside-lightness: 47%;
   --aside-border-lightness: 30%;
-}
-
-html[page-theme="light"] .aside-tag {
-  --danger: 354, 45%;
-  --caution: 34, 73%;
-  --tip: 102, 38%;
-  --note: 285, 29%;
-
-  --aside-lightness: 67%;
-  --aside-border-lightness: 50%;
-}
-
-.aside-tag {
   --aside-color: var(--danger);
   --aside-border-color: hsl(var(--aside-color), var(--aside-border-lightness));
 

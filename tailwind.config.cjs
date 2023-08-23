@@ -23,6 +23,8 @@ module.exports = {
         accent: "var(--lavender)",
         "accent-secondary": "var(--mauve)",
         alternate: "var(--maroon)",
+
+        bright: "#eceff4",
       },
     },
 
@@ -48,6 +50,11 @@ module.exports = {
       primary: ["Raleway", "Roboto", "Ubuntu", "sans-serif"],
       article: ["EB+Garamond", "Raleway", "sans-serif"],
       "article-title": ["Roboto", "sans-serif"],
+    },
+
+    boxShadowColor: {
+      black: "#000",
+      "light-constrast": "var(--shadow)",
     },
 
     extend: {

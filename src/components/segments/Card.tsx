@@ -50,14 +50,15 @@ function Card({ post, showCategory = true, special = false }: Props) {
     <div
       onMouseOver={() => toggleDescription(true)}
       onMouseLeave={() => toggleDescription(false)}
-      className={`border-2 p-2 bg-crust rounded-md text-xl ${special ? "border-secondary bg-mantle" : "border-third"
-        }`}
+      className={`border-2 p-2 bg-crust rounded-md text-xl ${
+        special ? "border-secondary" : "border-third"
+      }`}
     >
       {special && (
         <div className="flex justify-center">
-          <h4 className="text-skin-accent-secondary text-lg font-bold pt-1">
+          <h3 className="text-skin-accent-secondary text-lg font-bold pt-1">
             Mais recente
-          </h4>
+          </h3>
         </div>
       )}
 
@@ -114,11 +115,7 @@ function Card({ post, showCategory = true, special = false }: Props) {
       <div className="flex py-2 px-3 gap-1.5">
         {post.tags.map((tag, id) => {
           return (
-            <p
-              key={id}
-              className={`text-skin-muted bg-mantle text-sm px-2 ${special && "bg-primary"
-                }`}
-            >
+            <p key={id} className="text-skin-muted bg-mantle text-sm px-2">
               {tag}
             </p>
           );

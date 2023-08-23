@@ -35,6 +35,8 @@
     --mantle: #292c3c;
     --crust: #232634;
 
+    --shadow: #000;
+
     --bg-opacity: 0.02;
     --fg-opacity: 0.1;
   }
@@ -43,10 +45,10 @@
     --rosewater: #dc8a78;
     --flamingo: #dd7878;
     --pink: #ea76cb;
-    --mauve: #8caaee;
+    --mauve: #5e81ac;
     --red: #d20f39;
-    --maroon: #e78284;
-    --peach: #dc8a78;
+    --maroon: #e64553;
+    --peach: #d08770;
     --yellow: #df8e1d;
     --green: #40a02b;
     --teal: #179299;
@@ -54,20 +56,22 @@
     --sapphire: #209fb5;
     --blue: #1e66f5;
     --lavender: #838ba7;
-    --text: #4c4f69;
+    --text: #2e3440;
     --subtext1: #5c5f77;
-    --subtext0: #6c6f85;
+    --subtext0: #3b4252;
     --overlay2: #7c7f93;
-    --overlay1: #8c8fa1;
+    --overlay1: #434c5e;
     --overlay0: #9ca0b0;
     --surface2: #acb0be;
     --surface1: #bcc0cc;
     --surface0: #ccd0da;
-    --crust: #dce0e8;
+    --crust: #d8dee9;
     --mantle: #e6e9ef;
     --base: #eff1f5;
 
-    --bg-opacity: 0.07;
+    --shadow: #9ca3af;
+
+    --bg-opacity: 0.08;
     --fg-opacity: 0.3;
   }
 }
