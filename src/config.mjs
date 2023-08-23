@@ -52,6 +52,7 @@ export const SITE = {
     "futurologia",
     "atualidades",
     "ciência",
+    "legislação",
   ],
 
   authorTags: ["programador", "autor"],
