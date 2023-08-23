@@ -43,7 +43,7 @@
     --rosewater: #dc8a78;
     --flamingo: #dd7878;
     --pink: #ea76cb;
-    --mauve: #5e81ac;
+    --mauve: #557a95;
     --red: #d20f39;
     --maroon: #e64553;
     --peach: #d08770;
@@ -53,7 +53,7 @@
     --sky: #04a5e5;
     --sapphire: #209fb5;
     --blue: #1e66f5;
-    --lavender: #838ba7;
+    --lavender: #64485c;
     --text: #2e3440;
     --subtext1: #5c5f77;
     --subtext0: #3b4252;
@@ -65,7 +65,7 @@
     --surface0: #ccd0da;
     --crust: #d8dee9;
     --mantle: #e6e9ef;
-    --base: #eff1f5;
+    --base: #fff;
 
     --shadow: #9ca3af;
 
@@ -96,7 +96,7 @@
   }
 
   .hoverable-btn {
-    @apply opacity-90 hover:opacity-100 hover:text-skin-selected transition-colors ease-linear;
+    @apply opacity-90 hover:opacity-100 hover:text-skin-selected transition-opacity ease-linear;
   }
 
   .background-opacity {

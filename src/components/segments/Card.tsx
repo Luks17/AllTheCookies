@@ -51,8 +51,9 @@ function Card({ post, showCategory = true, special = false }: Props) {
     <div
       onMouseOver={() => toggleDescription(true)}
       onMouseLeave={() => toggleDescription(false)}
-      className={`border-2 p-2 bg-crust rounded-md text-xl ${special ? "border-secondary" : "border-third"
-        }`}
+      className={`border-2 p-2 bg-crust rounded-md text-xl ${
+        special ? "border-secondary" : "border-third"
+      }`}
     >
       {special && (
         <div className="flex justify-center">
@@ -83,7 +84,7 @@ function Card({ post, showCategory = true, special = false }: Props) {
         {showCategory && (
           <a
             href={"/posts/" + post.category}
-            className="hover:font-bold bg-primary text-center font-semibold text-skin-alternate w-fit px-2 py-1 uppercase"
+            className="hover:font-bold bg-primary text-center font-semibold text-skin-alternate w-fit px-3.5 py-2 uppercase border-l-2 border-primary"
           >
             {post.category}
           </a>
@@ -97,7 +98,7 @@ function Card({ post, showCategory = true, special = false }: Props) {
 
       <div className="px-2 py-1">
         {/* title */}
-        <h3 className="text-skin-base hover:text-skin-accent ease-in-out transition-colors font-bold px-1 pb-2">
+        <h3 className="text-skin-base hover:text-skin-accent font-bold px-1 pb-2">
           <a href={postSlug}>{post.title}</a>
         </h3>
 
@@ -115,7 +116,10 @@ function Card({ post, showCategory = true, special = false }: Props) {
       <div className="flex py-2 px-3 gap-1.5">
         {post.tags.map((tag, id) => {
           return (
-            <p key={id} className="text-skin-muted bg-mantle text-sm px-2">
+            <p
+              key={id}
+              className="text-skin-muted bg-primary text-sm px-2 py-1"
+            >
               {tag}
             </p>
           );

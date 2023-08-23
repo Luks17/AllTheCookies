@@ -12,7 +12,7 @@
 }
 
 .content-body article a {
-  @apply text-skin-alternate font-semibold hover:underline hover:text-skin-selected transition-colors;
+  @apply text-skin-alternate font-semibold hover:underline hover:text-skin-selected;
 }
 
 .content-body article > ul {

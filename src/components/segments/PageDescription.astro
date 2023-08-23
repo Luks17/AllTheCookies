@@ -25,23 +25,25 @@ if (numberOfPages > 1) {
 ---
 
 <div
-  class="flex-col relative bg-gradient-to-t from-crust via-mantle to-primary border-secondary border-b-2 px-4 pb-4 pt-20 max-w-4xl mx-auto text-md lg:text-lg rounded-lg"
+  class="relative bg-gradient-to-t from-crust via-mantle to-primary border-secondary border-b-2 px-4 pb-4 pt-14 max-w-4xl mx-auto text-md lg:text-lg rounded-lg"
 >
-  <h6 class="text-skin-accent-secondary font-semibold">
-    <span class="capitalize">{"Home > " + pathToPage.join(" > ")}</span>
-    {numberOfPages > 1 && pageNumber}
-  </h6>
   <h1 class="text-skin-base capitalize font-bold text-3xl lg:text-4xl py-2">
     {pageName}
   </h1>
-  <p class="text-skin-subtext font-semibold">
+
+  <label class="text-skin-subtext font-semibold">
     {description}
-  </p>
+  </label>
+
+  <h2 class="text-skin-accent-secondary font-semibold mt-3">
+    <span class="capitalize">{"Home > " + pathToPage.join(" > ")}</span>
+    {numberOfPages > 1 && pageNumber}
+  </h2>
 
   <Image
     src={cookiesAndCoffee}
     alt="Cookies and Coffee"
-    width={200}
-    class="absolute top-0 right-0 foreground-opacity"
+    width={300}
+    class="absolute top-1.5 right-0 foreground-opacity w-48"
   />
 </div>

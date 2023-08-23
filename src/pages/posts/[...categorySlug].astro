@@ -81,14 +81,14 @@ const btnClass =
   <ul class="text-skin-base mt-5 max-w-xl mx-auto flex flex-col">
     {
       showedPosts.map((post, i) => (
-        <div class="my-2.5 lg:mx-2.5 place-self-center">
+        <li class="my-2.5 lg:mx-2.5 place-self-center">
           <Card
             post={post}
             showCategory={categorySlug === "all"}
             special={i === startPost}
             client:visible
           />
-        </div>
+        </li>
       ))
     }
   </ul>
