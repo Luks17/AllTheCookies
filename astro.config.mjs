@@ -18,7 +18,7 @@ export default defineConfig({
       },
     },
   },
-  experimental: { assets: true, redirects: true },
+  experimental: { assets: true },
   integrations: [react(), tailwind(), markdoc()],
   image: {
     service: sharpImageService(),
