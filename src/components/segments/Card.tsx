@@ -15,6 +15,7 @@ function Card({ post, showCategory = true, special = false }: Props) {
   const descriptionContainer = useRef<HTMLParagraphElement | null>(null);
   const thumbContainer = useRef<HTMLImageElement | null>(null);
   const isScreenSmall = useMediaQuery("(max-width: 640px)");
+  const isScreenMd = useMediaQuery("(min-width: 768px)");
 
   const postSlug = "/posts/" + getSlug(post.title);
 
@@ -50,9 +51,8 @@ function Card({ post, showCategory = true, special = false }: Props) {
     <div
       onMouseOver={() => toggleDescription(true)}
       onMouseLeave={() => toggleDescription(false)}
-      className={`border-2 p-2 bg-crust rounded-md text-xl ${
-        special ? "border-secondary" : "border-third"
-      }`}
+      className={`border-2 p-2 bg-crust rounded-md text-xl ${special ? "border-secondary" : "border-third"
+        }`}
     >
       {special && (
         <div className="flex justify-center">
@@ -68,8 +68,8 @@ function Card({ post, showCategory = true, special = false }: Props) {
           <img
             src={post.thumbnail.img.src}
             alt={post.thumbnail.alt}
-            width={1280}
-            height={720}
+            width={isScreenMd ? 1280 : 800}
+            height={isScreenMd ? 720 : 450}
             className="transition-transform ease-in-out duration-500"
             loading="lazy"
             decoding="async"

@@ -63,14 +63,7 @@ const authors = await extractAuthorsFromPost(post);
         class="absolute p-2 rounded-b-lg capitalize bg-crust">{category}</a
       >
     </div>
-    <img
-      src={thumb.img.src}
-      alt={thumb.alt}
-      width={1280}
-      height={720}
-      loading="lazy"
-      decoding="async"
-    />
+    <Image src={thumb.img} alt={thumb.alt} />
   </div>
 
   <!-- authors -->

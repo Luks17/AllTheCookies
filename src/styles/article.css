@@ -4,11 +4,11 @@
 .content-body article > h4,
 .content-body article > h5,
 .content-body article > h6 {
-  @apply text-xl md:text-2xl font-bold text-skin-accent w-full text-center font-article-title;
+  @apply text-xl md:text-2xl font-bold text-skin-accent w-full text-center;
 }
 
 .content-body article > p {
-  @apply text-lg text-skin-base my-5 font-article;
+  @apply text-lg text-skin-base my-5;
 }
 
 .content-body article a {

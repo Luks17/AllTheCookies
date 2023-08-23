@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
@@ -47,9 +48,7 @@ module.exports = {
     },
 
     fontFamily: {
-      primary: ["Raleway", "Roboto", "Ubuntu", "sans-serif"],
-      article: ["EB+Garamond", "Raleway", "sans-serif"],
-      "article-title": ["Roboto", "sans-serif"],
+      primary: ["Raleway Variable", "sans-serif"],
     },
 
     boxShadowColor: {
