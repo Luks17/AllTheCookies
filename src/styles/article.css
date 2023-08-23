@@ -19,6 +19,10 @@
   @apply text-lg font-semibold text-skin-subtext list-disc py-2;
 }
 
+.content-body article > p > img {
+  @apply w-fit mx-auto rounded-md border-4 border-third;
+}
+
 .content-body article > pre {
   @apply text-skin-subtext overflow-x-scroll bg-fg-base p-2.5 pl-5 border-l-2 border-secondary relative;
   /* TODO: rework code block mdoc node so each line is actually a different line in the final html
