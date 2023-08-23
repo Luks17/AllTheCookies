@@ -4,4 +4,6 @@ export interface MetaTags {
   author?: string;
   socialImage?: string;
   canonicalURL?: string;
+
+  largestContentfulPaint?: string;
 }

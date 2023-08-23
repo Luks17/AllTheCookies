@@ -9,6 +9,8 @@ const {
   description = SITE.description,
   author = SITE.author,
   socialImage = SITE.socialImage,
+
+  largestContentfulPaint,
 } = Astro.props;
 ---
 
@@ -30,6 +32,19 @@ const {
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#9d5346" />
 <meta name="msapplication-TileColor" content="#da532c" />
 <meta name="theme-color" content="#ffffff" />
+
+<!-- LCP preloading -->
+{
+  largestContentfulPaint !== undefined && (
+    <link
+      rel="preload"
+      fetchpriority="high"
+      as="image"
+      href={largestContentfulPaint}
+      type="image/webp"
+    />
+  )
+}
 
 <!-- Open Graph -->
 <meta property="og:title" content={title} />
