@@ -17,8 +17,8 @@ const meta = Astro.props;
 // reduces size and converts to webp
 const optimizedBg = await getImage({
   src: background,
-  width: 1041,
-  height: 663,
+  width: 892,
+  height: 568,
 });
 
 const postsToSearch = (await getUnsortedPosts()).map((post) => post.data);
