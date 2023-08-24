@@ -14,7 +14,10 @@ export const postSchema = ({ image }: { image: ImageFunction }) =>
       message: "Description cannot be longer than 200 characters",
     }),
     thumbnail: z.object({
-      img: image(),
+      img: image().refine((img) => img.width === 1280 && img.height === 720, {
+        message:
+          "Thumbnail must be 1280x720 (same dimensions as a youtube thumb)",
+      }),
       alt: z.string(),
     }),
     publishDate: z.date(),

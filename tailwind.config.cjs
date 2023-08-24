@@ -28,6 +28,7 @@ module.exports = {
         alternate: "var(--maroon)",
 
         bright: "#fff",
+        dark: "#272829",
       },
     },
 
