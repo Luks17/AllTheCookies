@@ -2,7 +2,7 @@
 export interface Props {
   url: string;
   penName: string;
-  defaultTab: "html" | "css" | "js";
+  defaultTab?: "html" | "css" | "js";
 }
 
 const { url, penName, defaultTab = "html" } = Astro.props;

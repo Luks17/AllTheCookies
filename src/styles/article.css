@@ -24,7 +24,7 @@
 }
 
 .content-body article > pre {
-  @apply text-skin-subtext overflow-x-scroll bg-fg-base p-2.5 pl-5 border-l-2 border-secondary relative;
+  @apply text-skin-subtext overflow-x-scroll bg-fg-base p-2.5 pl-5 mb-5 border-l-2 border-secondary relative;
   /* TODO: rework code block mdoc node so each line is actually a different line in the final html
            with that, this counter css will work */
   /* counter-reset: line; */
