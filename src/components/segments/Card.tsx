@@ -84,12 +84,11 @@ function Card({ post, showCategory = true, special = false }: Props) {
         {showCategory && (
           <a
             href={"/posts/" + post.category}
-            className="hover:font-bold bg-primary text-center font-semibold text-skin-alternate w-fit px-3.5 py-2 uppercase border-l-2 border-primary"
+            className="bg-alternate px-2 py-1 text-sm rounded-lg font-bold text-skin-bright hover:scale-110 transition-transform shadow-black shadow-sm"
           >
             {post.category}
           </a>
         )}
-
         {/* date */}
         <span className="text-skin-muted">
           <time>{getFormatedDate(post.publishDate)}</time>
@@ -113,15 +112,17 @@ function Card({ post, showCategory = true, special = false }: Props) {
       </div>
 
       {/* tags */}
-      <div className="flex py-2 px-3 gap-1.5">
+      <div className="flex py-2 px-2 gap-1.5">
         {post.tags.map((tag, id) => {
           return (
-            <p
+            <a
               key={id}
-              className="text-skin-muted bg-primary text-sm px-2 py-1"
+              href="#"
+              aria-label={`Link para a tag ${tag}`}
+              className="text-skin-accent font-semibold text-sm px-2 py-1 before:pr-0.5 before:content-['#']"
             >
               {tag}
-            </p>
+            </a>
           );
         })}
       </div>

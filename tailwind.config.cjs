@@ -12,6 +12,8 @@ module.exports = {
       "fg-secondary": "var(--surface1)",
       "fg-third": "var(--surface2)",
 
+      alternate: "var(--overlay1)",
+
       "glow-primary": "var(--sky)",
     },
 
@@ -25,7 +27,7 @@ module.exports = {
         "accent-secondary": "var(--mauve)",
         alternate: "var(--maroon)",
 
-        bright: "#eceff4",
+        bright: "#fff",
       },
     },
 
