@@ -12,6 +12,8 @@ const {
 
   largestContentfulPaint,
 } = Astro.props;
+
+const imgURL = new URL(socialImage, Astro.url.origin).href;
 ---
 
 <!-- Basic Meta Tags -->
@@ -50,11 +52,11 @@ const {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalURL} />
-<meta property="og:image" content={socialImage} />
+<meta property="og:image" content={imgURL} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={socialImage} />
+<meta property="twitter:image" content={imgURL} />
