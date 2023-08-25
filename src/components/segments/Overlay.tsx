@@ -20,11 +20,9 @@ function Overlay({
 }: Props) {
   return (
     <aside
-      className={`fixed flex z-20 ${
-        lgHidden ? "lg:hidden " : " "
-      }top-0 overlay right-0 h-full w-full justify-center items-center overlay-opacity transition-all duration-100 ease-linear ${
-        condition ? "scale-100 visible" : "scale-0 invisible"
-      }`}
+      className={`fixed flex z-20 ${lgHidden ? "lg:hidden " : " "
+        }top-0 overlay right-0 h-full w-full justify-center items-center overlay-opacity transition-all duration-100 ease-linear ${condition ? "scale-100 visible" : "scale-0 invisible"
+        }`}
     >
       {/* this div's only purpose is to close the overlay when the user clicks outside content  */}
       <div
@@ -34,9 +32,8 @@ function Overlay({
 
       {/* this div is the actual content */}
       <div
-        className={`bg-mantle scroll-smooth overflow-y-auto rounded-md relative shadow-black h-[95%] w-[90%] border-primary border-2 ${
-          maxW_sm ? "max-w-sm" : "max-w-md"
-        }`}
+        className={`bg-mantle scroll-smooth overflow-y-auto rounded-md relative h-[95%] w-[90%] border-primary border-2 ${maxW_sm ? "max-w-sm" : "max-w-md"
+          }`}
       >
         <button onClick={() => closeFunction()}>
           <svg

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
@@ -10,6 +11,8 @@ module.exports = {
       "fg-base": "var(--surface0)",
       "fg-secondary": "var(--surface1)",
       "fg-third": "var(--surface2)",
+
+      alternate: "var(--overlay1)",
 
       "glow-primary": "var(--sky)",
     },
@@ -23,6 +26,9 @@ module.exports = {
         accent: "var(--lavender)",
         "accent-secondary": "var(--mauve)",
         alternate: "var(--maroon)",
+
+        bright: "#fff",
+        dark: "#272829",
       },
     },
 
@@ -45,9 +51,12 @@ module.exports = {
     },
 
     fontFamily: {
-      primary: ["Raleway", "Roboto", "Ubuntu", "sans-serif"],
-      article: ["EB+Garamond", "Raleway", "sans-serif"],
-      "article-title": ["Roboto", "sans-serif"],
+      primary: ["Raleway Variable", "sans-serif"],
+    },
+
+    boxShadowColor: {
+      black: "#000",
+      "light-constrast": "var(--shadow)",
     },
 
     extend: {

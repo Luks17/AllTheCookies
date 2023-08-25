@@ -40,6 +40,7 @@ export function SocialButton(social: AuthorSocial) {
     if (social.name !== "mail") {
       anchorContainer.current!.href = social.link;
     } else {
+      anchorContainer.current!.href = "#0";
       anchorContainer.current!.addEventListener("click", () => {
         const notification = notificationContainer.current!;
 

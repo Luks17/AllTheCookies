@@ -34,7 +34,7 @@ function Summary() {
 
   return (
     <aside
-      className="bg-mantle border-crust border-l-8 p-5 my-6 rounded-r-2xl scale-x-0 transition-transform origin-top-left duration-200"
+      className="bg-crust border-primary border-l-4 shadow-light-constrast shadow-sm p-5 my-6 rounded-r-2xl scale-x-0 transition-transform origin-top-left duration-200"
       ref={summaryContainer}
     >
       <h2 className="text-skin-base font-bold text-2xl indent-5 mb-3 underline underline-offset-4">

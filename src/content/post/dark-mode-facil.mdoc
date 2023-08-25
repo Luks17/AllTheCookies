@@ -1,0 +1,191 @@
+---
+authors: ["luks"]
+title: Modo noturno simples e efetivo
+description: Hoje mostrarei como implementar modo noturno para sua página web de uma maneira ótima, o método apresentado é o utilizado no AllTheCookies! 
+thumbnail: {
+  img: "@/assets/posts/dark-mode-facil/thumb.jpg",
+  alt: Ilustração de noite e dia
+}
+publishDate: 2023-08-24T16:40:00Z
+category: tutorials
+tags: ["html/css", "web"]
+draft: false
+minutesRead: 7
+edited: false
+---
+
+{% summary / %}
+
+## Introdução
+
+Ter um modo escuro na sua página web é essencial para deixar ela mais acessível. Existem muitos métodos para implementá-lo, neste tutorial irei ensinar como fazer isso por meio de CSS, atributos de elementos html e o mínimo possível de JavaScript!
+
+## Planejamento
+
+Antes de começar a implementação, precisamos decidir exatamente como queremos que o nosso dark mode funcione. Sabendo disso, podemos delimitar algumas features básicas que são interessantes para nossa implementação ter:
+
+Não haver a necessidade de utilizar classes diferentes para o modo claro e escuro;
+Armazenamento do modo que o usuário usou na última seção;
+Se o usuário está visitando a página pela primeira vez, utilizar preferências do Browser se possível;
+Um botão, obviamente.
+
+Excelente, vamos lá!
+
+## Implementação do HTML, Cores e Lógica da Troca de Tema
+
+Comecemos com um html básico, com um botão para fazer a troca de tema e um card para armazenar conteúdo separado do resto do corpo da página:
+
+```html
+<button class="theme-toggle">☀️</button>
+<div class="card">
+  <h1 class="title-text">Coisas importantes</h1>
+  <ul class="base-text">
+	<li>Coisa importante 1</li>
+	<li>Coisa importante 2</li>
+	<li>Coisa importante 3</li>
+  </ul>
+</div>
+```
+
+Utilizar cores aleatoriamente por nosso CSS deixaria nossa interface de usuário uma bagunça. Logo, declaramos variáveis do CSS específicas para cada parte do código com `--nome` e as utilizaremos depois com `var(--nome)`. 
+
+
+Agora vem a parte principal do nosso código: definir variáveis CSS para cada tema com base no atributo “theme” do elemento `<html>`. Para acessar o atributo de um elemento HTML, utilizamos a sintaxe `html[nomeAtributo=”alguma coisa”]`.
+
+Vamos definir esse atributo com o valor “light” utilizando o seguinte código JavaScript:
+
+```javascript
+document.firstElementChild.setAttribute("theme", “light”);
+```
+
+O objeto `document` representa nossa página web e, com o método `firstElementChild`, estamos acessando o primeiro elemento dele: o `<html>`! Após isso, criamos o atributo com nosso valor desejado.
+
+Graças a isso, finalmente podemos definir nossas variáveis CSS para cada tema (estarei usando as cores de um tema chamado Catppuccin):
+
+```css
+html[theme="light"] {
+  --base: #eff1f5;
+  --foreground: #dce0e8;
+  --text: #4c4f69;
+  --text-accent: #8839ef;
+}
+html[theme="dark"] {
+  --base: #303446;
+  --foreground: #232634;
+  --text: #c6d0f5;
+  --text-accent: #ca9ee6;
+}
+```
+
+Por enquanto nossa página estará sempre no modo claro, visto que definimos o atributo `theme` para sempre usar o modo claro sem opção de mudá-lo.
+
+Com nossas cores definidas, vamos melhorar um pouco nossa página! Deixaremos nossa Card mais destacada, aplicamos as cores aos textos e colocaremos nosso botão na direita com posicionamento absoluto:
+
+```css
+body {
+  background: var(--base);
+}
+
+.theme-toggle {
+  font-size: 2rem;
+  padding: 0.5rem;
+  position: absolute;
+  right: 2%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.base-text {
+  color: var(--text);
+}
+
+.title-text {
+  font-size: 1.5rem;
+  color: var(--text-accent);
+}
+
+.card {
+  background: var(--foreground);
+  width: fit-content;
+  padding: 1.5rem;
+  border-radius: .5rem;
+}
+```
+
+Ufa, agora finalmente podemos começar a implementar o funcionamento do nosso botão!
+
+## Implementação do Funcionamento do Botão
+
+Primeiramente, vamos definir uma variável booleana não constante para guardar o estado atual do nosso tema. Além disso, vamos também usar `document.querySelector()` para termos acesso ao nosso botão pelo JavaScript:
+
+```javascript
+let darkModeEstaAtivo = false;
+
+const botao = document.querySelector(".theme-toggle");
+```
+
+Agora, implementaremos um procedimento para fazer a troca do tema sempre que necessário. Para isso, ele precisa mudar para o modo escuro se estivermos no modo claro e mudar para o modo claro se estivermos no escuro. 
+
+Faremos isso invertendo o valor atual do booleano que criamos e depois o atribuíremos ao nosso atributo “theme”. Além disso, trocaremos o ícone do sol para uma lua e vice-versa se necessário:
+
+```javascript
+// procedimento de troca de tema
+const trocaTema = () => {
+  darkModeEstaAtivo = !darkModeEstaAtivo;
+ 
+  document.firstElementChild.setAttribute("theme", darkModeEstaAtivo ? "dark" : "light");
+  botao.textContent = darkModeEstaAtivo ? "🌚" : "☀️";
+}
+```
+
+{% aside type="tip" title="Operador ternário"  %}
+O operador ternário é uma ferramenta útil para economizar linhas de código que seriam ocupadas por if e else. Sua sintaxe é a seguinte: 
+`(booleano) ? (procedimento se booleano for verdadeiro) : (procedimento caso seja falso)`.
+{% /aside %}
+
+Agora que temos o procedimento para realizar a troca do tema, podemos criar um Event Listener para executá-lo sempre que o usuário clicar no botão:
+
+```javascript
+botao.addEventListener("click", trocaTema);
+```
+
+Finalmente podemos trocar o tema quando quisermos!
+
+## Refletindo as preferências do usuário
+
+O único que falta agora é verificar as preferências do usuário e guardar o modo preferido dele para a próxima seção. Para fazer esse último, precisamos adicionar a seguinte linha de código no final do nosso procedimento trocaTema:
+
+```javascript
+localStorage.theme = darkModeEstaAtivo ? "dark" : "light";
+```
+
+Essa linha de código armazena no navegador uma variável “theme” com o valor “dark” ou “light” dependendo do tema atual. Quando o usuário acessar nossa página novamente, poderemos recuperar esse valor.
+
+Agora criaremos um procedimento chamado “verificaPreferencia”, que irá fazer a recuperação da variável “theme” do armazenamento local do navegador. 
+
+Caso o usuário estiver acessando a página pela primeira vez, ele também irá verificar se o método `window.matchMedia` é acessível e, caso seja, irá olhar as preferências do navegador do usuário para ver se ele prefere o modo escuro.
+
+```javascript
+function verificaPreferencia() {
+  const theme = localStorage.getItem("theme");
+  if(theme !== null) {
+	if(theme === "dark")
+  	trocaTema();
+    
+	return;
+  }
+ 
+  if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+	trocaTema();
+	return;
+  }
+}
+```
+
+## Código final
+
+Com isso, implementamos um modo escuro funcional e que verifica as preferências do usuário! O código final pode ser visto e executado abaixo:
+
+{% codepen url="https://codepen.io/Luksb10/pen/abPbKVo" penName="Modo escuro simples e efetivo" / %}
+

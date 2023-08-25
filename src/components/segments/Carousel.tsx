@@ -17,6 +17,7 @@ interface Props {
 interface ButtonProps {
   icon: () => JSX.Element;
   func: MouseEventHandler<HTMLButtonElement>;
+  label: string;
 }
 
 function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
@@ -59,8 +60,8 @@ function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
   return (
     <div className="relative">
       <div className="text-skin-muted text-2xl absolute top-[42%] flex justify-between w-full">
-        <Button icon={ArrowLeft} func={prev} />
-        <Button icon={ArrowRight} func={next} />
+        <Button icon={ArrowLeft} func={prev} label="Navegar post à esquerda" />
+        <Button icon={ArrowRight} func={next} label="Navegar post à direita" />
       </div>
       <div
         className="mx-auto overflow-x-clip transition-[width] ease-in-out duration-500"
@@ -86,9 +87,10 @@ function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
   );
 }
 
-function Button({ icon, func }: ButtonProps) {
+function Button({ icon, func, label }: ButtonProps) {
   return (
     <button
+      aria-label={label}
       className="bg-crust w-10 h-10 z-10 flex items-center border-2 border-third justify-center rounded-full hoverable-btn"
       onClick={func}
     >

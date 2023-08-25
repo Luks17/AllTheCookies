@@ -1,45 +1,40 @@
-:root,
-html[page-theme="dark"] .aside-tag {
-  --danger: 354, 45%;
-  --caution: 23, 51%;
-  --tip: 102, 38%;
-  --note: 285, 29%;
-
-  --aside-lightness: 47%;
-  --aside-border-lightness: 30%;
-}
-
-html[page-theme="light"] .aside-tag {
-  --danger: 354, 45%;
-  --caution: 34, 73%;
-  --tip: 102, 38%;
-  --note: 285, 29%;
-
-  --aside-lightness: 67%;
-  --aside-border-lightness: 50%;
-}
-
 .aside-tag {
-  --aside-color: var(--danger);
-  --aside-border-color: hsl(var(--aside-color), var(--aside-border-lightness));
+  --danger: #c70039;
+  --danger-dark: #800000;
 
-  background-color: hsl(var(--aside-color), var(--aside-lightness));
+  --caution: #e7b10a;
+  --caution-dark: #c58940;
+
+  --tip: #7a9d54;
+  --tip-dark: #40513b;
+
+  --note: #a084e8;
+  --note-dark: #3b185f;
+
+  --aside-color: var(--tip);
+  --aside-border-color: var(--tip-dark);
+
+  background-color: var(--aside-color);
   border-left-width: 4px;
   border-color: var(--aside-border-color);
 }
 
 .danger {
   --aside-color: var(--danger);
+  --aside-border-color: var(--danger-dark);
 }
 
 .caution {
   --aside-color: var(--caution);
+  --aside-border-color: var(--caution-dark);
 }
 
 .tip {
   --aside-color: var(--tip);
+  --aside-border-color: var(--tip-dark);
 }
 
 .note {
   --aside-color: var(--note);
+  --aside-border-color: var(--note-dark);
 }

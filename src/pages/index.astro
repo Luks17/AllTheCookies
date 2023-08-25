@@ -5,6 +5,7 @@ import { getSortedPosts } from "@/util/posts-utils";
 
 import Carousel from "@/components/segments/Carousel";
 import { Image } from "astro:assets";
+import { Checkmark } from "@/resources/static/Icons";
 
 const description =
   "AllTheCookies é um pequeno blog colaborativo de tecnologia. Tendo como conteúdo notícias, tutoriais & artigos pessoais.";
@@ -27,28 +28,28 @@ const sortedPosts = (await getSortedPosts()).map((post) => post.data);
         {description}
       </p>
     </div>
-    <div class="flex justify-center md:justify-start">
-      <div class="relative w-fit">
-        <div
-          class="absolute bg-glow-primary inset-5 blur opacity-0 hover:opacity-[0.03] rounded-full transition-opacity ease-in"
-        >
-        </div>
-        <Image
-          src={hero}
-          alt="Cookie with coffe"
-          class="max-lg:w-[20rem] max-w-[30rem]"
-        />
+    <div class="relative w-fit mx-auto group">
+      <Image
+        src={hero}
+        alt="Cookie with coffe"
+        class="max-lg:w-[20rem] max-w-[30rem]"
+      />
+
+      <div
+        class="absolute bottom-14 right-10 lg:right-16 lg:bottom-1/4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+      >
+        <Checkmark />
       </div>
     </div>
   </section>
 
   <!-- latest posts -->
   <section class="w-full pb-5">
-    <h3
+    <h2
       class="text-skin-base text-center py-1 md:py-2.5 font-bold text-xl sm:text-2xl"
     >
       Nossas <span class="text-skin-accent-secondary">últimas</span> postagens
-    </h3>
+    </h2>
     <div class="mt-4">
       <Carousel sortedPosts={sortedPosts} client:visible />
     </div>

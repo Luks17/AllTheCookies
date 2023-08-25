@@ -4,7 +4,11 @@ import { openSearch } from "@/resources/stores/nav-store";
 
 function SearchButton() {
   return (
-    <button className="flex items-center" onClick={() => openSearch()}>
+    <button
+      aria-label="Abre pesquisa de posts"
+      className="flex items-center"
+      onClick={() => openSearch()}
+    >
       <MagnifyingGlass />
     </button>
   );

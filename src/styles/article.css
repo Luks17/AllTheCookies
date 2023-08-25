@@ -4,23 +4,27 @@
 .content-body article > h4,
 .content-body article > h5,
 .content-body article > h6 {
-  @apply text-xl md:text-2xl font-bold text-skin-accent w-full text-center font-article-title;
+  @apply text-xl md:text-2xl font-bold text-skin-accent w-full text-center;
 }
 
 .content-body article > p {
-  @apply text-lg text-skin-base my-5 font-article;
+  @apply text-lg text-skin-base my-5;
 }
 
 .content-body article a {
-  @apply text-skin-alternate font-semibold hover:underline hover:text-skin-selected transition-colors;
+  @apply text-skin-alternate font-semibold hover:underline hover:text-skin-selected;
 }
 
 .content-body article > ul {
   @apply text-lg font-semibold text-skin-subtext list-disc py-2;
 }
 
+.content-body article > p > img {
+  @apply w-fit mx-auto rounded-md border-4 border-third;
+}
+
 .content-body article > pre {
-  @apply text-skin-subtext overflow-x-scroll bg-fg-base p-2.5 pl-5 border-l-2 border-secondary relative;
+  @apply text-skin-subtext overflow-x-scroll bg-fg-base p-2.5 pl-5 mb-5 border-l-2 border-secondary relative;
   /* TODO: rework code block mdoc node so each line is actually a different line in the final html
            with that, this counter css will work */
   /* counter-reset: line; */

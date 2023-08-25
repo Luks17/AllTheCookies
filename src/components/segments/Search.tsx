@@ -125,7 +125,7 @@ function Results({ searchResults }: { searchResults: FuseResult[] }) {
   const len = searchResults.length;
 
   const navButtonsClasses =
-    "text-skin-muted flex flex-col pb-5 hover:text-skin-subtext transition-colors font-semibold w-full items-center";
+    "text-skin-muted flex flex-col pb-5 hover:text-skin-subtext font-semibold w-full items-center";
 
   let showedPosts = searchResults.slice(0, currentLastPost);
 

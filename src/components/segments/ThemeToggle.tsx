@@ -38,6 +38,7 @@ function ThemeToggle() {
 
   return (
     <button
+      aria-label="Trocar tema da página"
       className={`bg-fg-base z-20 relative flex text-skin-base border-crust overflow-hidden items-center border-2 rounded-2xl`}
       ref={buttonContainer}
     >

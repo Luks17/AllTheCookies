@@ -9,10 +9,13 @@ const currentYear = new Date().getUTCFullYear();
 >
   <ul class="flex gap-x-4">
     <li class="hoverable-btn">
-      <a href="/rss.xml"><RSS /></a>
+      <a aria-label="Visualizar feed RSS da página" href="/rss.xml"><RSS /></a>
     </li>
     <li class="hoverable-btn">
-      <a href="https://github.com/Luks17/AllTheCookies"><Github /></a>
+      <a
+        aria-label="Ir para o github da página"
+        href="https://github.com/Luks17/AllTheCookies"><Github /></a
+      >
     </li>
   </ul>
   <p>© {currentYear} Lucas Dávalos</p>

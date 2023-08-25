@@ -7,14 +7,17 @@ import { z, ImageFunction } from "astro:content";
 export const postSchema = ({ image }: { image: ImageFunction }) =>
   z.object({
     authors: z.array(z.string()),
-    title: z.string().refine((title) => title.length < 50, {
+    title: z.string().refine((title) => title.length < 70, {
       message: "Title cannot be longer than 70 characters",
     }),
     description: z.string().refine((desc) => desc.length < 200, {
       message: "Description cannot be longer than 200 characters",
     }),
     thumbnail: z.object({
-      img: image(),
+      img: image().refine((img) => img.width === 1280 && img.height === 720, {
+        message:
+          "Thumbnail must be 1280x720 (same dimensions as a youtube thumb)",
+      }),
       alt: z.string(),
     }),
     publishDate: z.date(),

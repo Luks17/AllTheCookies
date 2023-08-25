@@ -25,13 +25,13 @@ const authors = await extractAuthorsFromPost(post);
 ---
 
 <div
-  class="max-w-3xl mx-auto flex flex-col text-skin-base py-2 border-[1px] border-b-4 border-l-[3px] border-crust bg-primary my-7 rounded-xl"
+  class="max-w-3xl mx-auto flex flex-col text-skin-base py-2 border-y-2 border-secondary bg-crust my-7 rounded-xl"
 >
   {
     post.edited && (
-      <p class="text-skin-muted text-[0.6rem] opacity-60 w-full text-right px-4">
+      <span class="text-skin-accent text-[0.6rem] opacity-90 w-full text-right px-4">
         Editado
-      </p>
+      </span>
     )
   }
   <p
@@ -63,13 +63,12 @@ const authors = await extractAuthorsFromPost(post);
         class="absolute p-2 rounded-b-lg capitalize bg-crust">{category}</a
       >
     </div>
-    <img
-      src={thumb.img.src}
+    <Image
+      src={thumb.img}
       alt={thumb.alt}
-      width={1280}
-      height={720}
-      loading="lazy"
-      decoding="async"
+      width={1024}
+      height={576}
+      loading="eager"
     />
   </div>
 
@@ -86,9 +85,9 @@ const authors = await extractAuthorsFromPost(post);
                   <Image
                     src={author.image}
                     alt={thumb.alt}
-                    class="rounded-full"
-                    width={50}
-                    height={50}
+                    class="rounded-full w-14 hover:scale-105 transition-transform ease-in-out duration-300"
+                    width={84}
+                    height={84}
                     loading="lazy"
                     decoding="async"
                   />
