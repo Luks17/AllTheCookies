@@ -21,15 +21,13 @@ function Card({ post, showCategory = true, special = false }: Props) {
 
   // hover checks if the mouse is the card
   // hover is undefined when this function is called from a click on the description
-  const toggleDescription = (hover?: boolean) => {
+  const toggleCardExpansion = (hover?: boolean) => {
     if (hover === undefined) {
       setIsCardFocus(!isCardFocus);
     } else {
       if (hover) {
-        thumbContainer.current!.classList.add("scale-125");
         setIsCardFocus(true);
       } else {
-        thumbContainer.current!.classList.remove("scale-125");
         setIsCardFocus(false);
       }
     }
@@ -39,8 +37,10 @@ function Card({ post, showCategory = true, special = false }: Props) {
     if (isCardFocus) {
       descriptionContainer.current!.classList.remove("line-clamp-2");
       descriptionContainer.current!.classList.add("max-h-40");
+      thumbContainer.current!.classList.add("scale-125");
     } else {
       descriptionContainer.current!.classList.remove("max-h-40");
+      thumbContainer.current!.classList.remove("scale-125");
       setTimeout(() => {
         descriptionContainer.current!.classList.add("line-clamp-2");
       }, 200);
@@ -49,34 +49,30 @@ function Card({ post, showCategory = true, special = false }: Props) {
 
   return (
     <div
-      onMouseOver={() => toggleDescription(true)}
-      onMouseLeave={() => toggleDescription(false)}
-      className={`border-2 p-2 bg-crust rounded-md text-xl ${
-        special ? "border-secondary" : "border-third"
-      }`}
+      onMouseOver={() => toggleCardExpansion(true)}
+      onMouseLeave={() => toggleCardExpansion(false)}
+      className={`border-2 p-2 bg-crust rounded-md text-xl ${special ? "border-secondary" : "border-third"
+        }`}
     >
       {special && (
-        <div className="flex justify-center">
-          <h3 className="text-skin-accent-secondary text-lg font-bold pt-1">
-            Mais recente
-          </h3>
-        </div>
+        <h3 className="text-skin-accent-secondary text-lg font-bold pt-1 text-center">
+          Mais recente
+        </h3>
       )}
 
       {/* thumb */}
-      <div className="flex items-center justify-center bg-fg-base m-4 mt-3">
-        <a href={postSlug} className="h-full w-full overflow-clip">
-          <img
-            src={post.thumbnail.img.src}
-            alt={post.thumbnail.alt}
-            width={isScreenMd ? 1280 : 800}
-            height={isScreenMd ? 720 : 450}
-            className="transition-transform ease-in-out duration-500"
-            loading="lazy"
-            decoding="async"
-            ref={thumbContainer}
-          />
-        </a>
+      <div className="flex items-center justify-center bg-fg-base m-4 mt-3 overflow-clip">
+        <img
+          src={post.thumbnail.img.src}
+          alt={post.thumbnail.alt}
+          width={isScreenMd ? 1280 : 800}
+          height={isScreenMd ? 720 : 450}
+          className="transition-transform ease-in-out duration-500 max-sm:cursor-pointer"
+          loading="lazy"
+          decoding="async"
+          onClick={() => isScreenSmall && toggleCardExpansion()}
+          ref={thumbContainer}
+        />
       </div>
 
       <div className="w-full flex my-1 px-5 text-xs items-center justify-between">
@@ -103,8 +99,8 @@ function Card({ post, showCategory = true, special = false }: Props) {
 
         {/* description */}
         <p
-          className="text-skin-subtext max-sm:cursor-pointer text-sm px-1 max-h-10 overflow-y-clip line-clamp-2 transition-height ease-in-out duration-200"
-          onClick={() => isScreenSmall && toggleDescription()}
+          className="text-skin-subtext max-sm:cursor-pointer text-sm px-1 max-h-10 overflow-y-clip line-clamp-2 transition-max-height ease-in-out duration-200"
+          onClick={() => isScreenSmall && toggleCardExpansion()}
           ref={descriptionContainer}
         >
           {post.description}
@@ -117,7 +113,7 @@ function Card({ post, showCategory = true, special = false }: Props) {
           return (
             <a
               key={id}
-              href="#"
+              href="#0"
               aria-label={`Link para a tag ${tag}`}
               className="text-skin-accent font-semibold text-sm px-2 py-1 before:pr-0.5 before:content-['#']"
             >

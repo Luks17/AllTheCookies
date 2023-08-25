@@ -13,6 +13,7 @@
     "@astrojs/markdoc": "^0.4.4",
     "@astrojs/react": "^2.3.2",
     "@astrojs/rss": "^2.4.4",
+    "@astrojs/sitemap": "^2.0.2",
     "@astrojs/tailwind": "^4.0.0",
     "@fontsource-variable/raleway": "^5.0.9",
     "@nanostores/react": "^0.7.1",
