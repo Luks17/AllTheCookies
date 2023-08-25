@@ -51,9 +51,9 @@ function getHref(next: boolean) {
   let pageNumber = currentPage;
 
   if (next) {
-    if (++pageNumber % SITE.postsPerPage === 0) pageNumber = 1;
+    if (pageNumber++ % numberOfPages === 0) pageNumber = 1;
   } else {
-    if (--pageNumber === 0) pageNumber = SITE.postsPerPage - 1;
+    if (--pageNumber === 0) pageNumber = numberOfPages;
   }
 
   return link + (pageNumber === 1 ? "" : `/${pageNumber}`);
