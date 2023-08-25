@@ -11,7 +11,7 @@ export async function get() {
     site: SITE.url,
     items: posts.map((post) => ({
       link: `posts/${getSlug(post.data.title)}`,
-      title: post.data.description,
+      title: post.data.title,
       description: post.data.description,
       pubDate: post.data.publishDate,
     })),
