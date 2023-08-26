@@ -39,7 +39,11 @@ const authors = await Promise.all(
             <h3 class="text-skin-accent font-bold text-xl text-center p-1">
               {author.name}
             </h3>
-            <Image src={author.image} alt={author.name} class="p-2 max-w-xs" />
+            <Image
+              src={author.image}
+              alt={author.name}
+              class="p-2 max-w-[16rem] sm:max-w-xs"
+            />
             <div class="flex justify-between flex-grow items-center px-5 mt-1 text-skin-subtext text-sm py-1.5">
               <ul class="flex flex-col gap-2 font-semibold capitalize border-l-2 border-primary pl-2">
                 {author.tags.map((tag) => (
