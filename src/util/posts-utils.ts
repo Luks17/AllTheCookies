@@ -16,8 +16,8 @@ async function optimizePostImages(
 
       const optImg = await getImage({
         src: post.data.thumbnail.img,
-        width: 1280,
-        height: 720,
+        width: 1024,
+        height: 576,
         format: "webp",
       });
 
@@ -96,7 +96,7 @@ export async function getNumberOfPosts(category?: string): Promise<number> {
 export async function getNumberOfPages(category?: string): Promise<number> {
   return Math.ceil(
     (await getNumberOfPosts(category ? category : undefined)) /
-      SITE.postsPerPage
+    SITE.postsPerPage
   );
 }
 
