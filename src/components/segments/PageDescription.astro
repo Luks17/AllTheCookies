@@ -22,6 +22,8 @@ let pageNumber = "";
 if (numberOfPages > 1) {
   pageNumber = ` (Página ${currentPageNumber} de ${numberOfPages})`;
 }
+
+let breadcrump = "/";
 ---
 
 <div
@@ -36,7 +38,18 @@ if (numberOfPages > 1) {
   </label>
 
   <h2 class="text-skin-accent-secondary font-semibold mt-3">
-    <span class="capitalize">{"Home > " + pathToPage.join(" > ")}</span>
+    <span><a href={breadcrump}>Home</a></span>
+    {
+      pathToPage.map((item) => {
+        breadcrump += item + "/";
+        return (
+          <span class="capitalize">
+            {" > "}
+            <a href={breadcrump}>{item}</a>
+          </span>
+        );
+      })
+    }
     {numberOfPages > 1 && pageNumber}
   </h2>
 
