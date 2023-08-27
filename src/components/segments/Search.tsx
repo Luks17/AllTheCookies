@@ -150,7 +150,7 @@ function Results({ searchResults }: { searchResults: FuseResult[] }) {
             {showedPosts.map((result) => {
               return (
                 <li className="my-3 w-[95%] mx-auto" key={result.refIndex}>
-                  <Card post={result.item} />
+                  <Card post={result.item} expandOnFocus={false} />
                 </li>
               );
             })}

@@ -58,7 +58,7 @@ function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
   useEffect(() => setPostIndex(getCorrectIndex()), [isLg]);
 
   return (
-    <div className="relative">
+    <div className="relative min-h-[30rem]">
       <div className="text-skin-muted text-2xl absolute top-[42%] flex justify-between w-full">
         <Button icon={ArrowLeft} func={prev} label="Navegar post à esquerda" />
         <Button icon={ArrowRight} func={next} label="Navegar post à direita" />

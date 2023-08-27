@@ -78,12 +78,13 @@ const btnClass =
     pageName={categoryName}
   />
 
-  <ul class="text-skin-base mt-5 max-w-xl mx-auto flex flex-col">
+  <ul class="text-skin-base my-10 max-w-xl mx-auto flex flex-col gap-y-5">
     {
       showedPosts.map((post, i) => (
-        <li class="my-2.5 lg:mx-2.5 place-self-center">
+        <li>
           <Card
             post={post}
+            expandOnFocus={false}
             showCategory={categorySlug === "all"}
             special={i === startPost}
             client:visible
@@ -95,7 +96,7 @@ const btnClass =
 
   {
     numberOfPages > 1 && (
-      <div class="text-skin-subtext font-semibold mt-5 w-full max-w-md mx-auto flex justify-between">
+      <div class="text-skin-subtext font-semibold w-full max-w-md mx-auto flex justify-between">
         <a href={getHref(false)} class={btnClass}>
           ↩
         </a>

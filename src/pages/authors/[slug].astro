@@ -37,15 +37,15 @@ const { Content } = await author.render();
     <Content />
   </section>
 
-  <section class="w-full text-skin-base py-6 border-t-2 border-secondary">
-    <h2 class="font-bold text-2xl text-center mb-8"><span class="text-skin-alternate">Últimos</span> posts compostos pelo autor</h2>
+  <section class="w-full text-skin-base border-t-2 border-secondary">
+    <h2 class="font-bold text-2xl text-center py-6 mb-1"><span class="text-skin-alternate">Últimos</span> posts compostos pelo autor</h2>
     {(authorPosts.length > 3) ?
       <!-- shows at max SITE.postsPerPage posts  -->
       <Carousel 
         sortedPosts={authorPosts} 
         maxIndex={(authorPosts.length >= SITE.postsPerPage) ? SITE.postsPerPage : authorPosts.length}
         client:visible />
-    : <ul class="flex max-md:flex-col gap-4">
+    : <ul class="flex max-md:flex-col gap-4 min-h-[30rem]">
       {authorPosts.map(post => <li class="max-w-sm mx-auto"><Card post={post} client:visible /></li>)}
       </ul>}
   </section>

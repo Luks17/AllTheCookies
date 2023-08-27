@@ -6,18 +6,32 @@ import { getSlug } from "@/util/common";
 
 interface Props {
   post: PostFrontmatter;
+  expandOnFocus?: boolean;
   showCategory?: boolean;
   special?: boolean;
 }
 
-function Card({ post, showCategory = true, special = false }: Props) {
-  const [isCardFocus, setIsCardFocus] = useState(false);
+// this component code is really complex because it is used in a lot of very different places
+// for example, on a table or a top-bottom list, you may not want expandOnFocus because it will cause a lot of cls on hover
+// if you are listing the posts in publish date order, the most recent card should be special
+// if you are already listing posts from a specific category, you may not want showCategory
+// to reduce cls when using expandOnFocus, it is recomended for the parent component to have a min-height that fits the expanded cards
+function Card({
+  post,
+  expandOnFocus = true,
+  showCategory = true,
+  special = false,
+}: Props) {
+  const [isCardFocus, setIsCardFocus] = useState(!expandOnFocus);
   const descriptionContainer = useRef<HTMLParagraphElement | null>(null);
   const thumbContainer = useRef<HTMLImageElement | null>(null);
   const isScreenSmall = useMediaQuery("(max-width: 640px)");
   const isScreenMd = useMediaQuery("(min-width: 768px)");
 
   const postSlug = "/posts/" + getSlug(post.title);
+
+  const clickHandler = () =>
+    isScreenSmall && expandOnFocus && toggleCardExpansion();
 
   // hover checks if the mouse is the card
   // hover is undefined when this function is called from a click on the description
@@ -37,10 +51,12 @@ function Card({ post, showCategory = true, special = false }: Props) {
     if (isCardFocus) {
       descriptionContainer.current!.classList.remove("line-clamp-2");
       descriptionContainer.current!.classList.add("max-h-40");
-      thumbContainer.current!.classList.add("scale-125");
+
+      if (expandOnFocus) thumbContainer.current!.classList.add("scale-125");
     } else {
       descriptionContainer.current!.classList.remove("max-h-40");
       thumbContainer.current!.classList.remove("scale-125");
+
       setTimeout(() => {
         descriptionContainer.current!.classList.add("line-clamp-2");
       }, 200);
@@ -49,8 +65,8 @@ function Card({ post, showCategory = true, special = false }: Props) {
 
   return (
     <div
-      onMouseOver={() => toggleCardExpansion(true)}
-      onMouseLeave={() => toggleCardExpansion(false)}
+      onMouseOver={() => expandOnFocus && toggleCardExpansion(true)}
+      onMouseLeave={() => expandOnFocus && toggleCardExpansion(false)}
       className={`border-2 p-2 bg-crust rounded-md text-xl ${special ? "border-secondary" : "border-third"
         }`}
     >
@@ -67,10 +83,13 @@ function Card({ post, showCategory = true, special = false }: Props) {
           alt={post.thumbnail.alt}
           width={isScreenMd ? 1280 : 800}
           height={isScreenMd ? 720 : 450}
-          className="transition-transform ease-in-out duration-500 max-sm:cursor-pointer"
+          className={
+            (expandOnFocus ? "max-sm:cursor-pointer" : "") +
+            " transition-transform ease-in-out duration-500"
+          }
           loading="lazy"
           decoding="async"
-          onClick={() => isScreenSmall && toggleCardExpansion()}
+          onClick={clickHandler}
           ref={thumbContainer}
         />
       </div>
@@ -99,8 +118,13 @@ function Card({ post, showCategory = true, special = false }: Props) {
 
         {/* description */}
         <p
-          className="text-skin-subtext max-sm:cursor-pointer text-sm px-1 max-h-10 overflow-y-clip line-clamp-2 transition-max-height ease-in-out duration-200"
-          onClick={() => isScreenSmall && toggleCardExpansion()}
+          className={
+            "text-skin-subtext text-sm px-1 overflow-y-clip transition-max-height ease-in-out duration-200" +
+            (expandOnFocus
+              ? " max-h-10 line-clamp-2 max-sm:cursor-pointer"
+              : "")
+          }
+          onClick={clickHandler}
           ref={descriptionContainer}
         >
           {post.description}
