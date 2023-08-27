@@ -8,7 +8,7 @@ import { Image } from "astro:assets";
 import { Checkmark } from "@/resources/static/Icons";
 
 const description =
-  "AllTheCookies é um pequeno blog colaborativo de tecnologia. Tendo como conteúdo notícias, tutoriais & artigos pessoais.";
+  "AllTheCookies é um pequeno blog colaborativo de tecnologia. Tendo como conteúdo notícias, tutoriais & artigos pessoais. Foi pensada para ser o mais perfomática e acessível possível.";
 
 const sortedPosts = (await getSortedPosts()).map((post) => post.data);
 ---
@@ -16,22 +16,20 @@ const sortedPosts = (await getSortedPosts()).map((post) => post.data);
 <PageLayout>
   <!-- greeting -->
   <section
-    class="py-12 md:py-6 max-w-5xl mx-auto xl:px-8 md:flex items-center justify-center"
+    class="py-12 max-w-5xl mx-auto xl:px-8 flex max-md:flex-col items-center justify-center"
   >
     <div class="text-skin-base">
-      <h1 class="text-3xl lg:text-4xl font-bold pb-2">
+      <h1 class="text-3xl lg:text-4xl xl:text-5xl font-bold pb-2">
         Bem vindo! <span class="text-skin-alternate">Aceite</span> todos os cookies.
       </h1>
-      <p
-        class="text-md text-skin-muted lg:text-lg max-w-xl overflow-hidden text-ellipsis"
-      >
+      <p class="text-lg text-skin-subtext lg:text-xl max-w-xl">
         {description}
       </p>
     </div>
-    <div class="relative w-fit mx-auto group">
+    <div class="relative w-fit mx-auto group flex items-center">
       <Image
         src={hero}
-        alt="Cookie with coffe"
+        alt="Cookie em uma página esperando ser aceito"
         class="max-lg:w-[20rem] max-w-[30rem]"
       />
 
@@ -44,14 +42,29 @@ const sortedPosts = (await getSortedPosts()).map((post) => post.data);
   </section>
 
   <!-- latest posts -->
-  <section class="w-full pb-5">
+  <section class="w-full mb-20">
     <h2
-      class="text-skin-base text-center py-1 md:py-2.5 font-bold text-xl sm:text-2xl"
+      class="text-skin-base text-center py-1 md:py-3 font-bold text-xl sm:text-2xl md:text-3xl"
     >
       Nossas <span class="text-skin-accent-secondary">últimas</span> postagens
     </h2>
     <div class="mt-4">
-      <Carousel sortedPosts={sortedPosts} client:visible />
+      <Carousel sortedPosts={sortedPosts} client:load />
     </div>
+  </section>
+
+  <section
+    class="flex flex-col gap-3 text-skin-base text-xl md:text-2xl lg:text-3xl font-bold mb-8 max-w-2xl mx-auto p-8 border-l-4 border-secondary bg-mantle rounded-r-md"
+  >
+    <h2>
+      Não perca <span class="text-skin-alternate">nenhum</span> post
+    </h2>
+    <p class="text-lg text-skin-subtext font-normal">
+      Adicione o RSS da nossa página no seu agregador favorito de notícias!
+    </p>
+    <a
+      class="text-lg text-skin-accent opacity-90 hover:opacity-100 transition-opacity duration-300"
+      href="/rss.xml">{">  Clique aqui para acessar o feed"}</a
+    >
   </section>
 </PageLayout>
