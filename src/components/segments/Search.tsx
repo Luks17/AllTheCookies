@@ -6,7 +6,11 @@ import type { PostFrontmatter } from "@/types/Posts";
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SITE } from "@/config.mjs";
-import { closeSearch, isSearchOpen } from "@/resources/stores/nav-store";
+import {
+  closeSearch,
+  isSearchOpen,
+  openSearch,
+} from "@/resources/stores/nav-store";
 import { useStore } from "@nanostores/react";
 
 interface FuseResult {
@@ -20,7 +24,7 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
   const [searchResults, setSearchResults] = useState([] as FuseResult[]);
   const [showResults, setShowResults] = useState(false);
   const inputContainer = useRef<HTMLInputElement | null>(null);
-  let userTypeTimerId = 0;
+  let userTypeTimerId: NodeJS.Timeout | undefined;
 
   const fuse = useMemo(
     () =>
@@ -69,6 +73,7 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
     // checks if the url has a query and sets it to the input field
     if (query !== null) {
       setInputFieldText(query);
+      openSearch();
       inputField.selectionStart = query.length;
     } else inputField.selectionStart = 0;
   }, []);
@@ -80,7 +85,7 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
   // the new timer.
   useEffect(() => {
     // clears old timer if exists
-    clearTimeout(userTypeTimerId);
+    if (userTypeTimerId !== undefined) clearTimeout(userTypeTimerId);
 
     userTypeTimerId = setTimeout(executeSearch, 1000);
 

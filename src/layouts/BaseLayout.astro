@@ -19,11 +19,6 @@ const meta = Astro.props;
     <slot />
     <script>
       import { setPreferredTheme } from "@/resources/stores/theme-store";
-      import { openSearch } from "@/resources/stores/nav-store";
-
-      const query = new URLSearchParams(window.location.search).get("q");
-
-      if (query !== null) openSearch();
 
       setPreferredTheme();
     </script>

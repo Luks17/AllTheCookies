@@ -36,11 +36,11 @@ if (meta.socialImage === undefined) meta.socialImage = optLogo.src;
 <Layout {...meta}>
   <!-- 
     client:media only loads the component JS when a css condition is met 
-    client:only renders component only in client (no static content)
+    client:idle renders component after a delay
   -->
   <Header />
   <Sidebar client:media="(max-width: 1024px)" />
-  <Search elementsToSearch={postsToSearch} client:only="react" />
+  <Search elementsToSearch={postsToSearch} client:idle />
 
   <!-- overflow-x-clip is needed so absolute elements don't make the horizontal scrollbar appear -->
   <main class="relative min-h-screen overflow-x-clip">
