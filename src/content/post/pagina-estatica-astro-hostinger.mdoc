@@ -1,0 +1,149 @@
+---
+authors: ["luks"]
+title: Minha Experiência utilizando Hostinger para esta página
+description: Neste artigo eu vou relatar como foi minha experiência para hostear minha página estática, feita com AstroJS, na hostinger.
+thumbnail: {
+  img: "@/assets/posts/pagina-estatica-astro-hostinger/thumb.jpg",
+  alt: Hostinger mais astro dá certo?
+}
+publishDate: 2023-08-27T21:59:00Z
+category: blog
+tags: ["web", "astrojs", "review"]
+draft: false
+minutesRead: 5
+edited: false
+---
+
+## Introdução
+
+Na reta final da construção desta página eu comecei a considerar as opções que tinha para finalmente colocar meu site - que estava trabalhando faz tanto tempo - no ar.
+
+Uma das opções mais famosas foi a Hostinger e, a primeira vista, aparantava ter tudo o que eu queria: preço bom, domínio gratuito por 1 ano, email com o domínio, SSL ilimitado, largura de banda ilimitada, etc.
+
+No entanto, após uma pesquisa no discord do **AstroJS**, o gerador de páginas estáticas que uso, vi que eles não recomendam a Hostinger pois não é tão simples como outros serviços que há lá na gringa, como Vercel, Netlify, etc. 
+
+Esses serviços têm suporte específico para Astro e fazem *Deployment* Automático após todo commit no Github. Essa *feature* é algo que eu queria muito, mas como essas empresas não atuam no Brasil fica muito caro os preços de seus serviços.
+
+Logo, decidi ir com a Hostinger e fazer ela funcionar do jeito que eu queria. Neste artigo irei relatar os perrengues até eu conseguir isso.
+
+{% aside type="danger" title="Isto não é um tutorial!" %}
+Este é um artigo descritivo em que eu só vou relatar o que passei e tive que fazer para alcançar meus objetivos, não tomei todo o cuidado que tomaria em tutoriais para garantir uma didática boa.
+
+Além disso, as coisas apresentadas neste artigo podem mudar e não serem mais válidas para quando você estiver lendo.
+
+Sabendo disso, espero que este artigo seja útil para alguém no futuro tentando fazer as mesmas coisas que eu fiz.
+{% /aside %}
+
+## Colocando a página no ar
+
+Primeiro de tudo foi necessário resgatar meu domínio gratuito que veio com o plano, fiz isso imediatamente. Após isso, percebi que no painel da Hostinger tinha uma opção para integrar com o Git.
+
+No entanto, não é bem o que eu esperava. A Hostinger aparentemente tem como público alvo quem usa PHP ou Wordpress, logo ao conectar meu repositório ela imediatamente tentou rodar o Composer. Como precisava de Node para buildar e dar deploy no meu site, a opção do Git do painel foi descartada.
+
+Como só estava ansioso para ver logo minha página no ar, decidi abrir o gerenciador de arquivos deles e jogar diretamente minha página, já buildada, no diretório `public_html`. Porém, esperei, esperei e esperei e nada! Logo, decidi contatar o suporte.
+
+Fui respondido rapidamente e foram bem atenciosos com minhas dúvidas. Aparentemente, faltava apontar um registro DNS para meu domínio e, com isso resolvido, fui no [DNS Propagation Checker](#links-externos) para ver ele se propagando!
+
+Após um tempo, meu site finalmente estava no ar!
+
+## SSL
+
+Ele estava no ar como HTTP... sem o S! Felizmente, antes de começar a suar frio, vi que não fui enganado e era só instalar meu certificado SSL gratuito no painel! Agora sim, estava usando HTTPS!
+
+## Deploy Automático
+
+Ficar buildando localmente meu site e atualizando os arquivos na mão no painel da Hostinger iria ficar insuportável eventualmente. Logo, decidi buscar soluções para isso.
+
+Ao olhar o painel, vi que poderia usar FTP para enviar os arquivos, ou seja, poderia substituir os arquivos atualizados, apagar os que não são mais necessários e colocar arquivos novos automaticamente! Perfeito, agora só precisava de alguma solução para buildar meu site com Node e enviá-lo via FTP.
+
+Encontrei muitas opções boas mas pagas para isso, logo acabei tendo que aprender e usar Github Actions. Basicamente, com elas é possível subir um container para automatizar coisas do seu projeto, exatamente o que eu precisava!
+
+Elas são declaradas com um arquivo YAML onde é possível definir tudo o que você quiser. O Github provê algumas Actions já pré-feitas, porém nenhuma me serviria perfeitamente, precisei escrever a minha eu mesmo:
+
+```yaml
+name: Build and Deploy
+
+on:
+  push:
+	branches:
+  	- main
+
+jobs:
+  build:
+	runs-on: ubuntu-latest
+	environment: Production
+
+	steps:
+  	- name: 🚚 Get latest code
+    	uses: actions/checkout@v3
+
+  	- name: Use Node.js 16
+    	uses: actions/setup-node@v2
+    	with:
+      	node-version: "16"
+
+  	- name: Install Dependencies
+    	run: npm install
+
+  	- name: Build
+    	run: npm run build
+
+  	- name: 📂 Sync files
+    	uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+    	with:
+      	server: ${{ secrets.ftp_server }}
+      	username: ${{ secrets.ftp_username }}
+      	password: ${{ secrets.ftp_password }}
+      	local-dir: ./dist/
+      	server-dir: ./
+```
+
+Basicamente, neste código defino uma ação chamada "Build and Deploy" que é chamada sempre que ocorre um `push` em `main`. Ele roda no `environment` "Production", que é um ambiente que eu pré defini nas configurações do meu repositório para guardar alguns *secrets* (variáveis de ambiente sensíveis).
+
+A *action* puxa o código mais recente do meu repositório, após isso instala Node 16, instala as dependências do meu projeto (Astro e suas integrações), builda ele e envia a o resultado via FTP para a Hostinger.
+
+## Cache
+
+Uma das coisas mais importantes para conseguir um *score* bom no **Google Lighthouse** é uma política de cache longa para coisas que não mudam frequentemente na sua página, como imagens, vídeos, fontes, etc.
+
+A Hostinger oferece um gerenciamento de cache no painel de controle, porém seu intervalo de tempo padrão é muito curto, logo o Lighthouse continua reclamando mesmo com ele ativo. No entanto, descobri uma forma de aumentar isso seguindo um [tutorial deles](#links-externos).
+
+Em *web servers* que usam `Apache` é possível fazer configurações complexas de forma simples utilizando um arquivo oculto chamado .htaccess. Como a hostinger aparentemente usa `Apache`, eu fiz o seguinte arquivo `.htaccess`:
+
+```apache
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+ # Fonts
+  ExpiresByType font/ttf "access plus 1 year"
+  ExpiresByType font/otf "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/font-woff "access plus 1 year"
+
+ # Images
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
+ErrorDocument 404 /404.html
+```
+
+Basicamente, neste arquivo estou falando para toda imagem e fonte ser armazenada no cache dos *browsers* por pelo menos 1 ano. Como não tenho vídeos na minha página, e nem planejo ter, não coloquei nada a respeito disso.
+
+A última linha eu coloquei pois a Hostinger não estava usando minha página para o erro 404, mas sim uma página genérica deles. Essa linha resolve isso.
+
+## Conclusão
+
+Apesar de ter tido que pesquisar muito e aprender algumas coisas, fiquei muito satisfeito que tudo que queria fazer deu certo. Talvez se tivesse sido fácil o sentimento bom de tudo ter dado certo não seria tão grande.
+
+Eu recomendaria a Hostinger? Sim, não tive nenhum problema grave e consegui fazer tudo o que eu queria. Como disse anteriormente, páginas construídas com Node não são o foco deles, visto que o suporte deles é melhor para Wordpress e PHP. Apesar disso, isso não foi problemático para mim em nenhum momento.
+
+No entanto, **isso vale apenas para páginas estáticas**, caso quisesse fazer uma página com `Server-side Rendering`, que o AstroJS também suporta, provavelmente não conseguiria fazê-la funcionar na Hostinger **com o plano que comprei**.
+
+### Links Externos
+
+- [DNS Propagation Checker](https://www.whatsmydns.net/)
+- [Tutorial da hostinger](https://www.hostinger.com/tutorials/website/improving-website-performance-leveraging-browser-cache)
