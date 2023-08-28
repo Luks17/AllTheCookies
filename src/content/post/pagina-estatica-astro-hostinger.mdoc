@@ -1,7 +1,7 @@
 ---
 authors: ["luks"]
 title: Minha Experiência utilizando Hostinger para esta página
-description: Neste artigo eu vou relatar como foi minha experiência para hostear minha página estática, feita com AstroJS, na hostinger.
+description: Neste artigo eu vou relatar como foi minha experiência para hostear e configurar minha página estática, feita com AstroJS, na hostinger.
 thumbnail: {
   img: "@/assets/posts/pagina-estatica-astro-hostinger/thumb.jpg",
   alt: Hostinger mais astro dá certo?
@@ -136,6 +136,14 @@ ErrorDocument 404 /404.html
 Basicamente, neste arquivo estou falando para toda imagem e fonte ser armazenada no cache dos *browsers* por pelo menos 1 ano. Como não tenho vídeos na minha página, e nem planejo ter, não coloquei nada a respeito disso.
 
 A última linha eu coloquei pois a Hostinger não estava usando minha página para o erro 404, mas sim uma página genérica deles. Essa linha resolve isso.
+
+No entanto, isso ainda não é suficiente. Após testes posteriores, percebi que os navegadores estavam guardando em cache por 1 ano o meu index.html. Por causa disso, sempre que postasse algum artigo novo ou só mudasse meu index.html mesmo, ele não mudaria. Por isso, precisei adicionar a diretiva no-cache com o seguinte código:
+
+```apache
+<FilesMatch "index\.html$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>
+```
 
 ## Conclusão
 

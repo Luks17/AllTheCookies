@@ -1,18 +1,21 @@
 <IfModule mod_expires.c>
   ExpiresActive On
 
- # Fonts
   ExpiresByType font/ttf "access plus 1 year"
   ExpiresByType font/otf "access plus 1 year"
   ExpiresByType font/woff "access plus 1 year"
   ExpiresByType font/woff2 "access plus 1 year"
   ExpiresByType application/font-woff "access plus 1 year"
 
- # Images
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/gif "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
   ExpiresByType image/webp "access plus 1 year"
   ExpiresByType image/svg+xml "access plus 1 year"
 </IfModule>
+
+<FilesMatch "index\.html$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>
+
 ErrorDocument 404 /404.html
