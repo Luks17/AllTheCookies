@@ -54,20 +54,17 @@ const authors = await extractAuthorsFromPost(post);
   </h1>
 
   <!-- thumb with category -->
-  <div class="mx-4 rounded-xl border-2 border-crust">
-    <div
-      class="relative flex justify-center font-bold text-xs sm:text-sm text-skin-accent-secondary sm:opacity-90 hover:opacity-100 ease-in-out transition-opacity"
+  <div class="mx-4 rounded-xl border-2 border-crust flex justify-center">
+    <a
+      href={`/posts/${categorySlug}`}
+      class="absolute w-fit mx-auto p-2 rounded-b-lg capitalize bg-crust font-bold text-xs sm:text-sm text-skin-accent-secondary opacity-90 hover:opacity-100 transition-opacity"
+      >{category}</a
     >
-      <a
-        href={`/posts/${categorySlug}`}
-        class="absolute p-2 rounded-b-lg capitalize bg-crust">{category}</a
-      >
-    </div>
     <Image
       src={thumb.img}
       alt={thumb.alt}
-      width={1024}
-      height={576}
+      width={880}
+      height={495}
       loading="eager"
     />
   </div>

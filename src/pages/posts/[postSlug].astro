@@ -35,6 +35,8 @@ const meta = {
   author: post.data.authors[0],
   socialImage: post.data.thumbnail.img.src,
   canonicalURL: `${SITE.url}/posts/${getSlug(post.data.title)}`,
+
+  largestContentfulPaint: post.data.thumbnail.img.src,
 } as MetaTags;
 
 const { Content } = await post.render();

@@ -26,7 +26,6 @@ function Card({
   const descriptionContainer = useRef<HTMLParagraphElement | null>(null);
   const thumbContainer = useRef<HTMLImageElement | null>(null);
   const isScreenSmall = useMediaQuery("(max-width: 640px)");
-  const isScreenMd = useMediaQuery("(min-width: 768px)");
 
   const postSlug = "/posts/" + getSlug(post.title);
 
@@ -67,8 +66,9 @@ function Card({
     <div
       onMouseOver={() => expandOnFocus && toggleCardExpansion(true)}
       onMouseLeave={() => expandOnFocus && toggleCardExpansion(false)}
-      className={`border-2 p-2 bg-crust rounded-md text-xl ${special ? "border-secondary" : "border-third"
-        }`}
+      className={`border-2 p-2 bg-crust rounded-md text-xl ${
+        special ? "border-secondary" : "border-third"
+      }`}
     >
       {special && (
         <h3 className="text-skin-accent-secondary text-lg font-bold pt-1 text-center">
@@ -81,8 +81,8 @@ function Card({
         <img
           src={post.thumbnail.img.src}
           alt={post.thumbnail.alt}
-          width={isScreenMd ? 1024 : 800}
-          height={isScreenMd ? 576 : 450}
+          width={880}
+          height={495}
           className={
             (expandOnFocus ? "max-sm:cursor-pointer" : "") +
             " transition-transform ease-in-out duration-500"
