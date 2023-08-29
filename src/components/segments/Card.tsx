@@ -78,9 +78,8 @@ function Card({
     <div
       onMouseOver={() => expandOnFocus && toggleCardExpansion(true)}
       onMouseLeave={() => expandOnFocus && toggleCardExpansion(false)}
-      className={`border-2 p-2 bg-crust rounded-md text-xl ${
-        special ? "border-secondary" : "border-third"
-      }`}
+      className={`border-2 p-2 bg-crust rounded-md text-xl ${special ? "border-secondary" : "border-third"
+        }`}
     >
       {special && (
         <h3 className="text-skin-accent-secondary text-lg font-bold pt-1 text-center">

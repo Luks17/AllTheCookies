@@ -26,7 +26,7 @@ async function getOptImg(
   return {
     src: optImg.src,
     width: optImg.options.width,
-    height: optImg.options.heigh,
+    height: optImg.options.height,
     format: optImg.options.format,
   } as OptimizedImg;
 }
