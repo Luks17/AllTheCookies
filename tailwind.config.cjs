@@ -63,6 +63,9 @@ module.exports = {
       transitionProperty: {
         "max-height": "max-height",
       },
+      borderWidth: {
+        1: "1px",
+      },
     },
   },
   plugins: [],

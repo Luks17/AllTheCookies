@@ -1,7 +1,5 @@
 import { getFormatedDate } from "@/util/date";
 import type { PostFrontmatter } from "@/types/Posts";
-import { useEffect, useRef, useState } from "react";
-import { useMediaQuery } from "@/util/hooks";
 import { getSlug } from "@/util/common";
 
 interface Props {
@@ -24,11 +22,6 @@ function Card({
   showCategory = true,
   special = false,
 }: Props) {
-  const [isCardFocus, setIsCardFocus] = useState(!expandOnFocus);
-  const descriptionContainer = useRef<HTMLParagraphElement | null>(null);
-  const thumbContainer = useRef<HTMLImageElement | null>(null);
-  const isScreenSmall = useMediaQuery("(max-width: 640px)");
-
   const img = {
     src: useSmallImg ? post.thumbnail.smallImg.src : post.thumbnail.img.src,
     width: useSmallImg
@@ -41,45 +34,11 @@ function Card({
 
   const postSlug = "/posts/" + getSlug(post.title);
 
-  const clickHandler = () =>
-    isScreenSmall && expandOnFocus && toggleCardExpansion();
-
-  // hover checks if the mouse is the card
-  // hover is undefined when this function is called from a click on the description
-  const toggleCardExpansion = (hover?: boolean) => {
-    if (hover === undefined) {
-      setIsCardFocus(!isCardFocus);
-    } else {
-      if (hover) {
-        setIsCardFocus(true);
-      } else {
-        setIsCardFocus(false);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (isCardFocus) {
-      descriptionContainer.current!.classList.remove("line-clamp-2");
-      descriptionContainer.current!.classList.add("max-h-40");
-
-      if (expandOnFocus) thumbContainer.current!.classList.add("scale-125");
-    } else {
-      descriptionContainer.current!.classList.remove("max-h-40");
-      thumbContainer.current!.classList.remove("scale-125");
-
-      setTimeout(() => {
-        descriptionContainer.current!.classList.add("line-clamp-2");
-      }, 200);
-    }
-  }, [isCardFocus]);
-
   return (
     <div
-      onMouseOver={() => expandOnFocus && toggleCardExpansion(true)}
-      onMouseLeave={() => expandOnFocus && toggleCardExpansion(false)}
-      className={`border-2 p-2 bg-crust rounded-md text-xl ${special ? "border-secondary" : "border-third"
-        }`}
+      className={`border-2 p-2 bg-crust group rounded-md text-xl ${
+        special ? "border-secondary" : "border-third"
+      }`}
     >
       {special && (
         <h3 className="text-skin-accent-secondary text-lg font-bold pt-1 text-center">
@@ -95,13 +54,10 @@ function Card({
           width={img.width}
           height={img.height}
           className={
-            (expandOnFocus ? "max-sm:cursor-pointer" : "") +
-            " transition-transform ease-in-out duration-500"
+            "transition-transform ease-in-out duration-500 group-hover:scale-125"
           }
           loading="lazy"
           decoding="async"
-          onClick={clickHandler}
-          ref={thumbContainer}
         />
       </div>
 
@@ -128,18 +84,23 @@ function Card({
         </h3>
 
         {/* description */}
-        <p
-          className={
-            "text-skin-subtext text-sm px-1 overflow-y-clip transition-max-height ease-in-out duration-200" +
-            (expandOnFocus
-              ? " max-h-10 line-clamp-2 max-sm:cursor-pointer"
-              : "")
-          }
-          onClick={clickHandler}
-          ref={descriptionContainer}
-        >
-          {post.description}
-        </p>
+        <div className="relative">
+          <p
+            className={
+              "text-skin-subtext text-sm px-1 overflow-y-clip transition-max-height ease-in-out duration-200" +
+              (expandOnFocus ? " max-h-10 group-hover:max-h-40" : "")
+            }
+          >
+            {post.description}
+          </p>
+          {expandOnFocus && (
+            <div className="absolute h-1/2 w-full top-1/2 bg-gradient-to-t from-crust group-hover:invisible border-b-1 border-third flex rounded-md justify-center">
+              <span className="text-skin-base absolute -bottom-3 bg-mantle px-1.5 rounded-full border-third border-1 text-sm">
+                +
+              </span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* tags */}

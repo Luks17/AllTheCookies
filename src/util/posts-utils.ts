@@ -109,16 +109,13 @@ export async function getNumberOfPosts(category?: string): Promise<number> {
 }
 
 export async function getNumberOfPages(category?: string): Promise<number> {
-  return Math.ceil(
-    (await getNumberOfPosts(category ? category : undefined)) /
-    SITE.postsPerPage
-  );
+  return Math.ceil((await getNumberOfPosts(category)) / SITE.postsPerPage);
 }
 
 export async function getPostsByAuthor(author: CollectionEntry<"author">) {
-  if (!loaded_posts) await load_posts();
+  const posts = await getSortedPosts();
 
   const authorSlug = getSlug(author.data.name);
 
-  return loaded_posts.filter((post) => post.data.authors.includes(authorSlug));
+  return posts.filter((post) => post.data.authors.includes(authorSlug));
 }
