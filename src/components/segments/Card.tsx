@@ -1,6 +1,7 @@
 import { getFormatedDate } from "@/util/date";
 import type { PostFrontmatter } from "@/types/Posts";
 import { getSlug } from "@/util/common";
+import { useMediaQuery } from "@/util/hooks";
 
 interface Props {
   post: PostFrontmatter;
@@ -10,11 +11,18 @@ interface Props {
   special?: boolean;
 }
 
-// this component code is really complex because it is used in a lot of very different places
-// for example, on a table or a top-bottom list, you may not want expandOnFocus because it will cause a lot of cls on hover
-// if you are listing the posts in publish date order, the most recent card should be special
-// if you are already listing posts from a specific category, you may not want showCategory
-// to reduce cls when using expandOnFocus, it is recomended for the parent component to have a min-height that fits the expanded cards
+// This component code is really complex because it is used in a lot of very different places
+// for example, on a table or a top-bottom list, you may not want expandOnFocus because it will
+// cause a lot of cls on hover
+//
+// If you are listing the posts in publish date order, the most recent card should be special
+//
+// If you are already listing posts from a specific category, you may not want showCategory
+// to reduce cls when using expandOnFocus, it is recomended for the parent component to have
+// a min-height that fits the expanded cards
+//
+// This element checks if the device has any hover implementation for expandOnFocus to work.
+// If it does not, it will fallback to it's non-expandOnFocus state
 function Card({
   post,
   useSmallImg = false,
@@ -22,6 +30,8 @@ function Card({
   showCategory = true,
   special = false,
 }: Props) {
+  const isHoverSupported = useMediaQuery("(any-hover: hover)");
+
   const img = {
     src: useSmallImg ? post.thumbnail.smallImg.src : post.thumbnail.img.src,
     width: useSmallImg
@@ -54,7 +64,9 @@ function Card({
           width={img.width}
           height={img.height}
           className={
-            "transition-transform ease-in-out duration-500 group-hover:scale-125"
+            expandOnFocus && isHoverSupported
+              ? "transition-transform ease-in-out duration-500 group-hover:scale-125"
+              : ""
           }
           loading="lazy"
           decoding="async"
@@ -88,12 +100,14 @@ function Card({
           <p
             className={
               "text-skin-subtext text-sm px-1 overflow-y-clip transition-max-height ease-in-out duration-200" +
-              (expandOnFocus ? " max-h-10 group-hover:max-h-40" : "")
+              (expandOnFocus && isHoverSupported
+                ? " max-h-10 group-hover:max-h-40"
+                : "")
             }
           >
             {post.description}
           </p>
-          {expandOnFocus && (
+          {expandOnFocus && isHoverSupported && (
             <div className="absolute h-1/2 w-full top-1/2 bg-gradient-to-t from-crust group-hover:invisible border-b-1 border-third flex rounded-md justify-center">
               <span className="text-skin-base absolute -bottom-3 bg-mantle px-1.5 rounded-full border-third border-1 text-sm">
                 +
