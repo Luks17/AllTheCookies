@@ -64,7 +64,7 @@ function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
         <Button icon={ArrowRight} func={next} label="Navegar post à direita" />
       </div>
       <div
-        className="mx-auto overflow-x-clip transition-[width] ease-in-out duration-500"
+        className="mx-auto overflow-x-clip lg:min-w-[59rem]"
         style={{ width: getContainerWidth() }}
       >
         <ul

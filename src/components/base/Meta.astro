@@ -1,4 +1,6 @@
 ---
+import font from "@fontsource-variable/raleway/files/raleway-latin-wght-normal.woff2";
+
 import type { MetaTags as Props } from "@/types/Meta";
 import { SITE } from "@/config.mjs";
 
@@ -25,6 +27,14 @@ const imgURL = new URL(socialImage, Astro.url.origin).href;
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta name="author" content={author} />
+
+<link
+  rel="preload"
+  as="font"
+  crossorigin="anonymous"
+  href={font}
+  type="font/woff2"
+/>
 
 <!-- sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
