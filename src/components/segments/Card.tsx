@@ -66,9 +66,8 @@ function Card({
     <div
       onMouseOver={() => expandOnFocus && toggleCardExpansion(true)}
       onMouseLeave={() => expandOnFocus && toggleCardExpansion(false)}
-      className={`border-2 p-2 bg-crust rounded-md text-xl ${
-        special ? "border-secondary" : "border-third"
-      }`}
+      className={`border-2 p-2 bg-crust rounded-md text-xl ${special ? "border-secondary" : "border-third"
+        }`}
     >
       {special && (
         <h3 className="text-skin-accent-secondary text-lg font-bold pt-1 text-center">
@@ -79,10 +78,10 @@ function Card({
       {/* thumb */}
       <div className="flex items-center justify-center bg-fg-base m-4 mt-3 overflow-clip">
         <img
-          src={post.thumbnail.img.src}
+          src={post.thumbnail.smallImg.src}
           alt={post.thumbnail.alt}
-          width={720}
-          height={405}
+          width={post.thumbnail.smallImg.width}
+          height={post.thumbnail.smallImg.height}
           className={
             (expandOnFocus ? "max-sm:cursor-pointer" : "") +
             " transition-transform ease-in-out duration-500"

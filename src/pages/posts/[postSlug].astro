@@ -6,12 +6,12 @@ import PostHeadline from "@/components/segments/PostHeadline.astro";
 import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import { getSlug } from "@/util/common";
 import { getUnsortedPosts } from "@/util/posts-utils";
-import type { CollectionEntry } from "astro:content";
 import type { MetaTags } from "@/types/Meta";
 import { SITE } from "@/config.mjs";
+import type { PostCollectionEntry } from "@/types/Posts";
 
 export interface Props {
-  post: CollectionEntry<"post">;
+  post: PostCollectionEntry;
 }
 
 export async function getStaticPaths() {
