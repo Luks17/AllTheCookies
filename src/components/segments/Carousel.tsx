@@ -78,7 +78,7 @@ function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
         >
           {posts.map((post, i) => (
             <li key={i} style={{ width: SLIDE_WIDTH }}>
-              <Card post={post} special={i === 0} />
+              <Card post={post} useSmallImg={true} special={i === 0} />
             </li>
           ))}
         </ul>

@@ -51,7 +51,7 @@ module.exports = {
     },
 
     fontFamily: {
-      primary: ["Raleway Variable", "sans-serif"],
+      primary: ["Raleway Variable", "Arial", "sans-serif"],
     },
 
     boxShadowColor: {

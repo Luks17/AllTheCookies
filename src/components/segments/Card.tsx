@@ -6,6 +6,7 @@ import { getSlug } from "@/util/common";
 
 interface Props {
   post: PostFrontmatter;
+  useSmallImg?: boolean;
   expandOnFocus?: boolean;
   showCategory?: boolean;
   special?: boolean;
@@ -18,6 +19,7 @@ interface Props {
 // to reduce cls when using expandOnFocus, it is recomended for the parent component to have a min-height that fits the expanded cards
 function Card({
   post,
+  useSmallImg = false,
   expandOnFocus = true,
   showCategory = true,
   special = false,
@@ -26,6 +28,16 @@ function Card({
   const descriptionContainer = useRef<HTMLParagraphElement | null>(null);
   const thumbContainer = useRef<HTMLImageElement | null>(null);
   const isScreenSmall = useMediaQuery("(max-width: 640px)");
+
+  const img = {
+    src: useSmallImg ? post.thumbnail.smallImg.src : post.thumbnail.img.src,
+    width: useSmallImg
+      ? post.thumbnail.smallImg.width
+      : post.thumbnail.img.width,
+    height: useSmallImg
+      ? post.thumbnail.smallImg.height
+      : post.thumbnail.img.height,
+  };
 
   const postSlug = "/posts/" + getSlug(post.title);
 
@@ -66,8 +78,9 @@ function Card({
     <div
       onMouseOver={() => expandOnFocus && toggleCardExpansion(true)}
       onMouseLeave={() => expandOnFocus && toggleCardExpansion(false)}
-      className={`border-2 p-2 bg-crust rounded-md text-xl ${special ? "border-secondary" : "border-third"
-        }`}
+      className={`border-2 p-2 bg-crust rounded-md text-xl ${
+        special ? "border-secondary" : "border-third"
+      }`}
     >
       {special && (
         <h3 className="text-skin-accent-secondary text-lg font-bold pt-1 text-center">
@@ -78,10 +91,10 @@ function Card({
       {/* thumb */}
       <div className="flex items-center justify-center bg-fg-base m-4 mt-3 overflow-clip">
         <img
-          src={post.thumbnail.smallImg.src}
+          src={img.src}
           alt={post.thumbnail.alt}
-          width={post.thumbnail.smallImg.width}
-          height={post.thumbnail.smallImg.height}
+          width={img.width}
+          height={img.height}
           className={
             (expandOnFocus ? "max-sm:cursor-pointer" : "") +
             " transition-transform ease-in-out duration-500"
