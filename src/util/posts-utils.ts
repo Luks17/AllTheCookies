@@ -16,8 +16,8 @@ async function optimizePostImages(
 
       const optImg = await getImage({
         src: post.data.thumbnail.img,
-        width: 880,
-        height: 495,
+        width: 720,
+        height: 405,
         format: "webp",
       });
 

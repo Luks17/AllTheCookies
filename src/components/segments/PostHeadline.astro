@@ -60,13 +60,7 @@ const authors = await extractAuthorsFromPost(post);
       class="absolute w-fit mx-auto p-2 rounded-b-lg capitalize bg-crust font-bold text-xs sm:text-sm text-skin-accent-secondary opacity-90 hover:opacity-100 transition-opacity"
       >{category}</a
     >
-    <Image
-      src={thumb.img}
-      alt={thumb.alt}
-      width={880}
-      height={495}
-      loading="eager"
-    />
+    <Image src={thumb.img} alt={thumb.alt} loading="eager" />
   </div>
 
   <!-- authors -->

@@ -81,8 +81,8 @@ function Card({
         <img
           src={post.thumbnail.img.src}
           alt={post.thumbnail.alt}
-          width={880}
-          height={495}
+          width={720}
+          height={405}
           className={
             (expandOnFocus ? "max-sm:cursor-pointer" : "") +
             " transition-transform ease-in-out duration-500"
