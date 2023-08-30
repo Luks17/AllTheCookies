@@ -51,13 +51,13 @@ function Card({
       }`}
     >
       {special && (
-        <h3 className="text-skin-accent-secondary text-lg font-bold pt-1 text-center">
+        <h3 className="text-skin-accent-secondary text-lg font-bold mt-1 text-center">
           Mais recente
         </h3>
       )}
 
       {/* thumb */}
-      <div className="flex items-center justify-center bg-fg-base m-4 mt-3 overflow-clip">
+      <div className="bg-fg-base m-4 mt-3 overflow-clip">
         <img
           src={img.src}
           alt={post.thumbnail.alt}
@@ -65,7 +65,7 @@ function Card({
           height={img.height}
           className={
             expandOnFocus && isHoverSupported
-              ? "transition-transform ease-in-out duration-500 group-hover:scale-125"
+              ? "transition-transform ease-in-out duration-300 group-hover:scale-125"
               : ""
           }
           loading="lazy"
@@ -78,7 +78,7 @@ function Card({
         {showCategory && (
           <a
             href={"/posts/" + post.category}
-            className="bg-alternate px-2 py-1 text-sm rounded-lg font-bold text-skin-bright hover:scale-110 transition-transform shadow-black shadow-sm"
+            className="bg-alternate px-2 py-1 text-sm rounded-lg font-bold text-skin-bright hover:scale-110 transition-transform shadow-black shadow-md"
           >
             {post.category}
           </a>
@@ -99,9 +99,9 @@ function Card({
         <div className="relative">
           <p
             className={
-              "text-skin-subtext text-sm px-1 overflow-y-clip transition-max-height ease-in-out duration-200" +
+              "text-skin-subtext text-sm px-1" +
               (expandOnFocus && isHoverSupported
-                ? " max-h-10 group-hover:max-h-40"
+                ? " max-h-10 overflow-y-clip group-hover:max-h-40 transition-max-height ease-in-out duration-200"
                 : "")
             }
           >

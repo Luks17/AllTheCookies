@@ -12,7 +12,7 @@ module.exports = {
       "fg-secondary": "var(--surface1)",
       "fg-third": "var(--surface2)",
 
-      alternate: "var(--overlay1)",
+      alternate: "var(--overlay0)",
 
       "glow-primary": "var(--sky)",
     },
