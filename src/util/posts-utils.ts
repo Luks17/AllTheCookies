@@ -1,39 +1,57 @@
 import { SITE } from "@/config.mjs";
-import type { OptimizedImg, PostFrontmatter } from "@/types/Posts";
+import type {
+  OptimizedImg,
+  PostCollectionEntry,
+  PostFrontmatter,
+} from "@/types/Posts";
 import { getImage } from "astro:assets";
 import { CollectionEntry, getCollection } from "astro:content";
 import { getSlug } from "./common";
 
 // variable to store loaded posts so they don't get reloaded all the time
-let loaded_posts: CollectionEntry<"post">[];
+let loaded_posts: PostCollectionEntry[];
+
+async function getOptImg(
+  img: OptimizedImg,
+  width: number,
+  height: number
+): Promise<OptimizedImg> {
+  const optImg = await getImage({
+    src: img,
+    width,
+    height,
+    format: "webp",
+  });
+
+  return {
+    src: optImg.src,
+    width: optImg.options.width,
+    height: optImg.options.height,
+    format: optImg.options.format,
+  } as OptimizedImg;
+}
 
 async function optimizePostImages(
   posts: CollectionEntry<"post">[]
-): Promise<CollectionEntry<"post">[]> {
+): Promise<PostCollectionEntry[]> {
   return await Promise.all(
-    posts.map(async (post): Promise<CollectionEntry<"post">> => {
-      let optPost = post;
-
-      const optImg = await getImage({
-        src: post.data.thumbnail.img,
-        width: 720,
-        height: 405,
-        format: "webp",
-      });
+    posts.map(async (post): Promise<PostCollectionEntry> => {
+      const img = await getOptImg(post.data.thumbnail.img, 720, 405);
+      const smallImg = await getOptImg(post.data.thumbnail.img, 480, 270);
 
       const optThumb = {
-        img: {
-          src: optImg.src,
-          width: optImg.options.width,
-          height: optImg.options.height,
-          format: optImg.options.format,
-        } as OptimizedImg,
+        img,
+        smallImg,
         alt: post.data.thumbnail.alt,
       };
 
-      optPost.data.thumbnail = optThumb;
-
-      return optPost;
+      return {
+        ...post,
+        data: {
+          ...post.data,
+          thumbnail: optThumb,
+        },
+      } as PostCollectionEntry;
     })
   );
 }
@@ -51,10 +69,7 @@ function getPostDateTime(post: PostFrontmatter): number {
   return post.publishDate.getTime();
 }
 
-function filterPostsByCategory(
-  posts: CollectionEntry<"post">[],
-  category: string
-) {
+function filterPostsByCategory(posts: PostCollectionEntry[], category: string) {
   return posts.filter((post) => post.data.category === category);
 }
 
@@ -63,7 +78,7 @@ const hasCategory = (category: string | undefined) =>
 
 export async function getUnsortedPosts(
   category?: string
-): Promise<CollectionEntry<"post">[]> {
+): Promise<PostCollectionEntry[]> {
   if (!loaded_posts) await load_posts();
 
   let posts = loaded_posts;
@@ -75,7 +90,7 @@ export async function getUnsortedPosts(
 
 export async function getSortedPosts(
   category?: string
-): Promise<CollectionEntry<"post">[]> {
+): Promise<PostCollectionEntry[]> {
   const posts = await getUnsortedPosts(category);
 
   return posts.sort(
@@ -94,16 +109,13 @@ export async function getNumberOfPosts(category?: string): Promise<number> {
 }
 
 export async function getNumberOfPages(category?: string): Promise<number> {
-  return Math.ceil(
-    (await getNumberOfPosts(category ? category : undefined)) /
-      SITE.postsPerPage
-  );
+  return Math.ceil((await getNumberOfPosts(category)) / SITE.postsPerPage);
 }
 
 export async function getPostsByAuthor(author: CollectionEntry<"author">) {
-  if (!loaded_posts) await load_posts();
+  const posts = await getSortedPosts();
 
   const authorSlug = getSlug(author.data.name);
 
-  return loaded_posts.filter((post) => post.data.authors.includes(authorSlug));
+  return posts.filter((post) => post.data.authors.includes(authorSlug));
 }

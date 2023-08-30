@@ -12,7 +12,7 @@ module.exports = {
       "fg-secondary": "var(--surface1)",
       "fg-third": "var(--surface2)",
 
-      alternate: "var(--overlay1)",
+      alternate: "var(--overlay0)",
 
       "glow-primary": "var(--sky)",
     },
@@ -51,7 +51,7 @@ module.exports = {
     },
 
     fontFamily: {
-      primary: ["Raleway Variable", "sans-serif"],
+      primary: ["Raleway Variable", "Arial", "sans-serif"],
     },
 
     boxShadowColor: {
@@ -62,6 +62,9 @@ module.exports = {
     extend: {
       transitionProperty: {
         "max-height": "max-height",
+      },
+      borderWidth: {
+        1: "1px",
       },
     },
   },

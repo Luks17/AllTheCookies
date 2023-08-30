@@ -22,8 +22,6 @@ const optimizedBg = await getImage({
   height: 568,
 });
 
-const optLogo = await getImage({ src: logo, width: 400, height: 400 });
-
 const postsToSearch = (await getUnsortedPosts()).map((post) => post.data);
 
 // sends this page background, which is this website LCP on most pages, to be loaded asap
@@ -31,7 +29,10 @@ if (meta.largestContentfulPaint === undefined)
   meta.largestContentfulPaint = optimizedBg.src;
 
 // use website logo as default canonical image
-if (meta.socialImage === undefined) meta.socialImage = optLogo.src;
+if (meta.socialImage === undefined) {
+  const optLogo = await getImage({ src: logo, width: 400, height: 400 });
+  meta.socialImage = optLogo.src;
+}
 ---
 
 <Layout {...meta}>

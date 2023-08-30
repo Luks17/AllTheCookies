@@ -1,96 +1,75 @@
 import { getFormatedDate } from "@/util/date";
 import type { PostFrontmatter } from "@/types/Posts";
-import { useEffect, useRef, useState } from "react";
-import { useMediaQuery } from "@/util/hooks";
 import { getSlug } from "@/util/common";
+import { useMediaQuery } from "@/util/hooks";
 
 interface Props {
   post: PostFrontmatter;
+  useSmallImg?: boolean;
   expandOnFocus?: boolean;
   showCategory?: boolean;
   special?: boolean;
 }
 
-// this component code is really complex because it is used in a lot of very different places
-// for example, on a table or a top-bottom list, you may not want expandOnFocus because it will cause a lot of cls on hover
-// if you are listing the posts in publish date order, the most recent card should be special
-// if you are already listing posts from a specific category, you may not want showCategory
-// to reduce cls when using expandOnFocus, it is recomended for the parent component to have a min-height that fits the expanded cards
+// This component code is really complex because it is used in a lot of very different places
+// for example, on a table or a top-bottom list, you may not want expandOnFocus because it will
+// cause a lot of cls on hover
+//
+// If you are listing the posts in publish date order, the most recent card should be special
+//
+// If you are already listing posts from a specific category, you may not want showCategory
+// to reduce cls when using expandOnFocus, it is recomended for the parent component to have
+// a min-height that fits the expanded cards
+//
+// This element checks if the device has any hover implementation for expandOnFocus to work.
+// If it does not, it will fallback to it's non-expandOnFocus state
 function Card({
   post,
+  useSmallImg = false,
   expandOnFocus = true,
   showCategory = true,
   special = false,
 }: Props) {
-  const [isCardFocus, setIsCardFocus] = useState(!expandOnFocus);
-  const descriptionContainer = useRef<HTMLParagraphElement | null>(null);
-  const thumbContainer = useRef<HTMLImageElement | null>(null);
-  const isScreenSmall = useMediaQuery("(max-width: 640px)");
+  const isHoverSupported = useMediaQuery("(any-hover: hover)");
+
+  const img = {
+    src: useSmallImg ? post.thumbnail.smallImg.src : post.thumbnail.img.src,
+    width: useSmallImg
+      ? post.thumbnail.smallImg.width
+      : post.thumbnail.img.width,
+    height: useSmallImg
+      ? post.thumbnail.smallImg.height
+      : post.thumbnail.img.height,
+  };
 
   const postSlug = "/posts/" + getSlug(post.title);
 
-  const clickHandler = () =>
-    isScreenSmall && expandOnFocus && toggleCardExpansion();
-
-  // hover checks if the mouse is the card
-  // hover is undefined when this function is called from a click on the description
-  const toggleCardExpansion = (hover?: boolean) => {
-    if (hover === undefined) {
-      setIsCardFocus(!isCardFocus);
-    } else {
-      if (hover) {
-        setIsCardFocus(true);
-      } else {
-        setIsCardFocus(false);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (isCardFocus) {
-      descriptionContainer.current!.classList.remove("line-clamp-2");
-      descriptionContainer.current!.classList.add("max-h-40");
-
-      if (expandOnFocus) thumbContainer.current!.classList.add("scale-125");
-    } else {
-      descriptionContainer.current!.classList.remove("max-h-40");
-      thumbContainer.current!.classList.remove("scale-125");
-
-      setTimeout(() => {
-        descriptionContainer.current!.classList.add("line-clamp-2");
-      }, 200);
-    }
-  }, [isCardFocus]);
-
   return (
     <div
-      onMouseOver={() => expandOnFocus && toggleCardExpansion(true)}
-      onMouseLeave={() => expandOnFocus && toggleCardExpansion(false)}
-      className={`border-2 p-2 bg-crust rounded-md text-xl ${
+      className={`border-2 p-2 bg-crust group rounded-md text-xl ${
         special ? "border-secondary" : "border-third"
       }`}
     >
       {special && (
-        <h3 className="text-skin-accent-secondary text-lg font-bold pt-1 text-center">
+        <h3 className="text-skin-accent-secondary text-lg font-bold mt-1 text-center">
           Mais recente
         </h3>
       )}
 
       {/* thumb */}
-      <div className="flex items-center justify-center bg-fg-base m-4 mt-3 overflow-clip">
+      <div className="bg-fg-base m-4 mt-3 overflow-clip">
         <img
-          src={post.thumbnail.img.src}
+          src={img.src}
           alt={post.thumbnail.alt}
-          width={720}
-          height={405}
+          width={img.width}
+          height={img.height}
           className={
-            (expandOnFocus ? "max-sm:cursor-pointer" : "") +
-            " transition-transform ease-in-out duration-500"
+            expandOnFocus && isHoverSupported
+              ? "transition-transform ease-in-out duration-300 group-hover:scale-125"
+              : ""
           }
           loading="lazy"
           decoding="async"
-          onClick={clickHandler}
-          ref={thumbContainer}
         />
       </div>
 
@@ -99,7 +78,7 @@ function Card({
         {showCategory && (
           <a
             href={"/posts/" + post.category}
-            className="bg-alternate px-2 py-1 text-sm rounded-lg font-bold text-skin-bright hover:scale-110 transition-transform shadow-black shadow-sm"
+            className="bg-alternate px-2 py-1 text-sm rounded-lg font-bold text-skin-bright hover:scale-110 transition-transform shadow-black shadow-md"
           >
             {post.category}
           </a>
@@ -117,18 +96,25 @@ function Card({
         </h3>
 
         {/* description */}
-        <p
-          className={
-            "text-skin-subtext text-sm px-1 overflow-y-clip transition-max-height ease-in-out duration-200" +
-            (expandOnFocus
-              ? " max-h-10 line-clamp-2 max-sm:cursor-pointer"
-              : "")
-          }
-          onClick={clickHandler}
-          ref={descriptionContainer}
-        >
-          {post.description}
-        </p>
+        <div className="relative">
+          <p
+            className={
+              "text-skin-subtext text-sm px-1" +
+              (expandOnFocus && isHoverSupported
+                ? " max-h-10 overflow-y-clip group-hover:max-h-40 transition-max-height ease-in-out duration-200"
+                : "")
+            }
+          >
+            {post.description}
+          </p>
+          {expandOnFocus && isHoverSupported && (
+            <div className="absolute h-1/2 w-full top-1/2 bg-gradient-to-t from-crust group-hover:invisible border-b-1 border-third flex rounded-md justify-center">
+              <span className="text-skin-base absolute -bottom-3 bg-mantle px-1.5 rounded-full border-third border-1 text-sm">
+                +
+              </span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* tags */}
