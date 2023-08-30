@@ -72,6 +72,10 @@
     --bg-opacity: 0.08;
     --fg-opacity: 0.3;
   }
+
+  html {
+    font-display: optional;
+  }
 }
 
 @layer components {
