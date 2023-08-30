@@ -16,7 +16,16 @@ export default defineConfig({
       },
     },
   },
-  integrations: [react(), tailwind(), markdoc(), sitemap()],
+  integrations: [
+    react(),
+    tailwind({
+      // Disables injecting a basic `base.css` import on every page.
+      // Needed because I have my own base.css.
+      applyBaseStyles: false,
+    }),
+    markdoc(),
+    sitemap(),
+  ],
   redirects: {
     "/posts": "/posts/all",
   },
