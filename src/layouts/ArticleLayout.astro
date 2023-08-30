@@ -2,14 +2,25 @@
 import "@/styles/article.css";
 
 import PageLayout from "./PageLayout.astro";
-import type { MetaTags as Props } from "@/types/Meta";
+import type { MetaTags } from "@/types/Meta";
+import type { MarkdownHeading } from "astro";
+import Summary from "@/components/segments/Summary.astro";
 
-const meta = Astro.props;
+export interface Props {
+  meta: MetaTags;
+  headings: MarkdownHeading[];
+}
+
+const { meta, headings } = Astro.props;
 ---
 
 <PageLayout {...meta}>
   <section>
     <slot name="header" />
+  </section>
+
+  <section class="mt-10">
+    <Summary headings={headings} />
   </section>
 
   <section class="max-w-[45rem] mx-auto content-body">

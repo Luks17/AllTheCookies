@@ -2,15 +2,39 @@
 import PageDescription from "@/components/segments/PageDescription.astro";
 import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import { navLinks } from "@/resources/static/links";
-import Summary from "@/components/tags/ui/Summary";
 
 import { Image } from "astro:assets";
 import astroLogo from "@/assets/astro.png";
+import type { MarkdownHeading } from "astro";
+import type { MetaTags } from "@/types/Meta";
 
 const aboutPage = navLinks.filter((link) => link.slug === "about")[0];
+
+const headings: MarkdownHeading[] = [
+  {
+    text: "O que é este site",
+    slug: "o-que-e-este-site",
+    depth: 2,
+  },
+  {
+    text: "Como foi feito",
+    slug: "como-foi-feito",
+    depth: 2,
+  },
+  {
+    text: "Por quê em Português?",
+    slug: "por-que-em-portugues",
+    depth: 2,
+  },
+  {
+    text: "E os cookies? Onde estão?",
+    slug: "e-os-cookies-onde-estao",
+    depth: 2,
+  },
+];
 ---
 
-<ArticleLayout>
+<ArticleLayout meta={{} as MetaTags} headings={headings}>
   <PageDescription
     slot="header"
     pathToPage={[aboutPage.slug]}
@@ -19,9 +43,7 @@ const aboutPage = navLinks.filter((link) => link.slug === "about")[0];
   />
 
   <article class="mt-10">
-    <Summary client:visible />
-
-    <h2 id="heading-1">O que é este site</h2>
+    <h2 id={headings[0].slug}>{headings[0].text}</h2>
     <p>
       Esta página foi feita por mim, <a class="link" href="/authors/luks"
         >Luks</a
@@ -36,7 +58,7 @@ const aboutPage = navLinks.filter((link) => link.slug === "about")[0];
       pessoais.
     </p>
 
-    <h2 id="heading-2">Como foi feito</h2>
+    <h2 id={headings[1].slug}>{headings[1].text}</h2>
     <p>
       Este site foi criado utilizando o gerador de páginas estáticas
       <a href="https://astro.build/">AstroJS</a>. Ele foi escolhido por ser
@@ -72,7 +94,7 @@ const aboutPage = navLinks.filter((link) => link.slug === "about")[0];
       decidi utilizar o Astro para construir este site.
     </p>
 
-    <h2 id="heading-3">Por quê em Português?</h2>
+    <h2 id={headings[2].slug}>{headings[2].text}</h2>
     <p>
       Muitos programadores ao fazer um site pessoal os fazem em Inglês. No
       entanto, já há muito conteúdo bom disponível nessa língua na internet,
@@ -82,7 +104,7 @@ const aboutPage = navLinks.filter((link) => link.slug === "about")[0];
       fazer este site em Português.
     </p>
 
-    <h2 id="heading-4">E os cookies? Onde estão?</h2>
+    <h2 id={headings[3].slug}>{headings[3].text}</h2>
     <p>
       Eu menti, não há nenhum cookie neste site. Tome este para compensar 🍪.
     </p>

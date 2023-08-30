@@ -39,10 +39,10 @@ const meta = {
   largestContentfulPaint: post.data.thumbnail.img.src,
 } as MetaTags;
 
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 ---
 
-<ArticleLayout {...meta}>
+<ArticleLayout meta={meta} headings={headings}>
   <PostHeadline slot="header" post={post.data} />
 
   <Content />

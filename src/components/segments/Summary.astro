@@ -1,0 +1,35 @@
+---
+import type { MarkdownHeading } from "astro";
+
+// markdoc creates ids for each heading
+// this component needs those to generate a summary
+export interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+---
+
+<aside
+  class="bg-crust border-primary border-l-8 shadow-light-constrast shadow-sm p-5 my-6 rounded-r-2xl max-w-lg mx-auto"
+>
+  <h2
+    class="text-skin-base font-bold text-2xl indent-5 mb-3 underline underline-offset-4"
+  >
+    Sumário
+  </h2>
+  <ul class="flex flex-col text-skin-alternate font-semibold gap-y-1.5 text-lg">
+    {
+      headings.map((heading) => (
+        <li class="flex items-center hover:text-skin-selected hover:underline hover:underline-offset-2">
+          <a
+            href={"#" + heading.slug}
+            aria-label={`Rolagem rápida à seção: ${heading.text}`}
+          >
+            {"# " + heading.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</aside>
