@@ -37,7 +37,7 @@ async function optimizePostImages(
   return await Promise.all(
     posts.map(async (post): Promise<PostCollectionEntry> => {
       const img = await getOptImg(post.data.thumbnail.img, 720, 405);
-      const smallImg = await getOptImg(post.data.thumbnail.img, 480, 270);
+      const smallImg = await getOptImg(post.data.thumbnail.img, 400, 225);
 
       const optThumb = {
         img,
