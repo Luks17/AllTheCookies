@@ -1,6 +1,6 @@
 import type { AuthorFrontmatter } from "@/types/Authors";
 import type { PostFrontmatter } from "@/types/Posts";
-import { CollectionEntry, getEntry } from "astro:content";
+import { type CollectionEntry, getEntry } from "astro:content";
 import { getSlug } from "./common";
 import { getPostsByAuthor } from "./posts-utils";
 import { SITE } from "@/config.mjs";

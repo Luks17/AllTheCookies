@@ -2,7 +2,7 @@ import { SITE } from "@/config.mjs";
 import { AuthorPossibleSocials } from "@/types/Authors";
 import { validateAuthorTags } from "@/util/authors";
 import { validateCategory, validateTags } from "@/util/post-validation";
-import { z, ImageFunction } from "astro:content";
+import { z, type ImageFunction } from "astro:content";
 
 export const postSchema = ({ image }: { image: ImageFunction }) =>
   z.object({

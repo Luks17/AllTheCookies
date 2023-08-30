@@ -1,4 +1,4 @@
-import { defineConfig, sharpImageService } from "astro/config";
+import { defineConfig } from "astro/config";
 import path from "path";
 import { fileURLToPath } from "url";
 import react from "@astrojs/react";
@@ -16,13 +16,7 @@ export default defineConfig({
       },
     },
   },
-  experimental: {
-    assets: true,
-  },
   integrations: [react(), tailwind(), markdoc(), sitemap()],
-  image: {
-    service: sharpImageService(),
-  },
   redirects: {
     "/posts": "/posts/all",
   },

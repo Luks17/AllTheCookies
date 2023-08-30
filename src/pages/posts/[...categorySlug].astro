@@ -8,13 +8,13 @@ import { getNumberOfPages, getSortedPosts } from "@/util/posts-utils";
 import { SITE } from "@/config.mjs";
 
 export async function getStaticPaths() {
-  // iterates through all posts categories (3 at the time of writing)
+  // iterates through all posts categories (4 (including category all) at the time of writing)
   const paths = await Promise.all(
     postsCategories.map(async (category) => {
       const numbers: number[] = [1];
       const numberOfPages = await getNumberOfPages(category.slug);
 
-      for (let i = 1; i <= numberOfPages; ++i) {
+      for (let i = 2; i <= numberOfPages; i++) {
         numbers.push(i);
       }
 

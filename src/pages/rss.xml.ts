@@ -3,7 +3,7 @@ import { SITE } from "@/config.mjs";
 import { getSortedPosts } from "@/util/posts-utils";
 import { getSlug } from "@/util/common";
 
-export async function get() {
+export async function GET() {
   const posts = await getSortedPosts();
   return rss({
     title: SITE.title,

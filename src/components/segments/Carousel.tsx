@@ -1,5 +1,5 @@
 import type { PostFrontmatter } from "@/types/Posts";
-import { MouseEventHandler, useEffect, useState } from "react";
+import { type MouseEventHandler, useEffect, useState } from "react";
 import { useMediaQuery } from "@/util/hooks";
 import Card from "./Card";
 import { ArrowLeft, ArrowRight } from "@/resources/static/Icons";

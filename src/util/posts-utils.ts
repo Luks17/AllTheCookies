@@ -5,7 +5,7 @@ import type {
   PostFrontmatter,
 } from "@/types/Posts";
 import { getImage } from "astro:assets";
-import { CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import { getSlug } from "./common";
 
 // variable to store loaded posts so they don't get reloaded all the time
