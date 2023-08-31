@@ -45,9 +45,9 @@ export function SocialButton(social: AuthorSocial) {
         const notification = notificationContainer.current!;
 
         navigator.clipboard.writeText(social.link);
-        notification.classList.remove("opacity-0");
+        notification.classList.remove("hidden");
         setTimeout(() => {
-          notification.classList.add("opacity-0");
+          notification.classList.add("hidden");
         }, 3000);
       });
     }
@@ -66,7 +66,7 @@ export function SocialButton(social: AuthorSocial) {
       {social.name === "mail" && (
         <div
           ref={notificationContainer}
-          className="fixed bottom-5 left-0 w-full opacity-0 transition-opacity ease-in-out z-50"
+          className="fixed top-24 right-0 w-full hidden z-50"
         >
           <CopiedNotification />
         </div>

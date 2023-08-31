@@ -1,5 +1,5 @@
-import Card from "./Card";
-import Overlay from "./Overlay";
+import Card from "@/components/segments/Card";
+import Overlay from "@/components/segments/Overlay";
 
 import { MagnifyingGlass } from "@/resources/static/Icons";
 import type { PostFrontmatter } from "@/types/Posts";

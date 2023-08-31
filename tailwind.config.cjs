@@ -7,7 +7,6 @@ module.exports = {
       primary: "var(--base)",
       crust: "var(--crust)",
       mantle: "var(--mantle)",
-      selected: "var(--surface2)",
       "fg-base": "var(--surface0)",
       "fg-secondary": "var(--surface1)",
       "fg-third": "var(--surface2)",

@@ -46,9 +46,8 @@ function Card({
 
   return (
     <div
-      className={`border-2 p-2 bg-crust group rounded-md text-xl ${
-        special ? "border-secondary" : "border-third"
-      }`}
+      className={`border-2 p-2 bg-crust group rounded-md text-xl ${special ? "border-secondary" : "border-third"
+        }`}
     >
       {special && (
         <h3 className="text-skin-accent-secondary text-lg font-bold mt-1 text-center">
@@ -64,8 +63,8 @@ function Card({
           width={img.width}
           height={img.height}
           className={
-            expandOnFocus && isHoverSupported
-              ? "transition-transform ease-in-out duration-300 group-hover:scale-125"
+            isHoverSupported
+              ? "transition-transform ease-in-out duration-300 group-hover:scale-110"
               : ""
           }
           loading="lazy"

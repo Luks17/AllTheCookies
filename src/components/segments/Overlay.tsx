@@ -20,8 +20,8 @@ function Overlay({
 }: Props) {
   return (
     <aside
-      className={`fixed flex z-20 ${lgHidden ? "lg:hidden " : " "
-        }top-0 overlay right-0 h-full w-full justify-center items-center overlay-opacity transition-all duration-100 ease-linear ${condition ? "scale-100 visible" : "scale-0 invisible"
+      className={`fixed flex z-20 ${lgHidden ? "lg:hidden " : ""
+        }top-0 right-0 h-full w-full justify-center items-center overlay-opacity transition-all duration-100 ease-linear ${condition ? "scale-100 visible" : "scale-0 invisible"
         }`}
     >
       {/* this div's only purpose is to close the overlay when the user clicks outside content  */}
