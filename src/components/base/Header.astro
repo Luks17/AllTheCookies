@@ -1,8 +1,8 @@
 ---
 import Logo from "@/components/Logo.astro";
+import Navbar from "@/components/base/Navbar.astro";
 import SidebarButton from "@/components/segments/SidebarButton";
 import SearchButton from "@/components/segments/SearchButton";
-import Navbar from "@/components/base/Navbar";
 import ThemeToggle from "@/components/segments/ThemeToggle";
 ---
 
@@ -13,7 +13,7 @@ import ThemeToggle from "@/components/segments/ThemeToggle";
     <Logo />
 
     <div class="hidden lg:flex justify-start items-center">
-      <Navbar client:media="(min-width: 1024px)" />
+      <Navbar />
     </div>
 
     <ul class="flex gap-3 text-skin-base items-center justify-end">
@@ -22,12 +22,13 @@ import ThemeToggle from "@/components/segments/ThemeToggle";
       </li>
 
       <li class="hidden lg:flex">
+      <!-- theme-toggle desktop - JS only load when screen is bigger than 1024px -->
         <ThemeToggle client:media="(min-width: 1024px)" />
       </li>
 
       <!-- sidebar-open mobile - JS only load when screen is smaller than 1024px -->
       <li class="lg:hidden hoverable-btn">
-        <SidebarButton client:media="(max-width: 1024px)" />
+        <SidebarButton client:media="(max-width: 1023px)" />
       </li>
     </ul>
   </div>

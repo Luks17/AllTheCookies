@@ -12,8 +12,8 @@ function Sidebar() {
 
       {/* links */}
       <nav className="relative border-crust mt-20 border-t-2">
-        {navLinks.map((link) => (
-          <SidebarLink key={link.id} {...link} />
+        {navLinks.map((link, id) => (
+          <SidebarLink key={id} {...link} />
         ))}
       </nav>
     </>
