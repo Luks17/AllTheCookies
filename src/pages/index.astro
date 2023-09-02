@@ -50,7 +50,7 @@ const sortedPosts = (await getSortedPosts()).map((post) => post.data);
       Nossas <span class="text-skin-accent-secondary">últimas</span> postagens
     </h2>
     <div class="mt-4">
-      <Carousel sortedPosts={sortedPosts} client:visible />
+      <Carousel sortedPosts={sortedPosts} client:idle />
     </div>
   </section>
 

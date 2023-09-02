@@ -1,15 +1,17 @@
 import { useRef, useState } from "react";
 
-import type { LinkTemplate } from "@/types/Links";
+import { navLinks } from "@/resources/static/links";
 
 interface SubmenuProps {
   buttonName: string;
-  sublinks: LinkTemplate[];
+  navSlug: string;
 }
 
-function Submenu({ buttonName, sublinks }: SubmenuProps) {
+function Submenu({ buttonName, navSlug }: SubmenuProps) {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const container = useRef<HTMLButtonElement | null>(null);
+
+  const sublinks = navLinks.find((link) => link.slug === navSlug)?.sublinks;
 
   const submenuPadding = 20;
   let submenuAbsolutePosition = 0;
@@ -34,8 +36,9 @@ function Submenu({ buttonName, sublinks }: SubmenuProps) {
       </button>
       {/* Tailwindcss does not support dynamic values for classes, so I need to use the style prop to align the submenu */}
       <aside
-        className={`absolute w-fit origin-top transition-transform ease-in flex flex-col items-center justify-center ${!isSubmenuOpen && "scale-y-0"
-          }`}
+        className={`absolute w-fit origin-top transition-transform ease-in flex flex-col items-center justify-center ${
+          !isSubmenuOpen && "scale-y-0"
+        }`}
         style={{ left: `${submenuAbsolutePosition}px` }}
       >
         <div className="submenu-triangle"></div>
@@ -43,19 +46,20 @@ function Submenu({ buttonName, sublinks }: SubmenuProps) {
           className="bg-fg-base rounded-lg"
           style={{ padding: submenuPadding }}
         >
-          {sublinks.map((sublink) => {
-            const { id, name, Icon, slug } = sublink;
+          {sublinks !== undefined &&
+            sublinks.map((sublink, id) => {
+              const { name, Icon, slug } = sublink;
 
-            return (
-              <li
-                key={id}
-                className="flex items-center text-skin-base hoverable-btn py-1 capitalize"
-              >
-                {Icon}
-                <a href={"/posts/" + slug}>{name}</a>
-              </li>
-            );
-          })}
+              return (
+                <li
+                  key={id}
+                  className="flex items-center text-skin-base hoverable-btn py-1 capitalize"
+                >
+                  {Icon}
+                  <a href={"/posts/" + slug}>{name}</a>
+                </li>
+              );
+            })}
         </ul>
       </aside>
     </div>

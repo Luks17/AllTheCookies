@@ -4,7 +4,6 @@ export interface ItemTemplate {
 }
 
 export interface LinkTemplate extends ItemTemplate {
-  id: number;
   slug: string;
   description: string;
   sublinks?: LinkTemplate[];
