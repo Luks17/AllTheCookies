@@ -1,25 +1,22 @@
 import Card from "@/components/segments/Card";
-import Overlay from "@/components/segments/Overlay";
 
 import { MagnifyingGlass } from "@/resources/static/Icons";
 import type { PostFrontmatter } from "@/types/Posts";
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SITE } from "@/config.mjs";
-import {
-  closeSearch,
-  isSearchOpen,
-  openSearch,
-} from "@/resources/stores/nav-store";
-import { useStore } from "@nanostores/react";
+
+interface Props {
+  elementsToSearch: PostFrontmatter[];
+  query: string | null;
+}
 
 interface FuseResult {
   refIndex: number;
   item: PostFrontmatter;
 }
 
-function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
-  const $isSearchOpen = useStore(isSearchOpen);
+function Search({ elementsToSearch, query }: Props) {
   const [inputFieldText, setInputFieldText] = useState("");
   const [searchResults, setSearchResults] = useState([] as FuseResult[]);
   const [showResults, setShowResults] = useState(false);
@@ -59,21 +56,12 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
     }
   }
 
-  function closeAndCleanSearch() {
-    setInputFieldText("");
-    // is this redundant? Yes, but it also bypasses the useEffect timeout
-    history.replaceState(null, "", window.location.pathname);
-    closeSearch();
-  }
-
   useEffect(() => {
     const inputField = inputContainer.current!;
-    const query = new URLSearchParams(window.location.search).get("q");
 
     // checks if the url has a query and sets it to the input field
     if (query !== null) {
       setInputFieldText(query);
-      openSearch();
       inputField.selectionStart = query.length;
     } else inputField.selectionStart = 0;
   }, []);
@@ -93,11 +81,7 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
   }, [inputFieldText]);
 
   return (
-    <Overlay
-      maxW_sm={false}
-      closeFunction={closeAndCleanSearch}
-      condition={$isSearchOpen}
-    >
+    <>
       <a id="search-top"></a>
       <p className="absolute w-full text-skin-muted font-bold text-center pr-4 mt-8">
         Busque posts em todo o site
@@ -121,7 +105,7 @@ function Search({ elementsToSearch }: { elementsToSearch: PostFrontmatter[] }) {
 
         {showResults && <Results searchResults={searchResults} />}
       </div>
-    </Overlay>
+    </>
   );
 }
 
