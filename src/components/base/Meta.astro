@@ -3,6 +3,7 @@ import type { MetaTags as Props } from "@/types/Meta";
 import { SITE } from "@/config.mjs";
 
 import font from "@fontsource-variable/raleway/files/raleway-latin-wght-normal.woff2";
+import { ViewTransitions } from "astro:transitions";
 
 // if page does not define any meta info, these will be the defaults
 const {
@@ -27,6 +28,8 @@ const imgURL = new URL(socialImage, Astro.url.origin).href;
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta name="author" content={author} />
+
+<ViewTransitions />
 
 <link
   rel="preload"
