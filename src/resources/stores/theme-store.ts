@@ -2,10 +2,12 @@ import { atom } from "nanostores";
 
 export const isLightMode = atom(false);
 
+export const getThemeStr = (theme: boolean) => (theme ? "light" : "dark");
+
 function setTheme(theme: boolean) {
   isLightMode.set(theme);
 
-  const themeStr = theme ? "light" : "dark";
+  const themeStr = getThemeStr(theme);
 
   document.firstElementChild?.setAttribute("page-theme", themeStr);
   localStorage.theme = themeStr;

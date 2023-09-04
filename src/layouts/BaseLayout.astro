@@ -17,10 +17,12 @@ const meta = Astro.props;
   <!-- lining-nums fixes raleway font oddly placed numbers -->
   <body class="bg-primary h-full w-full font-primary lining-nums">
     <slot />
-    <script>
-      import { setPreferredTheme } from "@/resources/stores/theme-store";
-
-      setPreferredTheme();
-    </script>
   </body>
+
 </html>
+<script>
+import { setPreferredTheme, isLightMode, getThemeStr } from "@/resources/stores/theme-store";
+
+setPreferredTheme()
+document.addEventListener("astro:after-swap", () => document.firstElementChild?.setAttribute("page-theme", getThemeStr(isLightMode.get())));
+</script>
