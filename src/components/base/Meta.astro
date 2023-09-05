@@ -37,6 +37,7 @@ const imgURL = new URL(socialImage, Astro.url.origin).href;
   crossorigin="anonymous"
   href={font}
   type="font/woff2"
+  transition:persist
 />
 
 <!-- sitemap -->
@@ -60,6 +61,7 @@ const imgURL = new URL(socialImage, Astro.url.origin).href;
       as="image"
       href={largestContentfulPaint}
       type="image/webp"
+      transition:persist
     />
   )
 }
