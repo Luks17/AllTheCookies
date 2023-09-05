@@ -32,6 +32,8 @@ function Card({
 }: Props) {
   const isHoverSupported = useMediaQuery("(any-hover: hover)");
 
+  const titleSlug = getSlug(post.title);
+
   const img = {
     src: useSmallImg ? post.thumbnail.smallImg.src : post.thumbnail.img.src,
     width: useSmallImg
@@ -42,12 +44,13 @@ function Card({
       : post.thumbnail.img.height,
   };
 
-  const postSlug = "/posts/" + getSlug(post.title);
+  const postSlug = "/posts/" + titleSlug;
 
   return (
     <div
-      className={`border-2 p-2 bg-crust group rounded-md text-xl ${special ? "border-secondary" : "border-third"
-        }`}
+      className={`border-2 p-2 bg-crust group rounded-md text-xl ${
+        special ? "border-secondary" : "border-third"
+      }`}
     >
       {special && (
         <h3 className="text-skin-accent-secondary text-lg font-bold mt-1 text-center">
@@ -69,6 +72,7 @@ function Card({
           }
           loading="lazy"
           decoding="async"
+          style={{ viewTransitionName: `card-img-${titleSlug}` }}
         />
       </div>
 

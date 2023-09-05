@@ -60,7 +60,7 @@ const authors = await extractAuthorsFromPost(post);
       class="absolute w-fit mx-auto p-2 rounded-b-lg capitalize bg-crust font-bold text-xs sm:text-sm text-skin-accent-secondary opacity-90 hover:opacity-100 transition-opacity"
       >{category}</a
     >
-    <Image src={thumb.img} alt={thumb.alt} loading="eager" />
+    <Image src={thumb.img} alt={thumb.alt} loading="eager" transition:name={`card-img-${getSlug(post.title)}`} />
   </div>
 
   <!-- authors -->
@@ -70,9 +70,10 @@ const authors = await extractAuthorsFromPost(post);
       <ul class="flex items-center gap-2">
         {
           authors.map((author) => {
+            const authorSlug = getSlug(author.name)
             return (
               <li class="w-fit">
-                <a href={`/authors/${getSlug(author.name)}`}>
+                <a href={`/authors/${authorSlug}`}>
                   <Image
                     src={author.image}
                     alt={thumb.alt}
@@ -81,6 +82,7 @@ const authors = await extractAuthorsFromPost(post);
                     height={84}
                     loading="lazy"
                     decoding="async"
+                    transition:name={`author-img-${authorSlug}`}
                   />
                 </a>
               </li>

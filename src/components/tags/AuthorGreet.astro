@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
 
 import { SocialButton } from "@/components/segments/SocialButton";
+import { getSlug } from "@/util/common";
 
 export interface Props {
   author: string;
@@ -27,6 +28,7 @@ const socials = authorEntry.data.socials;
       width={1028}
       height={1028}
       class="shadow-black shadow-md rounded-lg"
+      transition:name={`author-img-${getSlug(authorEntry.data.name)}`}
     />
   </div>
   <!-- text -->
