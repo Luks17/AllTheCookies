@@ -22,7 +22,16 @@ const meta = Astro.props;
 </html>
 <script>
 import { setPreferredTheme, isLightMode, getThemeStr } from "@/resources/stores/theme-store";
+import { closeSidebar, closeSearch } from "@/resources/stores/nav-store";
 
 setPreferredTheme()
-document.addEventListener("astro:after-swap", () => document.firstElementChild?.setAttribute("page-theme", getThemeStr(isLightMode.get())));
+
+document.addEventListener("astro:after-swap", () => {
+  // fixes theme on page transitions
+  document.firstElementChild?.setAttribute("page-theme", getThemeStr(isLightMode.get()))
+
+  // closes overlay elements on page transitions
+  closeSearch();
+  closeSidebar();
+});
 </script>
