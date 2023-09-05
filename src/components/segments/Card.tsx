@@ -9,6 +9,7 @@ interface Props {
   expandOnFocus?: boolean;
   showCategory?: boolean;
   special?: boolean;
+  viewTransitionStyle?: boolean;
 }
 
 // This component code is really complex because it is used in a lot of very different places
@@ -23,12 +24,16 @@ interface Props {
 //
 // This element checks if the device has any hover implementation for expandOnFocus to work.
 // If it does not, it will fallback to it's non-expandOnFocus state
+//
+// If you want to show a card of a certain post somewhere where there is the possibility of
+// the same post being showed, do not use viewTransitionStyle
 function Card({
   post,
   useSmallImg = false,
   expandOnFocus = true,
   showCategory = true,
   special = false,
+  viewTransitionStyle = false,
 }: Props) {
   const isHoverSupported = useMediaQuery("(any-hover: hover)");
 
@@ -48,9 +53,8 @@ function Card({
 
   return (
     <div
-      className={`border-2 p-2 bg-crust group rounded-md text-xl ${
-        special ? "border-secondary" : "border-third"
-      }`}
+      className={`border-2 p-2 bg-crust group rounded-md text-xl ${special ? "border-secondary" : "border-third"
+        }`}
     >
       {special && (
         <h3 className="text-skin-accent-secondary text-lg font-bold mt-1 text-center">
@@ -72,7 +76,11 @@ function Card({
           }
           loading="lazy"
           decoding="async"
-          style={{ viewTransitionName: `card-img-${titleSlug}` }}
+          style={
+            viewTransitionStyle
+              ? { viewTransitionName: `post-img-${titleSlug}` }
+              : {}
+          }
         />
       </div>
 

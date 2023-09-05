@@ -60,7 +60,7 @@ const authors = await extractAuthorsFromPost(post);
       class="absolute w-fit mx-auto p-2 rounded-b-lg capitalize bg-crust font-bold text-xs sm:text-sm text-skin-accent-secondary opacity-90 hover:opacity-100 transition-opacity"
       >{category}</a
     >
-    <Image src={thumb.img} alt={thumb.alt} loading="eager" transition:name={`card-img-${getSlug(post.title)}`} />
+    <Image src={thumb.img} alt={thumb.alt} loading="eager" transition:name={`post-img-${getSlug(post.title)}`} />
   </div>
 
   <!-- authors -->

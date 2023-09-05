@@ -29,16 +29,27 @@ const imgURL = new URL(socialImage, Astro.url.origin).href;
 <meta name="description" content={description} />
 <meta name="author" content={author} />
 
-<ViewTransitions />
-
+<!-- Font preloading -->
 <link
   rel="preload"
   as="font"
   crossorigin="anonymous"
   href={font}
   type="font/woff2"
-  transition:persist
 />
+
+<!-- LCP preloading -->
+{
+  largestContentfulPaint !== undefined && (
+    <link
+      rel="preload"
+      fetchpriority="high"
+      as="image"
+      href={largestContentfulPaint}
+      type="image/webp"
+    />
+  )
+}
 
 <!-- sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
@@ -52,20 +63,6 @@ const imgURL = new URL(socialImage, Astro.url.origin).href;
 <meta name="msapplication-TileColor" content="#da532c" />
 <meta name="theme-color" content="#ffffff" />
 
-<!-- LCP preloading -->
-{
-  largestContentfulPaint !== undefined && (
-    <link
-      rel="preload"
-      fetchpriority="high"
-      as="image"
-      href={largestContentfulPaint}
-      type="image/webp"
-      transition:persist
-    />
-  )
-}
-
 <!-- Open Graph -->
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -78,3 +75,6 @@ const imgURL = new URL(socialImage, Astro.url.origin).href;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={imgURL} />
+
+<!-- AstroJS ViewTransitions implementation -->
+<ViewTransitions />
