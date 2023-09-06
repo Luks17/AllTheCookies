@@ -76,11 +76,25 @@ function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
             columnGap: `${GAP_WIDTH}px`,
           }}
         >
-          {posts.map((post, i) => (
-            <li key={i} style={{ width: SLIDE_WIDTH }}>
-              <Card post={post} useSmallImg={true} special={i === 0} />
-            </li>
-          ))}
+          {posts.map((post, i) => {
+            const hide =
+              isLg && (i < postIndex || i > postIndex + (SHOWED_POSTS_LG - 1));
+            return (
+              <li
+                key={i}
+                className={`transition-opacity ease-in-out duration-500 ${hide ? "opacity-0" : ""
+                  }`}
+                style={{ width: SLIDE_WIDTH }}
+              >
+                <Card
+                  post={post}
+                  useSmallImg={true}
+                  special={i === 0}
+                  viewTransitionStyle={true}
+                />
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
