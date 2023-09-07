@@ -1,0 +1,113 @@
+---
+authors: ["luks"]
+title: Simulando uma SPA com a View Transitions API e Astro
+description: A View Transition API permite simular uma SPA em seu MPA! Neste artigo eu falo um pouco sobre como ela funciona e como a usei com AstroJS.
+thumbnail: {
+  img: "@/assets/posts/astrojs-viewtransitions/thumb.jpg",
+  alt: Tag da View Transitions em Astro
+}
+publishDate: 2023-09-06T22:31:00Z
+category: blog
+tags: ["astrojs", "web", "html/css"]
+draft: false
+minutesRead: 4
+edited: false
+---
+
+## Introdução
+
+Uma das coisas mais legais que está sendo desenvolvida para a web nos últimos tempos é a **View Transitions API**. 
+Ela permite a criação de animações de transição durante a navegação entre páginas, simulando o comportamento de 
+uma *Single-Page Application* (SPA) em uma *Multi-Page Application* (MPA)! E isso **usando apenas CSS**!
+
+Ela foi proposta pelo **W3C CSS Working Group** e hoje em dia já está sendo suportada pela 
+[maior parte dos navegadores baseados em Chromium](#referencias) (nada do Firefox ainda infelizmente 🙁).
+
+Para minha sorte, o *framework* utilizado para construir esta página, **Astro em sua atualização 3.0**, 
+foi o primeiro a implementar uma solução para utilizar View Transitions com *fallback* para navegadores 
+que não a suportam ainda e com persistência de estado! 
+
+Assim que terminei de implementar as coisas mais importantes desta página, já comecei a pesquisar como implementar essa *feature*. 
+E o resultado? Navegue por esta página e descubra você mesmo! Neste artigo irei falar sobre o que tive que fazer para implementá-la 
+e tentar explicar sobre como ela funciona.
+
+## Implementação básica
+
+{% aside type="danger" title="Isto não é um tutorial!" %}
+Isto é um artigo descritivo , não tomei todo o cuidado que tomaria em tutoriais para garantir uma didática boa.
+{% /aside %}
+
+Utilizando a [documentação oficial do Astro como referência](#referencias), percebe-se que não é necessário mudar muito para começar a 
+usar a *feature*. A única mudança que precisa ser feita é colocar o componente `<ViewTransitions />` em uma `<head />` comum entre as páginas do site.
+
+Com isso, o Astro começa a englobar o HTML principal com um pseudo elemento `::view-transition` sempre que você navegar entre suas rotas, 
+realizando uma transição padrão com a animação definida por eles. Além disso, ele também já implementa o fallback para navegadores que não 
+suportem a feature ou para usuários que prefiram movimentação reduzida nas páginas.
+
+No entanto, o primeiro problema dá a sua cara imediatamente após isso: o tema da página não persiste quando navegamos nela! Isso deve-se ao 
+fato do Astro executar o script, que busca a preferência de tema do usuário, apenas quando ele chega pela primeira vez na página, nunca 
+executando-o novamente, nem mesmo quando ele navega pelas rotas.
+
+Para resolver isso, podemos utilizar `astro:after-swap`, que é um evento que o Astro lança imediatamente quando a nova página substitui a anterior. 
+Logo, se o escutamos podemos executar nosso script de tema sempre que ele é lançado!
+
+```typescript
+<script>
+
+import { setTemaPreferido } from "@/caminho/para/temas";
+
+setTemaPreferido();
+
+document.addEventListener("astro:after-swap", setTemaPreferido);
+
+</script>
+```
+
+Apenas com isso, esta página já começou a funcionar sem grandes problemas!
+
+## Persistindo estados e transições de imagens
+
+O Astro permite que se persista elementos entre páginas. Logo, é possível fazer coisas incríveis que seriam extremamente complexas em outros *frameworks*, 
+como persistir um cronômetro entre páginas sem atrapalhar sua contagem ou até continuar executando um vídeo de de uma página para a outra!
+
+Isso é possível com a diretiva `transition:persist`, que pode até ser usada em componentes de outros frameworks como React! 
+
+No entanto, você provavelmente clicou neste artigo para ver como eu implementei a animação de imagens na transição de páginas e, realmente, 
+isso é provavelmente a parte mais interessante.
+
+Para fazer isso, o Astro fornece uma diretiva chamada `transition:name=”nome”`, que basicamente implementa o estilo `view-transition-name` 
+no seu elemento para você. Basicamente, elementos com o mesmo `view-transition-name` de duas páginas diferentes são “conectados”  e o navegador 
+cria uma transição animada entre eles.
+
+Porém, há uma limitação para esse estilo: em um mesmo HTML, não podem existir dois ou mais elementos com o mesmo `view-transition-name`. 
+Isso pois o navegador não tem como saber qual deles deve ser animado na troca de páginas. 
+
+## Como isso funciona?
+
+Imagine um *Card* que contém a *thumbnail* de um artigo na página A e um *Hero* na página B com uma versão da imagem com melhor qualidade e maior. 
+Quando o usuário navega de A para B, o navegador irá calcular as diferenças entre a *thumbnail* do *Card* e o *Hero* e criar estados intermediários para 
+dar a ilusão de animação.
+
+Um [artigo em inglês de Dave Rupert](#referencias) utilizou como exemplo uma imagem que achei sensacional para explicar isso:
+
+![Animorphs como exemplo para View Transitions](../../assets/posts/astrojs-viewtransitions/animorphs.jpg)
+
+Após ver isso, não irei mais elaborar sobre o assunto.
+
+## Problemas
+
+Apesar de ser uma adição incrível à web, as View Transitions do Astro introduzem uma complexidade a mais para as MPAs por causa da persistência de 
+estados e execução única de scripts que executavam múltiplas vezes antes. Ademais, por ainda ser uma feature nova nos navegadores, há uma alta 
+possibilidade de ocorrência de bugs.
+
+Além disso, após implementá-las na página, sempre que quiser fazer algo novo preciso testar tudo duas vezes: uma em um navegador que 
+suporte a feature e outra em algum que não o suporte (isso sem contar ter que fazer o mesmo para o mobile!).
+
+No entanto, apesar de tudo isso, eu acredito que vale completamente o esforço, pois deixa a página muito mais viva e dinâmica!
+
+{% anchor name="referencias" / %}
+### Referências
+
+- [Suporte da View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API#browser_compatibility)
+- [Documentação sobre View Transitions do astro](https://docs.astro.build/en/guides/view-transitions/)
+- [Artigo de Dave Rupert](https://daverupert.com/2023/05/getting-started-view-transitions/)
