@@ -57,7 +57,7 @@ const authors = await extractAuthorsFromPost(post);
   <div class="mx-4 rounded-xl border-2 border-crust flex justify-center">
     <a
       href={`/posts/${categorySlug}`}
-      class="absolute w-fit mx-auto p-2 rounded-b-lg capitalize bg-crust font-bold text-xs sm:text-sm text-skin-accent-secondary opacity-90 hover:opacity-100 transition-opacity"
+      class="absolute w-fit mx-auto p-2 rounded-b-lg capitalize bg-crust font-bold text-xs sm:text-sm text-skin-accent-secondary opacity-90 hover:opacity-100 transition-opacity z-10"
       >{category}</a
     >
     <Image src={thumb.img} alt={thumb.alt} loading="eager" transition:name={`post-img-${getSlug(post.title)}`} />
