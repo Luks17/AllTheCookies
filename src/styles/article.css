@@ -35,6 +35,18 @@
 /*   counter-increment: line; */
 /* } */
 
+.content-body article > table {
+  @apply w-full mx-auto text-skin-base bg-fg-base border-secondary border-1;
+}
+
+.content-body article > table > thead {
+  @apply font-bold text-skin-accent bg-mantle border-b-1 border-third;
+}
+
+.content-body article > table > tbody {
+  @apply bg-primary;
+}
+
 .content-body .accent {
   @apply font-semibold text-skin-accent;
 }

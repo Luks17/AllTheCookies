@@ -1,0 +1,81 @@
+---
+authors: ["luks"]
+title: Unity começará a cobrar taxas por cada jogo instalado
+description: A Unity decidiu começar a cobrar taxas por cada cópia instalada de jogos feito com ela, causando dessatisfação entre desenvolvedores.
+thumbnail: {
+  img: "@/assets/posts/unity-comeca-a-cobrar/thumb.jpg",
+  alt: Unity querendo ganhar dinheiro
+}
+publishDate: 2023-09-12T19:05:00Z
+category: news
+tags: ["gaming"]
+draft: false
+minutesRead: 4
+edited: false
+---
+
+## O que aconteceu?
+
+A Unity, uma *game-engine* de código fechado multiplataforma, começará a cobrar uma taxa sobre cada instalação a partir de Janeiro de 2024. 
+
+[Segundo o FAQ](#referencias) lançado por eles, os planos mais simples deverão pagar uma taxa de 20 centavos de dólar por cada cópia instalada caso as seguintes condições forem atendidas:
+
+- O jogo faturou pelo menos 200.000 dólares em um período de 12 meses;
+- O jogo teve mais de 200.000 cópias instaladas (não foi especificado se betas abertas e demos contarão para esse número).
+
+Planos mais avançados pagarão taxas menores e variadas dependendo da quantidade de instalações acima do limite. Além disso, os limites descritos acima são maiores para esses planos.
+
+| 	Instalações acima do limite | Unity Personal e  Unity Plus | Unity Pro | Unity Enterprise |
+|:---:|:---:|:---:|:---:|
+| 1-100.000 | $0.20 | $0.15 | $0.125 |
+| 100.001-500.000 | $0.20 | $0.075 | $0.06 |
+| 500.001-1.000.000 | $0.20 | $0.03 | $0.02 |
+| 1.000.001+ | $0.20 | $0.02 | $0.01 |
+
+Jogos gratuitos terão a opção de ganhar descontos nas taxas se adotarem outros serviços da Unity para monetização por anúncios. 
+
+## Contagem de instalações
+
+Um dos maiores problemas levantados tanto por desenvolvedores da engine quanto por jogadores, é sobre como esse levantamento de número de instalações será feito.
+
+A respeito disso, a única coisa que sabemos até agora é que, segundo [uma resposta deles no Twitter](#referencias), utilizarão um modelo de dados proprietário para conseguir uma estimativa aproximada de instalações.
+
+![Resposta da Unity](../../assets/posts/unity-comeca-a-cobrar/resposta-da-unity.jpg)
+
+Isso é extremamente preocupante por questões de privacidade e segurança de dados. Pois para garantir que o mesmo usuário não está instalando o mesmo jogo várias vezes, eles precisam coletar dados sensíveis do sistema.
+
+Com esses dados, eles poderiam perfilar cada sistema e identificar as pessoas caso os dados dela sejam conhecidos. Além das implicações morais e éticas disso, isso irá causar enormes problemas para eles por causa das leis de segurança de dados de cada país.
+
+Ademais, como a Unity é um software de código fechado, não há como uma pessoa comum auditar o código fonte e garantir que seus dados coletados não estão sendo usados para outros propósitos.
+
+Outro problema que não pode ser auditado por desenvolvedores é se as cópias contabilizadas vão ser válidas. 
+
+Afinal, uma cópia pirateada pode ser contabilizada? Como um desenvolvedor pode estimar o número de instalações de seus jogos para fazer um orçamento? Como ele pode garantir que o número contabilizado pela Unity é válido? Não há como responder nenhuma dessas perguntas.
+
+## Controvérsias
+
+Obviamente, a comunidade desenvolvedora não ficou muito feliz com essa notícia, pois a decisão acabará afetando desenvolvedores de jogos de todos os tamanhos.
+
+No entanto, os que mais serão afetados são os desenvolvedores de jogos indie, visto que esses jogos costumam ser mais baratos e, por causa da taxa por instalação ser um valor estático em planos mais básicos, afetará muito nos ganhos que eles tenham sobre o jogo caso ele faça sucesso.
+
+Para jogos gratuitos a situação fica ainda pior, pois eles vão ser obrigados, de forma indireta (conseguir desconto nas taxas), a fazer uma parceria com a Unity para utilizar anúncios como fonte de renda.
+
+{% aside type="caution" title="Leia o(s) parágrafo(s) abaixo com ceticismo!" %}
+A informação apresentada abaixo não possui fontes e baseia-se apenas em hipóteses pessoais do autor ou rumores propagados na época em que a notícia foi escrita!
+{% /aside %}
+
+Como é algo que afetará uma grande parcela da indústria, há a possibilidade de medidas drásticas a serem tomadas por desenvolvedores dela, desde retirarem os seus jogos das lojas online até processos contra a Unity.
+
+Se a situação piorar, as lojas online de jogos e editoras também podem chegar a se envolver por causa dos jogos sendo retirados em massa.
+
+## Conclusão e alternativas
+
+A decisão da Unity não só trará uma enorme desconfiança pela empresa, mas para qualquer engine de código fechado e proprietário no futuro. Afinal, fazer jogos requer um alto investimento de tempo e dinheiro, e utilizar algo não confiável para esse processo é um risco enorme.
+
+Logo, alternativas de código aberto como Godot e Unreal Engine provavelmente passarão a ser opções mais interessantes para isso.
+
+{% anchor name="referencias" / %}
+### Referências
+
+- [FAQ mencionado da Unity](https://unity.com/pricing-updates)
+- [Resposta a respeito da contagem da Unity](https://twitter.com/unity/status/1701689241456021607)
