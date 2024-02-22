@@ -71,8 +71,9 @@ function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
           className="flex w-min transition-transform ease-in-out duration-500"
           /* moves the ul to the correct post using only css */
           style={{
-            transform: `translateX(-${postIndex * (SLIDE_WIDTH + GAP_WIDTH)
-              }px)`,
+            transform: `translateX(-${
+              postIndex * (SLIDE_WIDTH + GAP_WIDTH)
+            }px)`,
             columnGap: `${GAP_WIDTH}px`,
           }}
         >
@@ -82,8 +83,9 @@ function Carousel({ sortedPosts, maxIndex = SITE.postsPerPage }: Props) {
             return (
               <li
                 key={i}
-                className={`transition-opacity ease-in-out duration-500 ${hide ? "opacity-0" : ""
-                  }`}
+                className={`transition-opacity ease-in-out duration-500 ${
+                  hide ? "opacity-0" : ""
+                }`}
                 style={{ width: SLIDE_WIDTH }}
               >
                 <Card

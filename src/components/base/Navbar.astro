@@ -4,17 +4,19 @@ import Submenu from "@/components/segments/Submenu";
 ---
 
 <nav class="flex gap-24 z-20 text-skin-base font-bold text-2xl">
-  {navLinks.map((link) => {
-    const { sublinks, slug, name } = link;
+  {
+    navLinks.map((link) => {
+      const { sublinks, slug, name } = link;
 
-    return (
-      <div class="hoverable-btn">
-        {sublinks === undefined ? (
-          <a href={"/" + slug}>{name}</a>
-        ) : (
+      return (
+        <div class="hoverable-btn">
+          {sublinks === undefined ? (
+            <a href={"/" + slug}>{name}</a>
+          ) : (
             <Submenu buttonName={name} navSlug={slug} client:visible />
           )}
-      </div>
-    );
-  })}
+        </div>
+      );
+    })
+  }
 </nav>

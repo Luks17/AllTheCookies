@@ -14,7 +14,7 @@ let loaded_posts: PostCollectionEntry[];
 async function getOptImg(
   img: OptimizedImg,
   width: number,
-  height: number
+  height: number,
 ): Promise<OptimizedImg> {
   const optImg = await getImage({
     src: img,
@@ -32,7 +32,7 @@ async function getOptImg(
 }
 
 async function optimizePostImages(
-  posts: CollectionEntry<"post">[]
+  posts: CollectionEntry<"post">[],
 ): Promise<PostCollectionEntry[]> {
   return await Promise.all(
     posts.map(async (post): Promise<PostCollectionEntry> => {
@@ -52,7 +52,7 @@ async function optimizePostImages(
           thumbnail: optThumb,
         },
       } as PostCollectionEntry;
-    })
+    }),
   );
 }
 
@@ -60,7 +60,7 @@ async function optimizePostImages(
 async function load_posts(): Promise<void> {
   const unoptimizedPosts = await getCollection(
     "post",
-    ({ data }) => data.draft !== true
+    ({ data }) => data.draft !== true,
   );
   loaded_posts = await optimizePostImages(unoptimizedPosts);
 }
@@ -77,7 +77,7 @@ const hasCategory = (category: string | undefined) =>
   category !== undefined && category !== "all";
 
 export async function getUnsortedPosts(
-  category?: string
+  category?: string,
 ): Promise<PostCollectionEntry[]> {
   if (!loaded_posts) await load_posts();
 
@@ -89,12 +89,12 @@ export async function getUnsortedPosts(
 }
 
 export async function getSortedPosts(
-  category?: string
+  category?: string,
 ): Promise<PostCollectionEntry[]> {
   const posts = await getUnsortedPosts(category);
 
   return posts.sort(
-    (a, b) => getPostDateTime(b.data) - getPostDateTime(a.data)
+    (a, b) => getPostDateTime(b.data) - getPostDateTime(a.data),
   );
 }
 

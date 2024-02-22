@@ -8,7 +8,7 @@ import type { MetaTags as Props } from "@/types/Meta";
 const meta = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt" class="scroll-smooth">
   <head>
     <Meta {...meta} />
@@ -17,21 +17,27 @@ const meta = Astro.props;
   <!-- lining-nums fixes raleway font oddly placed numbers -->
   <body class="bg-primary h-full w-full font-primary lining-nums">
     <slot />
+    <script>
+      import {
+        setPreferredTheme,
+        isLightMode,
+        getThemeStr,
+      } from "@/resources/stores/theme-store";
+      import { closeSidebar, closeSearch } from "@/resources/stores/nav-store";
+
+      setPreferredTheme();
+
+      document.addEventListener("astro:after-swap", () => {
+        // fixes theme on page transitions
+        document.firstElementChild?.setAttribute(
+          "page-theme",
+          getThemeStr(isLightMode.get()),
+        );
+
+        // closes overlay elements on page transitions
+        closeSearch();
+        closeSidebar();
+      });
+    </script>
   </body>
-
 </html>
-<script>
-import { setPreferredTheme, isLightMode, getThemeStr } from "@/resources/stores/theme-store";
-import { closeSidebar, closeSearch } from "@/resources/stores/nav-store";
-
-setPreferredTheme()
-
-document.addEventListener("astro:after-swap", () => {
-  // fixes theme on page transitions
-  document.firstElementChild?.setAttribute("page-theme", getThemeStr(isLightMode.get()))
-
-  // closes overlay elements on page transitions
-  closeSearch();
-  closeSidebar();
-});
-</script>

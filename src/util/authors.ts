@@ -6,14 +6,14 @@ import { getPostsByAuthor } from "./posts-utils";
 import { SITE } from "@/config.mjs";
 
 export async function extractAuthorsFromPost(
-  post: PostFrontmatter
+  post: PostFrontmatter,
 ): Promise<AuthorFrontmatter[]> {
   return await Promise.all(
     post.authors.map(async (author) => {
       const authors = await getEntry("author", getSlug(author));
 
       return authors!.data;
-    })
+    }),
   );
 }
 

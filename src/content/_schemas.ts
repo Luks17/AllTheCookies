@@ -42,7 +42,7 @@ export const authorSchema = ({ image }: { image: ImageFunction }) =>
           name: z.nativeEnum(AuthorPossibleSocials),
           link: z.string(),
         })
-        .optional()
+        .optional(),
     ),
     tags: z.array(z.string()).refine((tags) => validateAuthorTags(tags), {
       message: "Author tags do not exist",

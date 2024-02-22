@@ -31,7 +31,7 @@ function Search({ elementsToSearch, query }: Props) {
         minMatchCharLength: 2,
         threshold: 0.5,
       }),
-    [elementsToSearch]
+    [elementsToSearch],
   );
 
   const changeHandler = (e: React.FormEvent<HTMLInputElement>) =>

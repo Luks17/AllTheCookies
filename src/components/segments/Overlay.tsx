@@ -52,10 +52,11 @@ function Overlay({ posts }: Props) {
 
   return (
     <aside
-      className={`fixed flex z-20 top-0 right-0 h-full w-full justify-center items-center overlay-opacity transition-all duration-100 ease-linear ${$isSidebarOpen || $isSearchOpen
+      className={`fixed flex z-20 top-0 right-0 h-full w-full justify-center items-center overlay-opacity transition-all duration-100 ease-linear ${
+        $isSidebarOpen || $isSearchOpen
           ? "scale-100 visible"
           : "scale-0 invisible"
-        }`}
+      }`}
       style={{ viewTransitionName: "overlay" }}
     >
       {/* this div's only purpose is to close the overlay when the user clicks outside content  */}
