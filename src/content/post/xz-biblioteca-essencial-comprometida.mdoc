@@ -1,17 +1,17 @@
 ---
 authors: ["luks"]
 title: XZ Utils - Biblioteca essencial de sistemas Linux foi comprometida
-description: Atualize seus sistemas Linux e imagens Docker agora! Mantainer do projeto XZ Utils coloca scripts maliciosos para criar backdoor em servidores SSH.
+description: Atualize seus sistemas Linux e imagens Docker agora! Maintainer do projeto XZ Utils coloca scripts maliciosos para criar backdoor em servidores SSH.
 thumbnail: {
   img: "@/assets/posts/xz-biblioteca-essencial-comprometida/thumb2.png",
   alt: Backdoor
 }
-publishDate: 2024-03-30T10:12:00Z
+publishDate: 2024-03-30T12:50:00Z
 category: news
 tags: ["linux", "segurança"]
 draft: false
 minutesRead: 5
-edited: false
+edited: true
 ---
 
 ## Introdução
@@ -20,7 +20,7 @@ edited: false
 Atualize todos seus sistemas que usem Linux - incluindo imagens docker - para a ultima versão possível.
 {% /aside %}
 
-Desenvolvedores em todo o mundo, nesta sexta-feira santa, foram surpreendidos com a notícia de que XZ Utils - biblioteca de compressão utilizada na maioria das distribuições Linux - foi comprometida por um _mantainer_ malicioso.
+Desenvolvedores em todo o mundo, nesta sexta-feira santa, foram surpreendidos com a notícia de que XZ Utils - biblioteca de compressão utilizada na maioria das distribuições Linux - foi comprometida por um _maintainer_ malicioso.
 
 Esse ator em questão inseriu código malicioso nas tarballs do xz contendo instruções para compilar o programa que não existiam no repositório. 
 
@@ -32,13 +32,13 @@ Sendo provavelmente o maior problema de segurança de software desde a vulnerabi
 
 ## Como isso conseguiu ocorrer?
 
-No momento de escrita deste artigo, ainda não se traçou nenhuma conclusão absoluta de como isso aconteceu. No entanto, tudo indica que o _mantainer_ **planejou e conduziu** a introdução da vulnerabilidade em um período de longo prazo.
+No momento de escrita deste artigo, ainda não se traçou nenhuma conclusão absoluta de como isso aconteceu. No entanto, tudo indica que o _maintainer_ **planejou e conduziu** a introdução da vulnerabilidade em um período de longo prazo.
 
 Isso pois as instruções maliciosas para compilar o arquivo buscam objetos pré-compilados de casos de teste que, a primeira vista, parecem completamente normais. 
 
 ![Commit de teste malicioso](../../assets/posts/xz-biblioteca-essencial-comprometida/test-commit.jpg)
 
-Esses casos de teste e outras funções - que também parecem inocentes a primeira vista - foram todos escritos e commitados pelo _mantainer_ malicioso em um período de 2 anos. Com todas as peças em seu lugar, as instruções maliciosas conseguem criar a biblioteca comprometida.
+Esses casos de teste e outras funções - que também parecem inocentes a primeira vista - foram todos escritos e commitados pelo _maintainer_ malicioso em um período de 2 anos. Com todas as peças em seu lugar, as instruções maliciosas conseguem criar a biblioteca comprometida.
 
 ### 2021
 
@@ -50,7 +50,7 @@ No entanto, ele também faz algo que parece bobo mas que pode tornar-se uma vuln
 
 ### 2022
 
-JiaT75 faz um patch realmente inofensivo para a biblioteca xz. No entanto, algo crítico para os eventos que vem a seguir acontece: um ator misterioso - Jigar Kumar - começa a pressionar o _mantainer_ principal na época do XZ Utils para dar merge no patch do JiaT75. Alegando que o projeto está andando extremamente devagar e que um novo _mantainer_ principal para o XZ Utils seria ideal.
+JiaT75 faz um patch realmente inofensivo para a biblioteca xz. No entanto, algo crítico para os eventos que vem a seguir acontece: um ator misterioso - Jigar Kumar - começa a pressionar o _maintainer_ principal na época do XZ Utils para dar merge no patch do JiaT75. Alegando que o projeto está andando extremamente devagar e que um novo _maintainer_ principal para o XZ Utils seria ideal.
 
 O _maintainer_ da época do projeto XZ Utils estava extremamente sobrecarregado e não estava bem de saúde mental. Por isso, como JiaT75 havia tornado-se um contribuidor regular e confiável durante esse tempo, ele tornou-se o novo _maintainer_ principal do projeto, sendo o segundo contribuidor mais ativo.
 
