@@ -40,7 +40,7 @@ export const SITE = {
     "review",
     "performance",
     "otimização",
-    "server",
+    "servidores",
     "cloud",
     "IA",
     "docker",
@@ -53,6 +53,7 @@ export const SITE = {
     "atualidades",
     "ciência",
     "legislação",
+    "segurança",
   ],
 
   authorTags: ["programador", "autor"],

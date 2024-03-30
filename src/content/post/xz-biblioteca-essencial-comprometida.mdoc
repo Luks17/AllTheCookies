@@ -1,0 +1,92 @@
+---
+authors: ["luks"]
+title: XZ Utils - Biblioteca essencial de sistemas Linux foi comprometida
+description: Atualize seus sistemas Linux e imagens Docker agora! Mantainer do projeto XZ Utils coloca scripts maliciosos para criar backdoor em servidores SSH.
+thumbnail: {
+  img: "@/assets/posts/xz-biblioteca-essencial-comprometida/thumb2.png",
+  alt: Backdoor
+}
+publishDate: 2024-03-30T10:12:00Z
+category: news
+tags: ["linux", "segurança"]
+draft: false
+minutesRead: 5
+edited: false
+---
+
+## Introdução
+
+{% aside type="note" title="Primeiro de tudo: o que fazer agora para estar seguro?" %}
+Atualize todos seus sistemas que usem Linux - incluindo imagens docker - para a ultima versão possível.
+{% /aside %}
+
+Desenvolvedores em todo o mundo, nesta sexta-feira santa, foram surpreendidos com a notícia de que XZ Utils - biblioteca de compressão utilizada na maioria das distribuições Linux - foi comprometida por um _mantainer_ malicioso.
+
+Esse ator em questão inseriu código malicioso nas tarballs do xz contendo instruções para compilar o programa que não existiam no repositório. 
+
+Essas instruções em questão, por meio de ofuscações para evitar qualquer suspeita, modificam funções no código da biblioteca a ser compilada, gerando um programa comprometido. O resultado disso é uma biblioteca modificada que consegue interceptar e modificar dados de qualquer programa compilado com um _link_ a ela. 
+
+No entanto, o alvo principal do ator malicioso é o OpenSSH Daemon (**sshd**). Logo, a biblioteca modificada contém um gatilho para quando esse processo está rodando para criar um _backdoor_, permitindo acesso remoto sem credenciais ao sistema comprometido.
+
+Sendo provavelmente o maior problema de segurança de software desde a vulnerabilidade em [Log4j](https://www.ncsc.gov.uk/information/log4j-vulnerability-what-everyone-needs-to-know), foi atribuido a esta ameaça de segurança o [CVE-2024-3094](https://www.cve.org/CVERecord?id=CVE-2024-3094) e um _score_ de 10, sendo assim uma **vulnerabilidade crítica**.
+
+## Como isso conseguiu ocorrer?
+
+No momento de escrita deste artigo, ainda não se traçou nenhuma conclusão absoluta de como isso aconteceu. No entanto, tudo indica que o _mantainer_ **planejou e conduziu** a introdução da vulnerabilidade em um período de longo prazo.
+
+Isso pois as instruções maliciosas para compilar o arquivo buscam objetos pré-compilados de casos de teste que, a primeira vista, parecem completamente normais. 
+
+![Commit de teste malicioso](../../assets/posts/xz-biblioteca-essencial-comprometida/test-commit.jpg)
+
+Esses casos de teste e outras funções - que também parecem inocentes a primeira vista - foram todos escritos e commitados pelo _mantainer_ malicioso em um período de 2 anos. Com todas as peças em seu lugar, as instruções maliciosas conseguem criar a biblioteca comprometida.
+
+### 2021
+
+JiaT75 cria uma conta no Github. O seu primeiro commit não foi para o projeto XZ Utils, mas sim para a biblioteca libarchive. O commit foi feito para adicionar uma mensagem de erro em um caso específico. 
+
+No entanto, ele também faz algo que parece bobo mas que pode tornar-se uma vulnerabilidade quando combinado com outros fatores: ele trocou uma função segura para memória para uma variante equivalente que não é segura. Logo, pode-se ver que ele já tinha seu _Modus Operandi_ de commits aparentemente inocentes para conseguir algo a longo prazo.
+
+![Commit em libarchive](../../assets/posts/xz-biblioteca-essencial-comprometida/commit-libarchive.png)
+
+### 2022
+
+JiaT75 faz um patch realmente inofensivo para a biblioteca xz. No entanto, algo crítico para os eventos que vem a seguir acontece: um ator misterioso - Jigar Kumar - começa a pressionar o _mantainer_ principal na época do XZ Utils para dar merge no patch do JiaT75. Alegando que o projeto está andando extremamente devagar e que um novo _mantainer_ principal para o XZ Utils seria ideal.
+
+O _maintainer_ da época do projeto XZ Utils estava extremamente sobrecarregado e não estava bem de saúde mental. Por isso, como JiaT75 havia tornado-se um contribuidor regular e confiável durante esse tempo, ele tornou-se o novo _maintainer_ principal do projeto, sendo o segundo contribuidor mais ativo.
+
+Jigar Kumar, a pessoa que estava pressionando para adicionar um novo _maintainer_, **nunca mais foi visto**.
+
+### 2023 e 2024
+
+O novo _maintainer_ do projeto, JiaT75, começa a fazer uma série de commits focados para a arquitetura de testes do projeto, que mais tarde seria utilizada para criar a vulnerabilidade como mencionado acima.
+
+Além disso, JiaT75 foi aos poucos tomando o projeto por meio de movimentos sutis, como mudando o e-mail de contato do projeto para o dele e mudando a url do projeto de `tukaani.org/xz/` para `xz.tukaani.org/xz-utils/`
+
+Ademais, ele também fez um commit para o OSS-Fuzz do Google, projeto voltado para encontrar bugs e vulnerabilidades de projetos open-source críticos para a indústria (como o XZ Utils). Esse commit foi mascarado como solução de um bug causado propositalmente pelo JiaT75, e acabou sendo aceito.
+
+![Commit em Open-Fuzz](../../assets/posts/xz-biblioteca-essencial-comprometida/commit-google.png)
+
+Com todas as peças em seu lugar, a vulnerabilidade foi ao ar!
+
+#### Presente - A descoberta
+
+Um Engenheiro de Software da Microsoft que contribui para projetos open-source estava fazendo testes de performance em seu sistema, e acabou percebendo o processo sshd estava usando sua CPU muito mais que o normal.
+
+Após isso, ele deu uma investigada e ficou suspeito. Depois disso, ele descobriu a vulnerabilidade e reportou ela.
+
+![Engenheiro da Microsoft falando sobre sua descoberta](../../assets/posts/xz-biblioteca-essencial-comprometida/suspeito.png)
+
+Com a descoberta da vulnerabilidade, diversas distruições Linux afetadas já tomaram providências, lançando a biblioteca com a última versão da biblioteca que já tem a vulnerabilidade corrigida ou com patchs próprios (por se acaso a biblioteca tenha mais _maintainers_ maliciosos envolvidos no escândalo).
+
+## Conclusão
+
+Todos esses acontecimentos nos levam a questionar quais versões do software estão comprometidas e quais não, visto que o JiaT75 já está envolvido no projeto XZ Utils faz muito tempo.
+
+Outras questões que surgiram são: quem é o JiaT75 e quais seus interesses? Um agente de Estado buscando invadir alguma organização específica? Jigar Kumar estava envolvido? Talvez nunca saibamos as respostas dessas questões. 
+
+{% anchor name="referencias" / %}
+### Referências
+
+- [Reporte do Engenheiro da Microsoft em OSS-Security](https://www.openwall.com/lists/oss-security/2024/03/29/4)
+- [Cyber Kendra](https://www.cyberkendra.com/2024/03/major-linux-distributions-impacted-by.html)
+- [Evan Boehs](https://boehs.org/node/everything-i-know-about-the-xz-backdoor)
