@@ -50,16 +50,16 @@ const { Content, headings } = await post.render();
 
 <!-- aside tag script -->
 <script>
-  const asides = document.querySelectorAll(".aside-tag");
-  const contents = document.querySelectorAll(".content");
   const buttons = document.querySelectorAll(".title");
   const chevrons = document.querySelectorAll(".chevron");
+  const contents = document.querySelectorAll(".content");
 
   function handleClick(id: number) {
     chevrons?.item(id).classList.toggle("-rotate-180");
-    asides?.item(id).classList.toggle("max-h-12");
-    asides?.item(id).classList.toggle("max-h-[99rem]");
-    contents?.item(id).classList.toggle("opacity-0");
+    contents?.item(id).classList.toggle("max-h-0");
+    contents?.item(id).classList.toggle("max-h-96");
+
+    setTimeout(() => contents?.item(id).classList.toggle("pb-2"), 100);
   }
 
   buttons?.forEach((button, id) => {

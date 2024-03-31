@@ -25,29 +25,30 @@ const { type, title } = Astro.props;
 ---
 
 <aside
-  class={`my-5 px-3 rounded-md aside-tag ${type} max-h-[99rem] transition-max-height origin-top duration-200 text-skin-dark`}
+  class={`my-5 px-2 sm:px-3 rounded-md overflow-hidden aside-tag ${type} h-fit text-skin-dark`}
 >
-  <button class="flex w-full justify-between title pt-2">
-    <h3 class="flex items-center font-bold text-lg">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d={icons[type].d}
-        ></path>
-      </svg>
-      <span>{title}</span>
-    </h3>
+  <button class="flex w-full title pt-2 pb-2 font-bold">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d={icons[type].d}
+      ></path>
+    </svg>
+    <span class="flex-grow text-start">{title}</span>
     <div
-      class="-rotate-180 transition-transform ease-linear chevron flex items-center"
+      class="-rotate-180 w-5 sm:w-6 transition-transform ease-linear chevron flex items-center"
     >
       <ChevronUp />
     </div>
   </button>
-
-  <div class="content transition-opacity py-2 font-semibold"><slot /></div>
+  <div
+    class="content font-semibold pb-2 transition-max-height origin-top duration-200 max-h-96"
+  >
+    <slot />
+  </div>
 </aside>
